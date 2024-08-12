@@ -1,3 +1,8 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:prettier/recommended",
+    "plugin:tailwindcss/recommended" // Tailwind CSS 관련 규칙을 추가합니다.
+  ],
+  "plugins": ["tailwindcss"]
 }

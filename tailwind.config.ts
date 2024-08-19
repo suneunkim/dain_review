@@ -34,6 +34,10 @@ const config: Config = {
           red: '#FFECEE',
           gray: '#F7F8F8'
         },
+        blue: {
+          5: '#D4EAFA',
+          50: '#0081E5'
+        },
         red: {
           5: '#FFE5E8',
           30: '#FF6676',

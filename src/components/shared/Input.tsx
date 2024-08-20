@@ -44,4 +44,8 @@ const Input: React.FC<InputProps> = ({
   )
 }
 
+const InputIcon = () => {
+  return <div>icon</div>
+}
+
 export default Input

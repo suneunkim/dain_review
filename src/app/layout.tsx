@@ -6,10 +6,10 @@ import './globals.css'
 
 const pretendard = Inter({
   subsets: ['latin'],
-  weight: ['400', '600'], // 필요한 폰트 두께 선택
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'], // 필요한 폰트 두께 선택
   display: 'swap',
-  variable: '--font-pretendard', // CSS 변수로 설정
-});
+  variable: '--font-pretendard' // CSS 변수로 설정
+})
 
 export const metadata: Metadata = {
   title: '다인리뷰',
@@ -22,7 +22,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={pretendard.variable}>
+    <html
+      lang="en"
+      className={pretendard.variable}>
       <body>{children}</body>
     </html>
   )

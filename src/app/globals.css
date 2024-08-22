@@ -9,3 +9,7 @@
 body {
   font-family: var(--font-pretendard);
 }
+
+strong {
+  @apply text-red-main;
+}

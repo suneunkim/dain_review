@@ -44,6 +44,22 @@ const config: Config = {
           main: '#FF394E',
           50: '#D32C3E'
         }
+      },
+      // to do
+      fontSize: {
+        display1: ['3rem', { lineHeight: '4.2rem', fontWeight: '700' }], // ok
+        display2: ['2rem', { lineHeight: '2.5rem', fontWeight: '600' }], // ok
+        heading1: ['1.9rem', { lineHeight: '2.25rem', fontWeight: '600' }],
+        heading2: ['1.8rem', { lineHeight: '2rem', fontWeight: '600' }],
+        heading3: ['1.7rem', { lineHeight: '1.75rem', fontWeight: '600' }],
+        heading4: ['1.6rem', { lineHeight: '1.75rem', fontWeight: '600' }],
+        heading5: ['1.5rem', { lineHeight: '1.75rem', fontWeight: '600' }],
+        body1: ['1rem', { lineHeight: '1.5rem', fontWeight: '400' }], // ok
+        body1r: ['1rem', { lineHeight: '1.75rem', fontWeight: '400' }], // ok
+        body2: ['0.9rem', { lineHeight: '2rem', fontWeight: '400' }], // ok
+        caption1: ['0.75rem', { lineHeight: '1rem', fontWeight: '500' }],
+        caption2: ['0.75rem', { lineHeight: '1rem', fontWeight: '500' }],
+        caption3: ['0.75rem', { lineHeight: '1rem', fontWeight: '500' }]
       }
     }
   },

@@ -5,8 +5,8 @@ import Image from 'next/image'
 
 export default function LoginPage() {
   return (
-    <>
-      <div className="box-border w-[454px] border-b-2 border-l-2 border-t-2 px-[40px] py-[44px] max-lg:border-r-2">
+    <div className="mt-10 flex w-[908px]">
+      <div className="box-border flex-1 border-b-2 border-l-2 border-t-2 px-[40px] py-[44px] max-lg:border-r-2">
         <h1 className="mb-[32px] text-center text-[26px] font-bold leading-8">
           LOGIN
         </h1>
@@ -14,7 +14,10 @@ export default function LoginPage() {
           <LoginForm />
         </div>
         <div className="mb-11 flex max-lg:justify-center max-lg:gap-6 lg:flex-col lg:space-y-3">
-          <SocialLinkGroups />
+          <SocialLinkGroups
+            border={true}
+            color={false}
+          />
           <SocialLinkMobileGroups />
         </div>
         <div className="text-center">
@@ -34,6 +37,6 @@ export default function LoginPage() {
           priority={false}
         />
       </div>
-    </>
+    </div>
   )
 }

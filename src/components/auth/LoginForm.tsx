@@ -4,15 +4,13 @@ import { useForm } from 'react-hook-form'
 import Input from '../shared/Input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { LoginFormValues } from '@/models/auth'
+import Form from '../shared/Form'
 
 /**
  * 유효성검사 에러 메세지 주석
  * 디자인이 안되어 있어서 추후 회의해서
  */
-type LoginFormValues = {
-  email: string
-  pw: string
-}
 
 const loginSchema = z.object({
   email: z.string().email('이메일 형식을 입력해주세요.'),
@@ -37,12 +35,12 @@ export function LoginForm() {
     console.log(data)
   }
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-4 space-y-2">
         <Input
           id="email"
           type="text"
-          register={register}
+          // register={register}
           placeholder="아이디(이메일)"
           errors={errors}
         />
@@ -50,7 +48,7 @@ export function LoginForm() {
         <Input
           id="pw"
           type="password"
-          register={register}
+          // register={register}
           placeholder="비밀번호"
           errors={errors}
         />
@@ -72,6 +70,6 @@ export function LoginForm() {
           비밀번호 찾기
         </a>
       </div>
-    </form>
+    </Form>
   )
 }

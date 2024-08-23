@@ -1,37 +1,56 @@
 import React from 'react'
 
-import NaverLogin from '@/app/assets/icons/auth/NaverLogin.svg'
-import KakaoLogin from '@/app/assets/icons/auth/KakaoLogin.svg'
-import GoogleLogin from '@/app/assets/icons/auth/GoogleLogin.svg'
+import NaverLogin from '@/assets/icons/auth/NaverLogin.svg'
+import KakaoLogin from '@/assets/icons/auth/KakaoLogin.svg'
+import GoogleLogin from '@/assets/icons/auth/GoogleLogin.svg'
 
 import Link from 'next/link'
+import Text from '../shared/Text'
 
-export const SocialLinkGroups = () => {
+export const SocialLinkGroups = ({
+  border,
+  color
+}: {
+  border: boolean
+  color: boolean
+}) => {
   return (
     <>
       <Link
-        href={'/'}
-        className="flex h-[46px] w-full items-center justify-center gap-2 border-2 max-lg:sr-only">
-        <div className="">
-          <NaverLogin />
-        </div>
-        <p>네이버로 로그인</p>
+        href={'/sign-up'}
+        className={`flex h-[46px] w-full items-center justify-center gap-2 ${border && `border-2`} ${color ? `bg-[#03CF5D]` : `bg-white`} max-lg:sr-only`}>
+        <NaverLogin />
+
+        <Text
+          color="black"
+          size="t5"
+          weight={700}>
+          네이버로 로그인
+        </Text>
       </Link>
       <Link
-        href={'/'}
-        className="flex h-[46px] w-full items-center justify-center gap-2 border-2 max-lg:sr-only">
-        <div className="">
-          <KakaoLogin />
-        </div>
-        <p>카카오로 로그인</p>
+        href={'/sign-up'}
+        className={`flex h-[46px] w-full items-center justify-center gap-2 ${border && `border-2`} ${color ? `bg-[#FFE812]` : `bg-white`} max-lg:sr-only`}>
+        <KakaoLogin />
+
+        <Text
+          color="black"
+          size="t5"
+          weight={700}>
+          카카오로 로그인
+        </Text>
       </Link>
       <Link
-        href={'/'}
-        className="flex h-[46px] w-full items-center justify-center gap-2 border-2 max-lg:sr-only">
-        <div className="">
-          <GoogleLogin />
-        </div>
-        <p>구글로 로그인</p>
+        href={'/sign-up'}
+        className={`flex h-[46px] w-full items-center justify-center gap-2 ${border && `border-2`} ${color ? `bg-[#F0F1F2]` : `bg-white`} max-lg:sr-only`}>
+        <GoogleLogin />
+
+        <Text
+          color="black"
+          size="t5"
+          weight={700}>
+          구글로 로그인
+        </Text>
       </Link>
     </>
   )

@@ -3,12 +3,12 @@ import { Inter } from 'next/font/google'
 import localFont from 'next/font/local'
 import './globals.css'
 
-const pretendard = localFont({
-  src: './assets/fonts/PretendardVariable.woff2',
-  display: 'swap',
-  weight: '45 920',
-  variable: '--font-pretendard'
-})
+// const pretendard = localFont({
+//   src: './assets/fonts/PretendardVariable.woff2',
+//   display: 'swap',
+//   weight: '45 920',
+//   variable: '--font-pretendard'
+// })
 
 export const metadata: Metadata = {
   title: '다인리뷰',
@@ -21,9 +21,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html
-      lang="en"
-      className={pretendard.variable}>
+    <html lang="en">
       <body>{children}</body>
     </html>
   )

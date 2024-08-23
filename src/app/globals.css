@@ -2,14 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Pretendard';
+  src:
+    url('/fonts/subset-PretendardVariable-Regular.woff2') format('woff2'),
+    url('/fonts/subset-PretendardVariable-Regular.woff') format('woff'),
+    url('/fonts/subset-PretendardVariable-Regular.ttf') format('truetype');
+  font-weight: 300 400 500 700 800;
+  font-display: fallback;
+}
+
 :root {
   --font-pretendard: 'Pretendard', sans-serif;
 }
 
 body {
   font-family: var(--font-pretendard);
-}
-
-strong {
-  @apply text-red-main;
 }

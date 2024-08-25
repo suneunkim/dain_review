@@ -1,14 +1,7 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import localFont from 'next/font/local'
-import './globals.css'
 
-const pretendard = localFont({
-  src: './assets/fonts/PretendardVariable.woff2',
-  display: 'swap',
-  weight: '45 920',
-  variable: '--font-pretendard'
-})
+import './globals.css'
+import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: '다인리뷰',
@@ -21,9 +14,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html
-      lang="en"
-      className={pretendard.variable}>
+    <html lang="en">
+      <Script src="https://cdn.iamport.kr/v1/iamport.js" />
       <body>{children}</body>
     </html>
   )

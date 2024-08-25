@@ -11,7 +11,7 @@ const sizeClasses = {
   t7: 'text-xs'
 }
 
-const weightClasses = {
+export const weightClasses = {
   300: 'font-extralight',
   400: 'font-light',
   500: 'font-medium',
@@ -20,6 +20,7 @@ const weightClasses = {
 }
 
 const colorClasses = {
+  red: 'text-red-main',
   black: 'text-black',
   gray0: 'text-gray-0',
   gray5: 'text-gray-5',

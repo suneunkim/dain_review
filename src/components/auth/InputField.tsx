@@ -9,6 +9,7 @@ interface InputFieldProps {
   require: boolean
   type: string
   placeholder?: string
+  description?: string
 }
 
 export const InputField: React.FC<InputFieldProps> = ({
@@ -16,7 +17,8 @@ export const InputField: React.FC<InputFieldProps> = ({
   name,
   type,
   require,
-  placeholder
+  placeholder,
+  description
 }) => {
   return (
     <div>
@@ -30,6 +32,7 @@ export const InputField: React.FC<InputFieldProps> = ({
         type={type}
         placeholder={placeholder}
       />
+      <p className="mt-2 text-sm text-gray-20">{description}</p>
     </div>
   )
 }

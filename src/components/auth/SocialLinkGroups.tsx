@@ -5,14 +5,16 @@ import KakaoLogin from '@/assets/icons/auth/KakaoLogin.svg'
 import GoogleLogin from '@/assets/icons/auth/GoogleLogin.svg'
 
 import Link from 'next/link'
-import Text from '../shared/Text'
+import Text, { weightClasses } from '../shared/Text'
 
 export const SocialLinkGroups = ({
   border,
-  color
+  color,
+  weight
 }: {
   border: boolean
   color: boolean
+  weight: keyof typeof weightClasses
 }) => {
   return (
     <>
@@ -24,7 +26,7 @@ export const SocialLinkGroups = ({
         <Text
           color="black"
           size="t5"
-          weight={700}>
+          weight={weight}>
           네이버로 로그인
         </Text>
       </Link>
@@ -36,7 +38,7 @@ export const SocialLinkGroups = ({
         <Text
           color="black"
           size="t5"
-          weight={700}>
+          weight={weight}>
           카카오로 로그인
         </Text>
       </Link>
@@ -48,7 +50,7 @@ export const SocialLinkGroups = ({
         <Text
           color="black"
           size="t5"
-          weight={700}>
+          weight={weight}>
           구글로 로그인
         </Text>
       </Link>

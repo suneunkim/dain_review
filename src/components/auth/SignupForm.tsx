@@ -124,11 +124,21 @@ export function SignupForm() {
 
         <div className="">
           <div className="mb-10 flex gap-3">
-            <SocialNaverBlogLink />
-            <SocialInstagramLink />
-            <SocialYoutubeLink />
-            <SocialTikTokLink />
-            <SocialAddButtonLink />
+            <div className="h-10 w-10 overflow-hidden rounded-full">
+              <SocialNaverBlogLink />
+            </div>
+            <div className="h-10 w-10 overflow-hidden rounded-full">
+              <SocialInstagramLink />
+            </div>
+            <div className="h-10 w-10 overflow-hidden rounded-full">
+              <SocialYoutubeLink />
+            </div>
+            <div className="h-10 w-10 overflow-hidden rounded-full">
+              <SocialTikTokLink />
+            </div>
+            <div className="h-10 w-10 overflow-hidden rounded-full">
+              <SocialAddButtonLink />
+            </div>
           </div>
         </div>
 

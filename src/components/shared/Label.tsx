@@ -15,7 +15,7 @@ export const Label: React.FC<LabelProps> = ({
     <div className="mb-2 flex items-baseline">
       <label htmlFor={id}>{name}</label>
       {require && <p className="text-red-50">*</p>}
-      <p className="ml-3 text-caption1 text-gray-60">{description}</p>
+      <p className="text-caption-1 ml-3 text-gray-60">{description}</p>
     </div>
   )
 }

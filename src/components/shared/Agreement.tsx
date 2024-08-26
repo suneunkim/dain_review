@@ -107,7 +107,7 @@ function IconCheck({ checked }: { checked: boolean; withCircle?: boolean }) {
       viewBox="0 0 20 21"
       fill="none"
       xmlns="http://www.w3.org/2000/svg">
-      <g clip-path="url(#clip0_4830_266112)">
+      <g clipPath="url(#clip0_4830_266112)">
         {checked === true ? (
           <rect
             x="2.16797"

@@ -42,7 +42,9 @@ const Input: React.FC<InputProps> = ({
           `${className} box-border w-full rounded-[4px] border p-2 shadow-sm transition focus:border-black focus:outline-none focus:ring-1 focus:ring-black disabled:cursor-not-allowed disabled:opacity-70 ${hasError ? 'focus:border-red-500 focus:ring-red-500' : ''}`
         )}
       />
-      <p className="text-red-main">{errors[id]?.message?.toString()}</p>
+      {errors ? (
+        <p className="text-red-main">{errors[id]?.message?.toString()}</p>
+      ) : null}
     </div>
   )
 }

@@ -44,6 +44,27 @@ const config: Config = {
           main: '#FF394E',
           50: '#D32C3E'
         }
+      },
+      fontSize: {
+        'display-1': ['48px', '140%'], // Display 1
+        'display-2': ['32px', '120%'], // Display 2
+        'heading-1': ['26px', '120%'], // Heading 1
+        'heading-2': ['24px', '120%'], // Heading 2
+        'heading-3': ['22px', '120%'], // Heading 3
+        'heading-4': ['20px', '140%'], // Heading 4
+        'heading-5': ['18px', '140%'], // Heading 5
+        'body-1': ['16px', '140%'], // Body 1
+        'body-2': ['14px', '140%'], // Body 2
+        'caption-1': ['12px', '140%'], // Caption 1
+        'caption-2': ['11px', '140%'], // Caption 2
+        'caption-3': ['10px', '140%'] // Caption 3
+      },
+      boxShadow: {
+        fotter: 'rgba(100, 100, 100, 0.4) 0px 7px 29px 0px'
+      },
+      screens: {
+        desktop: '1440px',
+        '520': '520px'
       }
     }
   },

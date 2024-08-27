@@ -1,11 +1,13 @@
 'use client'
 
 import React, { useState } from 'react'
+import Header from '@/components/shared/Header'
+import Footer from '@/components/shared/Footer'
+import PageTitle from '@/components/shared/PageTitle'
 import ImagePreviewer from '@/components/review/ImagePreviewer'
-import BlogIcon from '@/assets/icon/review/blog.svg'
-import PointIcon from '@/assets/icon/review/point.svg'
+import BlogIcon from '@/assets/icons/review/blog.svg'
+import PointIcon from '@/assets/icons/review/point.svg'
 
-const HeaderImage = '/review/header.png'
 const ExCampaignImage = '/review/ex_campaign.png'
 const ExampleImage = '/review/example.png' // 예시화면 이미지를 등록하세요
 
@@ -30,29 +32,24 @@ const page = () => {
 
   return (
     <main>
-      <header className="bg-black">
-        <div className="h-[160px]">
-          <h1 className="text-white">헤더 높이 160px</h1>
-        </div>
-        <div
-          className="flex h-[200px] w-full flex-col items-center justify-center pt-[84px]"
-          style={{ backgroundImage: `url(${HeaderImage})` }}>
-          <h2 className="text-display-2 text-gray-0">리뷰 등록</h2>
-        </div>
-      </header>
-      <div className="flex w-full max-w-[1920px] flex-col px-[56px]">
+      <Header />
+      <PageTitle
+        title="리뷰 등록"
+        alignment="center"
+      />
+      <div className="m-auto flex w-full max-w-[1920px] flex-col px-[56px]">
         {/* contents */}
-        <div className="m-auto flex w-full max-w-[1400px] items-start justify-center">
+        <div className="m-auto mb-[200px] flex w-full max-w-[1400px] flex-col items-center justify-center lg:flex-row lg:items-start">
           {/* 일단 하드코딩함. 카드 컴포넌트로 교체 예정 */}
           <div className="my-[40px] flex h-full max-h-[494px] w-full max-w-[453px] flex-col items-center justify-center rounded-[8px] bg-background-gray p-[24px]">
             <img
               src={ExCampaignImage}
               alt="Example Campaign"
             />
-            <h4 className="mb-[14px] mt-[24px] w-full text-left text-[16px] text-heading-4 font-heading-b">
+            <h4 className="mb-[14px] mt-[24px] w-full text-left text-[16px] text-heading-4 font-[700]">
               다인카페 체험단 모집합니다
             </h4>
-            <p className="mb-[24px] w-full text-body-2 font-body-m text-gray-70">
+            <p className="font-body-m mb-[24px] w-full text-body-2 text-gray-70">
               음료 메뉴 2잔 + 디저트 메뉴 1종 (선택 가능) + 애견 동반 입장료
               무료 (매너벨트 1개 포함)
             </p>
@@ -60,17 +57,17 @@ const page = () => {
             <div className="my-[17px] flex">
               <div className="mr-[16px] flex bg-gray-5">
                 <PointIcon />
-                <p className="pl-[2px] text-body-2 font-body-b text-gray-70">
+                <p className="font-body-b pl-[2px] text-body-2 text-gray-70">
                   100,000 P
                 </p>
               </div>
               <div className="mr-[16px] flex">
                 <BlogIcon />
-                <p className="pl-[4px] text-body-2 font-body-b text-gray-70">
+                <p className="font-body-b pl-[4px] text-body-2 text-gray-70">
                   네이버 블로그
                 </p>
               </div>
-              <div className="mr-[16px] flex text-body-2 font-body-b text-gray-70">
+              <div className="font-body-b mr-[16px] flex text-body-2 text-gray-70">
                 방문형/맛집
               </div>
             </div>
@@ -105,7 +102,7 @@ const page = () => {
               </p>
               <img
                 src={ExampleImage}
-                alt="Example Image."
+                alt="Example Image"
               />
               <div className="my-4">
                 <label className="flex items-center">
@@ -134,9 +131,7 @@ const page = () => {
           </div>
         </div>
       </div>
-      <footer className="h-[286px] bg-background-red">
-        <h1>푸터 높이 286px</h1>
-      </footer>
+      <Footer />
     </main>
   )
 }

@@ -1,14 +1,16 @@
-import React from 'react'
-import { FieldErrors, UseFormRegister } from 'react-hook-form'
+import React, { FC, ReactNode } from 'react'
+import { FieldErrors, useFormContext } from 'react-hook-form'
+
+import classNames from 'classnames'
 
 interface InputProps {
   id: string
-  label: string
+  label?: ReactNode
   type: string
+  placeholder?: string
   disabled?: boolean
-  register: any // UseFormRegister<string>
   required?: boolean
-  errors?: FieldErrors // FieldErrors 타입 수정
+  className?: string
 }
 
 const Input: React.FC<InputProps> = ({
@@ -16,32 +18,35 @@ const Input: React.FC<InputProps> = ({
   label,
   type,
   disabled,
-  register,
   required,
-  errors,
+  placeholder,
+  className,
   ...rest
 }) => {
+  const {
+    register,
+    formState: { errors }
+  } = useFormContext()
+  const hasError = errors[id] ? errors[id] : null
+
   return (
-    <div className="relative">
-      <label
-        htmlFor={id}
-        className={`peer-focus-:scale-75 mb-1 block pl-1 text-sm font-medium text-neutral-700 peer-placeholder-shown:scale-100 peer-placeholder-shown:text-neutral-400`}>
-        {label}
-      </label>
+    <div className="w-full">
       <input
         id={id}
         disabled={disabled}
         type={type}
+        placeholder={placeholder}
         {...register(id, { required: '내용을 입력해주세요' })}
         {...rest}
-        className={`w-full rounded-md border p-2 shadow-sm transition focus:border-orange-400 focus:outline-none focus:ring-1 focus:ring-orange-400 disabled:cursor-not-allowed disabled:opacity-70`}
+        className={classNames(
+          `${className} box-border w-full rounded-[4px] border p-2 shadow-sm transition focus:border-black focus:outline-none focus:ring-1 focus:ring-black disabled:cursor-not-allowed disabled:opacity-70 ${hasError ? 'focus:border-red-500 focus:ring-red-500' : ''}`
+        )}
       />
+      {errors ? (
+        <p className="text-red-main">{errors[id]?.message?.toString()}</p>
+      ) : null}
     </div>
   )
-}
-
-const InputIcon = () => {
-  return <div>icon</div>
 }
 
 export default Input

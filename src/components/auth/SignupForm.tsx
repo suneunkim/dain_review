@@ -10,19 +10,19 @@ import Input from '../shared/Input'
 import Form from '../shared/Form'
 import { z } from 'zod'
 
-import SocialInstagramLink from '@/assets/icons/auth/SocialInstagramLink.svg'
-import SocialTikTokLink from '@/assets/icons/auth/SocialTikTokLink.svg'
-import SocialNaverBlogLink from '@/assets/icons/auth/SocialNaverBlogLink.svg'
-import SocialYoutubeLink from '@/assets/icons/auth/SocialYoutubeLink.svg'
-import SocialAddButtonLink from '@/assets/icons/auth/SocialAddButtonLink.svg'
 import ProfileImage from '@/assets/icons/auth/ProfileImage.svg'
 import CameraProfile from '@/assets/icons/auth/CameraProfile.svg'
 
-const userSchema = z.object({
+import SnsLinks from './SnsLinks'
+import SelectSource from './SelectSource'
+import AddressField from './AddressField'
+import Modal from '../shared/Modal'
+
+const userSchema: z.ZodSchema = z.object({
   address: z.string().optional(),
   addressDetail: z.string().optional(),
   birthdate: z.string().optional(), // 날짜 형식 검사가 필요할 경우 refine 사용
-  blog: z.string().url().optional(),
+  naver: z.string().url().optional(),
   email: z.string().email({ message: '이메일 형식을 입력해주세요.' }),
   gender: z.number().int().optional(), // 정수형을 나타내며, 선택적 필드로 설정
   instagram: z.string().optional(),
@@ -35,15 +35,60 @@ const userSchema = z.object({
   pw: z
     .string()
     .min(8, { message: '패스워드는 최소 8자 이상이어야 합니다.' })
-    .max(15),
+    .max(15)
+    .refine(
+      value => {
+        // 영문자, 숫자, 특수문자(@) 각각의 정규 표현식
+        const hasLetter = /[a-zA-Z]/.test(value)
+        const hasNumber = /\d/.test(value)
+        const hasSpecialChar = /[@]/.test(value)
+
+        // 세 가지 중 최소 두 가지를 포함해야 함
+        const validCombination =
+          (hasLetter && hasNumber) ||
+          (hasLetter && hasSpecialChar) ||
+          (hasNumber && hasSpecialChar)
+
+        return validCombination
+      },
+      {
+        message:
+          '영문+숫자+특수문자(@) 조합 중 최소 2가지를 사용해 8~15자리를 입력해주세요.'
+      }
+    ),
   signupSource: z.string().optional(),
   tiktok: z.string().optional(),
   youtube: z.string().optional()
 })
 
+const validateEmail = async (email: string) => {
+  try {
+    const response = await fetch(
+      'https://review-server.dain-ad.kr/api/email-verification',
+      {
+        method: 'POST',
+        headers: {
+          'Access-Control-Allow-Methods': 'true',
+          'Access-Control-Allow-Credentials': 'true',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email })
+      }
+    )
+    const result = await response.json()
+    if (result.isDuplicate) {
+      return { isValid: false, message: '이미 사용 중인 이메일입니다.' }
+    } else {
+      return { isValid: true, message: '이메일 중복확인 완료' }
+    }
+  } catch (error) {
+    return { isValid: false, message: '이메일 확인 중 오류가 발생했습니다.' }
+  }
+}
+
 export function SignupForm() {
-  const onSubmit = (data: any) => {
-    console.log(data)
+  const onSubmit = (data: z.infer<typeof userSchema>) => {
+    console.log('SignupForm', data)
   }
   return (
     <Form
@@ -57,6 +102,8 @@ export function SignupForm() {
           children="중복확인"
           placeholder="사용하실 아이디를 입력해주세요"
           require={true}
+          showIcon={true}
+          validationFunction={validateEmail}
         />
 
         <InputField
@@ -88,6 +135,8 @@ export function SignupForm() {
           name="전화번호"
           placeholder="‘-’ 없이 숫자만 작성"
           require={true}
+          showIcon={true}
+          validationFunction={validateEmail}
         />
 
         <InputField
@@ -98,20 +147,7 @@ export function SignupForm() {
           description="커뮤니티 이용 시 사용할 닉네임을 입력해 주세요."
         />
 
-        <Label
-          id="signupSource"
-          name="가입경로"
-          require={false}
-        />
-        <select
-          className="h-10 w-full rounded-e border-2"
-          name="signupSource"
-          id="signupSource">
-          <option value="">포털 검색</option>
-          <option value="">SNS</option>
-          <option value="">지인 소개</option>
-          <option value="">기타</option>
-        </select>
+        <SelectSource />
       </div>
 
       {/* 추가내용 2 */}
@@ -120,52 +156,22 @@ export function SignupForm() {
           id={'link'}
           name={'SNS'}
           require={true}
+          description="1개 이상"
+          highlight={true}
         />
-
-        <div className="">
-          <div className="mb-10 flex gap-3">
-            <div className="h-10 w-10 overflow-hidden rounded-full">
-              <SocialNaverBlogLink />
-            </div>
-            <div className="h-10 w-10 overflow-hidden rounded-full">
-              <SocialInstagramLink />
-            </div>
-            <div className="h-10 w-10 overflow-hidden rounded-full">
-              <SocialYoutubeLink />
-            </div>
-            <div className="h-10 w-10 overflow-hidden rounded-full">
-              <SocialTikTokLink />
-            </div>
-            <div className="h-10 w-10 overflow-hidden rounded-full">
-              <SocialAddButtonLink />
-            </div>
-          </div>
-        </div>
-
-        <div className="">
-          <div className="space-y-2">
-            <Input
-              id={'blog'}
-              type={'text'}
-            />
-            <Input
-              id={'instagram'}
-              type={'text'}
-            />
-            <Input
-              id={'youtube'}
-              type={'text'}
-            />
-            <Input
-              id={'tiktok'}
-              type={'text'}
-            />
-          </div>
-        </div>
+        <SnsLinks />
       </div>
 
       {/* 추가 내용 3 */}
       <div className="mb-10 space-y-6 border-2 bg-white px-10 py-10">
+        <Modal
+          onLeftButtonClick={() => {}}
+          onRightButtonClick={() => {}}
+          open={false}
+          // children={undefined}
+        >
+          <AddressField />
+        </Modal>
         <div className="mb-6 space-y-2">
           <CertifyField
             id="address"
@@ -174,6 +180,8 @@ export function SignupForm() {
             placeholder="우편번호"
             description="체험단 응모 시 사용할 주소를 입력해 주세요. / 체험단 모집 시 사용할 주소를 입력해 주세요."
             require={true}
+            showIcon={false}
+            validationFunction={validateEmail}
           />
           <Input
             id={'addressDetail1'}

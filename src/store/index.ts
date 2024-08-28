@@ -2,3 +2,4 @@
 // 이를 통해 import 경로를 간결하게 유지할 수 있습니다.
 
 export { useSearchModalStore } from './useSearchModal'
+export { useSearchFilterBoxStore } from './useSearchFilterBox'

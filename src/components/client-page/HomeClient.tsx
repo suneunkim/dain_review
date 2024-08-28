@@ -8,12 +8,15 @@ import TopButton from '@/components/shared/TopButton'
 import PremiumCardContainer from '@/components/home/premium/PremiumCardContainer'
 import ProductCardContainer from '@/components/home/product/ProductCardContainer'
 import DeadlineProductContainer from '@/components/home/deadline/DeadlineProductContainer'
-import SearchModal from '../modal/SearchModal'
-import { useSearchModalStore } from '@/store'
+import SearchModal from '../modal/search-modal/SearchModal'
+import { useSearchFilterBoxStore, useSearchModalStore } from '@/store'
 import NearByProductContainer from '../home/near/NearByProductContainer'
+import LocationModal from '../modal/search-modal/search-filter-box-inner-modal/LocationModal'
+import FilterModal from '../modal/search-modal/search-filter-box-inner-modal/FilterModal'
 
 export default function HomeClient() {
   const { isOpen } = useSearchModalStore()
+  const { isLocationModalOpen, isFilterModalOpen } = useSearchFilterBoxStore()
   return (
     <div className="relative">
       <Header isLogin={true} />
@@ -40,6 +43,8 @@ export default function HomeClient() {
         <Footer />
       </main>
       {isOpen && <SearchModal />}
+      {isLocationModalOpen && <LocationModal />}
+      {isFilterModalOpen && <FilterModal />}
     </div>
   )
 }

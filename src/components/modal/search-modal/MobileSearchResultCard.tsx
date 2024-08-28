@@ -1,8 +1,8 @@
-import ReviewType from '../home/product/ReviewType'
+import ReviewType from '../../home/product/ReviewType'
 
 const MobileSearchResultCard = () => {
   return (
-    <div className="min-h-[238px] min-w-[156px] max-w-[520px]">
+    <div className="min-h-[238px] w-[42vw] min-w-[156px] max-w-[520px]">
       <div className="max-w-[228px] 520:w-[44vw]">
         <div className="min-h-[117px] w-full bg-gray-300" />
         <div className="flex flex-col">

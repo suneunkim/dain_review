@@ -17,6 +17,7 @@ import SnsLinks from './SnsLinks'
 import SelectSource from './SelectSource'
 import AddressField from './AddressField'
 import Modal from '../shared/Modal'
+import result from 'postcss/lib/result'
 
 const userSchema: z.ZodSchema = z.object({
   address: z.string().optional(),
@@ -86,6 +87,32 @@ const validateEmail = async (email: string) => {
   }
 }
 
+const validateNumber = async (number: string) => {
+  try {
+    const response = await fetch(
+      'https://review-server.dain-ad.kr/api/email-verification',
+      {
+        method: 'POST',
+        headers: {
+          'Access-Control-Allow-Methods': 'true',
+          'Access-Control-Allow-Credentials': 'true',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ number })
+      }
+    )
+    const result = await response.json()
+    console.log(result)
+    if (result.isDuplicate) {
+      return { isValid: false, message: '이미 사용 중인 번호입니다.' }
+    } else {
+      return { isValid: true, message: '번호인증 완료' }
+    }
+  } catch (error) {
+    return { isValid: false, message: '번호 확인 중 오류가 발생했습니다.' }
+  }
+}
+
 export function SignupForm() {
   const onSubmit = (data: z.infer<typeof userSchema>) => {
     console.log('SignupForm', data)
@@ -136,7 +163,7 @@ export function SignupForm() {
           placeholder="‘-’ 없이 숫자만 작성"
           require={true}
           showIcon={true}
-          validationFunction={validateEmail}
+          validationFunction={validateNumber}
         />
 
         <InputField

@@ -8,7 +8,7 @@ interface VerificationIconProps {
 
 const VerificationIcon: React.FC<VerificationIconProps> = ({ isVerified }) => {
   if (isVerified === null) return null // null일 경우 아이콘을 표시하지 않음
-
+  console.log(isVerified)
   return (
     <div className="absolute right-2 top-3">
       {isVerified ? <InputCheckedIcon /> : <InputCheckedErrorIcon />}

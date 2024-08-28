@@ -79,7 +79,7 @@ const CertifyField: React.FC<CertifyFieldProps> = ({
         </div>
         <Button
           type="button"
-          className="h-[42px] min-w-[74px]"
+          className="h-[42px] min-w-[74px] rounded-md"
           variant="solid_primary"
           onClick={handleValidation}>
           {children}

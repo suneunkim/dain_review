@@ -25,14 +25,14 @@ const PageTitle: React.FC<PageHeaderProps> = ({
     <div>
       {/* Small screens: Display title at the top center */}
       {title && (
-        <div className="absolute left-0 right-0 top-[18px] z-10 mx-auto flex items-center justify-center md:hidden">
+        <div className="absolute left-0 right-0 top-[18px] z-10 mx-auto flex items-center justify-center lg:hidden">
           <h2 className="text-body-1 font-[700] text-gray-90">{title}</h2>
         </div>
       )}
 
       {/* Larger screens: Display full header */}
       <div
-        className={`hidden max-h-[240px] w-full bg-gradient-to-b from-[#040404] to-[#505156] md:flex ${containerHeightClass}`}>
+        className={`hidden max-h-[240px] w-full bg-gradient-to-b from-[#040404] to-[#505156] lg:flex ${containerHeightClass}`}>
         <div className="relative mx-auto flex w-full max-w-[1400px] flex-col justify-end px-[56px]">
           <DecoLeft className="absolute left-0 top-0 z-10 h-full" />
           <DecoRight className="absolute right-0 top-0 z-10 h-full" />

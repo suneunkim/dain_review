@@ -1,13 +1,10 @@
-import YoutubeIcon from '@/assets/icons/home/youtube.svg'
-import NaverBlogIcon from '@/assets/icons/home/naver-blog.svg'
-import InstagramIcon from '@/assets/icons/home/instagram.svg'
-
 interface ReviewTypeProps {
   snsType: 'naver' | 'youtube' | 'instagram'
-  labelType: '기자단' | '방문형' | '배송형'
+  labelType?: '기자단' | '방문형' | '배송형'
+  detailPage?: boolean
 }
 
-const ReviewType = ({ snsType, labelType }: ReviewTypeProps) => {
+const ReviewType = ({ snsType, labelType, detailPage }: ReviewTypeProps) => {
   // 모바일 크기일 때 svg 크기와 웹일때 크기 차이가 있어서 svgr 방법 대신 직접 사용
   const icons = {
     naver: (
@@ -210,9 +207,16 @@ const ReviewType = ({ snsType, labelType }: ReviewTypeProps) => {
   return (
     <div className="flex gap-[6px]">
       <div className="flex gap-[6px]">{icons[snsType]}</div>
-      <div className="rounded-md bg-gray-5 p-1 text-caption-3 text-gray-70 lg:text-body-2">
-        <p className="flex items-center justify-center">{labelType}</p>
-      </div>
+      {detailPage ? (
+        <div className="text-body-2 text-gray-60">
+          <span>네이버 블로그 ∙ {` `}</span>
+          <span>방문형 / 맛집</span>
+        </div>
+      ) : (
+        <div className="rounded-md bg-gray-5 p-1 text-caption-3 text-gray-70 lg:text-body-2">
+          <p className="flex items-center justify-center">{labelType}</p>
+        </div>
+      )}
     </div>
   )
 }

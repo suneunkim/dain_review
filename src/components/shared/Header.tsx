@@ -8,13 +8,15 @@ import MobileMenu from '@/assets/icons/home/mobile/mobile-menu.svg'
 import MobileSubtitleHeader from '../header/mobile/MobileSubtitleHeader'
 import { useSearchModalStore } from '@/store'
 import SearchButton from '../modal/SearchButton'
+import BackIcon from '@/assets/icons/product-detail/back-button.svg'
 
 interface Props {
   isLogin: boolean
   subtitle?: string
+  isBackButton?: boolean
 }
 
-const Header = ({ isLogin, subtitle }: Props) => {
+const Header = ({ isLogin, subtitle, isBackButton }: Props) => {
   const { openModal } = useSearchModalStore()
   return (
     <header className="mx-auto h-[56px] max-w-[1400px] bg-white px-4 md:bg-inherit lg:h-[160px] desktop:p-0">
@@ -23,7 +25,8 @@ const Header = ({ isLogin, subtitle }: Props) => {
         <MobileSubtitleHeader subtitle={subtitle} />
       ) : (
         <div className="flex h-full items-center justify-between lg:hidden">
-          <MobileMenu />
+          {isBackButton ? <BackIcon /> : <MobileMenu />}
+
           <div className="flex items-center gap-4">
             <SearchButton />
             <Notification noti={3} />

@@ -1,11 +1,30 @@
-const ButtonAndInfo = () => {
+import Link from 'next/link'
+
+interface Props {
+  productId: string
+  onClick?: () => void | undefined
+  isApplyPage?: boolean
+}
+
+const ButtonAndInfo = ({ productId, onClick, isApplyPage }: Props) => {
   return (
     <div className="relative w-full">
-      <button
-        className="h-[46px] w-full rounded-md bg-red-main px-4 py-3 text-white"
-        type="submit">
-        신청하기
-      </button>
+      {isApplyPage ? (
+        <button
+          onClick={onClick}
+          className="h-[46px] w-full rounded-md bg-red-main px-4 py-3 text-white"
+          type="button">
+          신청하기
+        </button>
+      ) : (
+        <Link href={`/product/${productId}/apply`}>
+          <button
+            className="h-[46px] w-full rounded-md bg-red-main px-4 py-3 text-white"
+            type="button">
+            신청하기
+          </button>
+        </Link>
+      )}
       <div className="absolute -top-14 flex w-full justify-center">
         <div className="h-[38px] w-[198px] rounded-lg bg-white px-8 py-2 text-black shadow-xl">
           <svg

@@ -12,8 +12,9 @@ import {
   필수체크사항
 } from '@/data/DetailPageMockData'
 import ReviewType from '@/components/home/product/ReviewType'
+import { ProductDetailProps } from '@/models/detailPage'
 
-const MobileLayout = () => {
+const MobileLayout = ({ productId }: ProductDetailProps) => {
   return (
     <div className="px-4">
       <section className="flex flex-col">
@@ -185,7 +186,7 @@ const MobileLayout = () => {
 
       <footer className="mt-32 flex items-center justify-between gap-2">
         <LikeButton />
-        <ButtonAndInfo />
+        <ButtonAndInfo productId={productId} />
       </footer>
     </div>
   )

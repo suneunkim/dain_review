@@ -13,8 +13,10 @@ import TagKeyword from './elements/TagKeyword'
 import DotIcon from '@/assets/icons/product-detail/dot.svg'
 import ReviewType from '../home/product/ReviewType'
 import DesttopShare from '@/assets/icons/product-detail/desktop-share.svg'
+import { ProductDetailProps } from '@/models/detailPage'
+import Schedule from './elements/Schedule'
 
-const DesktopLayout = () => {
+const DesktopLayout = ({ productId }: ProductDetailProps) => {
   return (
     <div className="px-5">
       <div className="flex justify-center gap-5">
@@ -179,31 +181,12 @@ const DesktopLayout = () => {
         {/* 오른쪽 레이아웃 */}
         <div className="mt-10 h-[836px] min-w-[461px] rounded-lg bg-[#F7F8F8] px-6 pb-8 pt-6">
           <p className="text-heading-5 font-bold">체험단 일정</p>
-          <div className="mt-2 flex min-h-[152px] flex-col rounded-2xl border border-line-neutral bg-white px-4 py-3 text-body-2">
-            <div className="flex justify-between py-[6px]">
-              <p className="text-gray-40">체험단 모집기간</p>
-              <p className="font-medium text-gray-60">
-                08.05 (월) ~ 08.14 (수)
-              </p>
-            </div>
-            <div className="flex justify-between py-[6px]">
-              <p className="text-gray-40">선정자 발표</p>
-              <p>08.05 (월) ~ 08.14 (수)</p>
-            </div>
-            <div className="flex justify-between py-[6px]">
-              <p className="text-gray-40">리뷰 & 체험</p>
-              <p>08.05 (월) ~ 08.14 (수)</p>
-            </div>
-            <div className="flex justify-between py-[6px]">
-              <p className="text-gray-40">리뷰 마감</p>
-              <p>08.05 (월) ~ 08.14 (수)</p>
-            </div>
-          </div>
+          <Schedule />
           <div className="mt-4 min-h-[465px] rounded-2xl border border-line-neutral bg-white">
             달력
           </div>
           <div className="mt-[66px]">
-            <ButtonAndInfo />
+            <ButtonAndInfo productId={productId} />
           </div>
         </div>
       </div>

@@ -5,18 +5,18 @@ import {
   tagkeywordList,
   요청사항,
   필수체크사항
-} from '@/components/product-detail/mockData'
-import CheckInfoList from './CheckInfoList'
-import LikeButton from './LikeButton'
-import ButtonAndInfo from './ButtonAndInfo'
-import TagKeyword from './TagKeyword'
+} from '@/data/DetailPageMockData'
+import CheckInfoList from './elements/CheckInfoList'
+import LikeButton from './elements/LikeButton'
+import ButtonAndInfo from './elements/ButtonAndInfo'
+import TagKeyword from './elements/TagKeyword'
 import DotIcon from '@/assets/icons/product-detail/dot.svg'
 import ReviewType from '../home/product/ReviewType'
 import DesttopShare from '@/assets/icons/product-detail/desktop-share.svg'
 
 const DesktopLayout = () => {
   return (
-    <div className="hidden px-5 lg:block">
+    <div className="px-5">
       <div className="flex justify-center gap-5">
         {/* 왼쪽 레이아웃 */}
         <div className="min-w-[503px] max-w-[899px] flex-1 px-4">

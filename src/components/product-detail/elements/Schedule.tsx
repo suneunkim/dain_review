@@ -10,7 +10,9 @@ const Schedule = () => {
   return (
     <div className="mt-2 flex min-h-[152px] flex-col rounded-2xl border border-line-neutral bg-white px-4 py-3 text-body-2">
       {experiencePeriods.map((item, i) => (
-        <div className="flex justify-between py-[6px]">
+        <div
+          key={i}
+          className="flex justify-between py-[6px]">
           <p className="text-gray-40">{item.label}</p>
           <p className="font-medium text-gray-60">{item.period}</p>
         </div>

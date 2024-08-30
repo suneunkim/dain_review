@@ -7,8 +7,8 @@ import LogoIconBlack from '@/assets/icons/home/logo-icon-black.svg'
 import MobileMenu from '@/assets/icons/home/mobile/mobile-menu.svg'
 import MobileSubtitleHeader from '../header/mobile/MobileSubtitleHeader'
 import { useSearchModalStore } from '@/store'
-import SearchButton from '../modal/SearchButton'
 import BackIcon from '@/assets/icons/product-detail/back-button.svg'
+import SearchButton from '../header/SearchButton'
 
 interface Props {
   isLogin: boolean

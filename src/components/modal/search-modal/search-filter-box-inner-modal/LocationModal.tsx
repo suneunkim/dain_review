@@ -6,33 +6,51 @@ import XIcon from '@/assets/icons/home/mobile/mobile-x-icon.svg'
 import { useSearchFilterBoxStore } from '@/store'
 import { locations } from '@/data/locations'
 
-const LocationModal = () => {
+interface Props {
+  onChange: (locations: [string, string][]) => void
+}
+
+const LocationModal = ({ onChange }: Props) => {
   const { closeLocationModal } = useSearchFilterBoxStore()
 
-  const [selectedCity, setSelectedCity] = useState<string>(locations[1].city)
-  const [seletcedDistricts, setSelectedDistricts] = useState<string[]>([])
+  const [selectedCity, setSelectedCity] = useState<string>('') // ui 용도
+  const [selectedLocations, setSelectedLocations] = useState<
+    [string, string][]
+  >([]) // 시와 구 튜플로 저장
 
   const handleCityClick = (city: string) => {
     setSelectedCity(city)
   }
 
   const handleDistrictClick = (district: string) => {
-    setSelectedDistricts(prevSelected => {
-      if (prevSelected.includes(district)) {
-        // 이미 선택된 하위 지역이면 제거
-        return prevSelected.filter(item => item !== district)
-      } else if (prevSelected.length < 5) {
-        // 선택된 하위 지역이 5개 미만일 때만 추가
-        return [...prevSelected, district]
+    // 도시와 구의 조합을 새로운 상태에 추가
+    setSelectedLocations(prevLocations => {
+      const exists = prevLocations.some(
+        ([city, dist]) => city === selectedCity && dist === district
+      )
+
+      if (exists) {
+        // 이미 선택된 조합이면 제거
+        return prevLocations.filter(
+          ([city, dist]) => !(city === selectedCity && dist === district)
+        )
+      } else if (prevLocations.length < 5) {
+        // 새로운 조합 추가
+        return [...prevLocations, [selectedCity, district]]
       } else {
-        // 선택된 하위 지역이 5개 이상일 때는 그대로 반환
-        return prevSelected
+        // 선택된 조합이 5개 이상일 때는 그대로 반환
+        return prevLocations
       }
     })
   }
 
   const handleReset = () => {
-    setSelectedDistricts([])
+    setSelectedLocations([])
+  }
+
+  const handleConfirm = () => {
+    onChange(selectedLocations)
+    closeLocationModal()
   }
 
   return (
@@ -55,21 +73,27 @@ const LocationModal = () => {
           <ul className="max-h-[282px] w-full overflow-y-auto border-r border-line-neutral">
             {locations
               .find(location => location.city === selectedCity)
-              ?.districts.map(district => (
-                <li
-                  onClick={() => handleDistrictClick(district)}
-                  key={district}
-                  className={`p-4 text-body-1 ${seletcedDistricts.includes(district) && 'text-red-main'}`}>
-                  {district}
-                </li>
-              ))}
+              ?.districts.map(district => {
+                const isSelected = selectedLocations.some(
+                  ([city, dist]) => city === selectedCity && dist === district
+                )
+                // 선택된 도시와 구의 조합이 존재하는지 확인
+                return (
+                  <li
+                    onClick={() => handleDistrictClick(district)}
+                    key={district}
+                    className={`p-4 text-body-1 ${isSelected && 'text-red-main'}`}>
+                    {district}
+                  </li>
+                )
+              })}
           </ul>
         </div>
-        {/* 선택된 요소 */}
-        <ul className="flex h-[36px] gap-1 overflow-x-auto px-4 pt-2 shadow-topCustom">
-          {seletcedDistricts.map(district => (
+        {/* 선택된 구 표시*/}
+        <ul className="shadow-topCustom flex h-[36px] gap-1 overflow-x-auto px-4 pt-2">
+          {selectedLocations.map(([city, district]) => (
             <li
-              key={district}
+              key={`${city}-${district}`}
               className="flex items-center gap-[7px] rounded-2xl border px-3 py-[2px]">
               <span className="min-w-min whitespace-nowrap text-body-2 text-gray-40">
                 {district}
@@ -93,7 +117,9 @@ const LocationModal = () => {
               닫기
             </button>
           </div>
-          <button className="min-h-[50px] w-full rounded-md bg-red-main text-heading-5 text-white">
+          <button
+            onClick={handleConfirm}
+            className="min-h-[50px] w-full rounded-md bg-red-main text-heading-5 text-white">
             확인
           </button>
         </div>

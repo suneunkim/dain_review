@@ -4,6 +4,8 @@ import React, { useState, useRef } from 'react'
 import Header from '@/components/shared/Header'
 import Footer from '@/components/shared/Footer'
 import PageTitle from '@/components/shared/PageTitle'
+import ImagePreviewer from '@/components/review/ImagePreviewer'
+import WeekdayPicker from '@/components/campaign/WeekdayPicker'
 
 // 체험단 등록: 사업자의 체험단 모집 작성 페이지
 // 방문형·포장형으로 구분
@@ -12,7 +14,24 @@ import PageTitle from '@/components/shared/PageTitle'
 
 // 공통 CSS 정의
 
+const weekdays = ['일', '월', '화', '수', '목', '금', '토']
+
 const page = () => {
+  const [selectedPossibleDays, setSelectedPossibleDays] = useState([])
+  const [selectedImpossibleDays, setSelectedImpossibleDays] = useState([])
+
+  const handlePossibleDayChange = day => {
+    setSelectedPossibleDays(prev =>
+      prev.includes(day) ? prev.filter(d => d !== day) : [...prev, day]
+    )
+  }
+
+  const handleImpossibleDayChange = day => {
+    setSelectedImpossibleDays(prev =>
+      prev.includes(day) ? prev.filter(d => d !== day) : [...prev, day]
+    )
+  }
+
   return (
     <main>
       <Header />
@@ -99,7 +118,7 @@ const page = () => {
             <p className="text-body-2 font-[300] text-gray-60">
               10MB 이하 이미지 파일 1개를 첨부해 주세요
             </p>
-            {/* Image Previewer 컴포넌트 */}
+            <ImagePreviewer />
             <div className="flex justify-center">
               <button className="mb-[32px] mt-[80px] w-full max-w-[216px] rounded-[4px] border border-gray-80 bg-gray-0 px-[20px] py-[12px] text-body-1 font-[700] text-gray-80">
                 다음
@@ -201,55 +220,14 @@ const page = () => {
                     </span>
                   </p>
                   <div className="mt-[8px] flex h-[90px] min-w-[328px] max-w-[335px] flex-1 items-center justify-around space-x-2 rounded-lg border px-[11px]">
-                    <label className="flex flex-col items-center">
-                      <span>일</span>
-                      <input
-                        type="checkbox"
-                        className="form-checkbox"
+                    {weekdays.map(day => (
+                      <WeekdayPicker
+                        key={day}
+                        day={day}
+                        isChecked={selectedPossibleDays.includes(day)}
+                        onChange={() => handlePossibleDayChange(day)}
                       />
-                    </label>
-                    <label className="flex flex-col items-center">
-                      <span>월</span>
-                      <input
-                        type="checkbox"
-                        className="form-checkbox"
-                      />
-                    </label>
-                    <label className="flex flex-col items-center">
-                      <span>화</span>
-                      <input
-                        type="checkbox"
-                        className="form-checkbox"
-                      />
-                    </label>
-                    <label className="flex flex-col items-center">
-                      <span>수</span>
-                      <input
-                        type="checkbox"
-                        className="form-checkbox"
-                      />
-                    </label>
-                    <label className="flex flex-col items-center">
-                      <span>목</span>
-                      <input
-                        type="checkbox"
-                        className="form-checkbox"
-                      />
-                    </label>
-                    <label className="flex flex-col items-center">
-                      <span>금</span>
-                      <input
-                        type="checkbox"
-                        className="form-checkbox"
-                      />
-                    </label>
-                    <label className="flex flex-col items-center">
-                      <span>토</span>
-                      <input
-                        type="checkbox"
-                        className="form-checkbox"
-                      />
-                    </label>
+                    ))}
                   </div>
                 </div>
                 {/* 일월화수목금토 체크박스 */}
@@ -257,7 +235,16 @@ const page = () => {
                   <p className="mb-[8px] text-body-1 font-[700] text-gray-80">
                     체험 불가능 요일
                   </p>
-                  <div className="mt-[8px] flex h-[90px] min-w-[328px] max-w-[335px] flex-1 items-center justify-around space-x-2 rounded-lg border px-[11px]"></div>
+                  <div className="mt-[8px] flex h-[90px] min-w-[328px] max-w-[335px] flex-1 items-center justify-around space-x-2 rounded-lg border px-[11px]">
+                    {weekdays.map(day => (
+                      <WeekdayPicker
+                        key={day}
+                        day={day}
+                        isChecked={selectedImpossibleDays.includes(day)}
+                        onChange={() => handleImpossibleDayChange(day)}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>

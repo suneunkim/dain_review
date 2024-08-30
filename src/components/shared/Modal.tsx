@@ -3,25 +3,10 @@ import Dimmed from './Dimmed'
 
 interface ModalProps {
   open: boolean
-  title?: string
-  body?: React.ReactNode
-  rightButtonLabel?: string
-  onRightButtonClick: () => void
-  leftButtonLabel?: string
-  onLeftButtonClick: () => void
   children: React.ReactNode
 }
 
-function Modal({
-  open,
-  title,
-  body,
-  rightButtonLabel = '닫기',
-  leftButtonLabel = '확인',
-  onRightButtonClick,
-  onLeftButtonClick,
-  children
-}: ModalProps) {
+function Modal({ open, children }: ModalProps) {
   if (open === false) return null
 
   return (

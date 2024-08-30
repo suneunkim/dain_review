@@ -12,7 +12,7 @@ import SocialTikTokLinkDisable from '@/assets/icons/auth/SocialTikTokLinkDisable
 import SocialNaverBlogLinkDisable from '@/assets/icons/auth/SocialNaverBlogLinkDisable.svg'
 import SocialYoutubeLinkDisable from '@/assets/icons/auth/SocialYoutubeLinkDisable.svg'
 import SocialAddButtonLinkDisable from '@/assets/icons/auth/SocialAddButtonLinkDisable.svg'
-import Input from '../shared/Input'
+import SnsInput from './SnsInput'
 
 type SnsLinkValue = {
   naver: boolean
@@ -132,7 +132,7 @@ const SnsLinks = () => {
         <div className="">
           <div className="space-y-2">
             {inputState.naver && (
-              <Input
+              <SnsInput
                 id={'naver'}
                 type={'text'}
                 icon={
@@ -144,7 +144,7 @@ const SnsLinks = () => {
               />
             )}
             {inputState.instagram && (
-              <Input
+              <SnsInput
                 id={'instagram'}
                 type={'text'}
                 icon={
@@ -156,7 +156,7 @@ const SnsLinks = () => {
               />
             )}
             {inputState.youtube && (
-              <Input
+              <SnsInput
                 id={'youtube'}
                 type={'text'}
                 icon={
@@ -168,7 +168,7 @@ const SnsLinks = () => {
               />
             )}
             {inputState.tiktok && (
-              <Input
+              <SnsInput
                 id={'tiktok'}
                 type={'text'}
                 icon={
@@ -180,7 +180,7 @@ const SnsLinks = () => {
               />
             )}
             {inputState.other && (
-              <Input
+              <SnsInput
                 id={'other'}
                 type={'text'}
                 icon={

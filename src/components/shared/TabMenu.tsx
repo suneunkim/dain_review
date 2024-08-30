@@ -1,5 +1,6 @@
 'use client'
 import React, { useState } from 'react'
+import ProductCard from '../home/product/ProductCard'
 
 const TabMenu = () => {
   const [activeMainTab, setActiveMainTab] = useState('내 체험단')
@@ -27,7 +28,7 @@ const TabMenu = () => {
       </span>
 
       {/* Sub Tabs */}
-      <span className="mt-4 flex space-x-4">
+      <span className="my-6 flex space-x-4">
         {subTabs.map(tab => (
           <button
             key={tab}
@@ -43,19 +44,10 @@ const TabMenu = () => {
       </span>
 
       {/* Tab Content */}
-      <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-4 lg:gap-x-5 lg:gap-y-10">
         {/* Example content - Replace with actual content */}
         {[...Array(8)].map((_, index) => (
-          <div
-            key={index}
-            className="flex flex-col justify-between rounded-lg bg-white p-4 shadow">
-            <h2 className="text-lg font-bold">{`${activeMainTab} - ${activeSubTab}`}</h2>
-            <p className="text-sm text-gray-500">Content {index + 1}</p>
-            <div className="mt-2 flex justify-between">
-              <button className="font-semibold text-red-500">신청취소</button>
-              <button className="font-semibold text-black">리뷰등록</button>
-            </div>
-          </div>
+          <ProductCard flag={'premium'} />
         ))}
       </div>
 

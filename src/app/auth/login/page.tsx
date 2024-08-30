@@ -1,4 +1,4 @@
-import { LoginForm } from '@/components/auth/LoginForm'
+import { LoginForm } from '@/components/auth/form/LoginForm'
 import { SocialLinkGroups } from '@/components/auth/SocialLinkGroups'
 import { SocialLinkMobileGroups } from '@/components/auth/SocialLinkMobileGroups'
 import Image from 'next/image'

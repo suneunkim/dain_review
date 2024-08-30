@@ -1,11 +1,11 @@
 'use client'
 
-import Input from '../shared/Input'
+import Input from '../../shared/Input'
 
 import { z } from 'zod'
 import { LoginFormValues } from '@/models/auth'
-import Form from '../shared/Form'
-import Button from '../shared/Button'
+import Form from '../../shared/Form'
+import Button from '../../shared/Button'
 
 /**
  * 유효성검사 에러 메세지 주석

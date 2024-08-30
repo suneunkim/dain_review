@@ -27,6 +27,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   weight?: keyof typeof weightClasses
   variant?: keyof typeof variantStyles
   className?: string
+  onClick?: () => void
 }
 
 const Button: FC<ButtonProps> = ({
@@ -36,6 +37,7 @@ const Button: FC<ButtonProps> = ({
   weight,
   variant = 'solid_primary',
   className,
+  onClick,
   ...rest
 }) => {
   const baseStyles = `text-center text-sm box-border px-3 py-[10px]`
@@ -43,6 +45,7 @@ const Button: FC<ButtonProps> = ({
   return (
     <button
       disabled={disable}
+      onClick={onClick}
       className={classNames(className, baseStyles, variantStyles[variant], {
         disable: 'cursor-not-allowed bg-gray-20'
       })}

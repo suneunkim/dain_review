@@ -1,38 +1,27 @@
 'use client'
 
-import Agreement from '../shared/Agreement'
-import Button from '../shared/Button'
-import { Label } from '../shared/Label'
-import CertifyField from './CertifyField'
-import GenderSelect from './GenderSelect'
-import { InputField } from './InputField'
-import Input from '../shared/Input'
-import Form from '../shared/Form'
+import Agreement from '../../shared/Agreement'
+import Button from '../../shared/Button'
+import { Label } from '../../shared/Label'
+import CertifyField from '../CertifyField'
+import GenderSelect from '../GenderSelect'
+import { InputField } from '../InputField'
+import Input from '../../shared/Input'
+import Form from '../../shared/Form'
 import { z } from 'zod'
 
 import ProfileImage from '@/assets/icons/auth/ProfileImage.svg'
 import CameraProfile from '@/assets/icons/auth/CameraProfile.svg'
 
-import SnsLinks from './SnsLinks'
-import SelectSource from './SelectSource'
-import AddressField from './AddressField'
-import Modal from '../shared/Modal'
-import result from 'postcss/lib/result'
+import SnsLinks from '../SnsLinks'
+import SelectSource from '../SelectSource'
+import AddressSearch from '../AddressSearch'
+import Modal from '../../shared/Modal'
+import { useSearchModalStore } from '@/store'
+import SignUpDatePicker from '../SignUpDatePicker'
 
 const userSchema: z.ZodSchema = z.object({
-  address: z.string().optional(),
-  addressDetail: z.string().optional(),
-  birthdate: z.string().optional(), // 날짜 형식 검사가 필요할 경우 refine 사용
-  naver: z.string().url().optional(),
   email: z.string().email({ message: '이메일 형식을 입력해주세요.' }),
-  gender: z.number().int().optional(), // 정수형을 나타내며, 선택적 필드로 설정
-  instagram: z.string().optional(),
-  name: z.string().min(1, { message: '이름을 입력해주세요.' }),
-  nickname: z.string().optional(),
-  other: z.string().optional(),
-  phone: z.string().optional(), // 전화번호 형식 검사가 필요할 경우 refine 사용
-  postalCode: z.string().optional(),
-  profile: z.string().optional(), // 파일 업로드의 경우, URL로 처리하거나 파일 핸들링 방식 설정 필요
   pw: z
     .string()
     .min(8, { message: '패스워드는 최소 8자 이상이어야 합니다.' })
@@ -57,6 +46,18 @@ const userSchema: z.ZodSchema = z.object({
           '영문+숫자+특수문자(@) 조합 중 최소 2가지를 사용해 8~15자리를 입력해주세요.'
       }
     ),
+  name: z.string().min(1, { message: '이름을 입력해주세요.' }),
+  phone: z.string().min(10, { message: '10자리 이상 입력해주세요!' }),
+  address: z.string().optional(),
+  nickname: z.string().optional(),
+  addressDetail: z.string().optional(),
+  birthdate: z.string().optional(), // 날짜 형식 검사가 필요할 경우 refine 사용
+  blog: z.string().url().optional(),
+  gender: z.number({ message: '성별을 선택해주세요' }).int(), // 정수형을 나타내며, 선택적 필드로 설정
+  instagram: z.string().optional(),
+  other: z.string().optional(),
+  postalCode: z.string().optional(),
+  profile: z.string().optional(), // 파일 업로드의 경우, URL로 처리하거나 파일 핸들링 방식 설정 필요
   signupSource: z.string().optional(),
   tiktok: z.string().optional(),
   youtube: z.string().optional()
@@ -191,36 +192,7 @@ export function SignupForm() {
 
       {/* 추가 내용 3 */}
       <div className="mb-10 space-y-6 border-2 bg-white px-10 py-10">
-        <Modal
-          onLeftButtonClick={() => {}}
-          onRightButtonClick={() => {}}
-          open={false}
-          // children={undefined}
-        >
-          <AddressField />
-        </Modal>
-        <div className="mb-6 space-y-2">
-          <CertifyField
-            id="address"
-            name="주소"
-            children="검색"
-            placeholder="우편번호"
-            description="체험단 응모 시 사용할 주소를 입력해 주세요. / 체험단 모집 시 사용할 주소를 입력해 주세요."
-            require={true}
-            showIcon={false}
-            validationFunction={validateEmail}
-          />
-          <Input
-            id={'addressDetail1'}
-            type={'text'}
-            placeholder="기본 주소"
-          />
-          <Input
-            id={'addressDetail2'}
-            type={'text'}
-            placeholder="상세주소"
-          />
-        </div>
+        <AddressSearch />
 
         <div>
           <Label
@@ -241,13 +213,15 @@ export function SignupForm() {
             />
           </label>
         </div>
-
-        <Label
-          id="birthdate"
-          name="생년월일"
-          require={true}
-        />
-        {/* datePicker자리 */}
+        <div>
+          <Label
+            id="birthdate"
+            name="생년월일"
+            require={true}
+          />
+          {/* datePicker자리 */}
+          <SignUpDatePicker />
+        </div>
         <GenderSelect id="gender" />
       </div>
 

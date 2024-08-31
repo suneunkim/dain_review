@@ -4,12 +4,13 @@ import { useSearchFilterBoxStore, useSearchModalStore } from '@/store'
 import { useMediaQuery } from 'react-responsive'
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
-import SearchIcon from '@/assets/icons/home/mobile/mobile-search.svg'
+
 import DeleteIcon from '@/assets/icons/home/mobile/mobile-search-delete.svg'
 import MobileSearchResult from '@/components/search/MobileSearchResult'
 import { useState } from 'react'
 import LocationModal from './search-filter-box-inner-modal/LocationModal'
 import FilterModal from './search-filter-box-inner-modal/FilterModal'
+import SearchForm from '@/components/search/SearchForm'
 
 // TODO: 검색어 입력 후 엔터 누르면 모바일-> 검색결과, 웹-> 검색 페이지 이동으로 변경
 // 검색모달에 표시하는 하위 모달의 위치는 홈이 아니라 서치 모달로 이동
@@ -22,9 +23,7 @@ interface QueryFilters {
 }
 
 const SearchModal = () => {
-  const { closeModal } = useSearchModalStore()
   const { isLocationModalOpen, isFilterModalOpen } = useSearchFilterBoxStore()
-  const { handleSubmit, register, watch } = useForm()
   const isMobile = useMediaQuery({ query: '(max-width: 1023px)' })
   const router = useRouter()
 
@@ -36,7 +35,7 @@ const SearchModal = () => {
     types: [] // 유형 필터
   })
 
-  console.log(queryFilters)
+  //console.log(queryFilters)
 
   const categories = ['프리미엄 👑', '인기 ⭐', '마감임박 🚨', '신규 🐤']
   const recentSearchTerms = ['하이파이브', '글램핑', '카페', '펜션', '수분크림']
@@ -53,7 +52,12 @@ const SearchModal = () => {
   ]
   const campaignLocation = ['전국', '서울', '경기']
 
-  const onSubmit = () => {
+  const onSubmit = (formData: { searchTerm: string }) => {
+    const { searchTerm } = formData
+    setSearchWord(searchTerm)
+
+    console.log('검색어', searchTerm)
+
     if (!isMobile) {
       router.push('/search-result')
     }
@@ -66,34 +70,17 @@ const SearchModal = () => {
     }))
   }
 
-  const searchTerm = watch('searchTerm') // 검색 결과 UI 표시용으로 추후 삭제. 엔터 누르면 검색
-
   return (
     <>
       <div className="fixed inset-0 z-20 overflow-hidden bg-black bg-opacity-40">
         <div className="fixed inset-y-0 right-0 z-30 max-h-[1000px] min-w-[360px] max-w-[520px] overflow-y-auto bg-white pb-[64px] pt-5">
           {/* 검색어 입력 부분 */}
           <div className="px-4">
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="flex h-10 items-center gap-2 border-b border-gray-90">
-              <SearchIcon />
-              <input
-                className="text-body-1 text-gray-40 outline-none ring-0 focus:text-gray-80"
-                placeholder="찾고있는 체험단을 검색해보세요"
-                {...register('searchTerm', { required: true })}
-              />
-              <button
-                className="ml-auto"
-                type="button"
-                onClick={closeModal}>
-                닫기
-              </button>
-            </form>
+            <SearchForm onSubmit={onSubmit} />
           </div>
           {/* 검색 결과 UI - 모바일은 검색 결과 모달에 노출 */}
-          {isMobile && searchTerm ? (
-            <MobileSearchResult searchTerm={searchTerm} />
+          {isMobile && searchWord ? (
+            <MobileSearchResult searchTerm={searchWord} />
           ) : (
             <>
               {/* 검색 전 UI - 웹에서는 검색 결과 페이지로 이동 */}

@@ -14,6 +14,41 @@ import WeekdayPicker from '@/components/campaign/WeekdayPicker'
 
 // 공통 CSS 정의
 
+const Section = React.forwardRef(({ children }, ref) => (
+  <section
+    ref={ref}
+    className="mb-[100px]">
+    {children}
+  </section>
+))
+
+const NextButton = ({ children, ...props }) => (
+  <button
+    className="mb-[32px] mt-[80px] w-full max-w-[216px] rounded-[4px] border border-gray-80 bg-gray-0 px-[20px] py-[12px] text-body-1 font-[700] text-gray-80"
+    {...props}>
+    {children}
+  </button>
+)
+
+const Guide = ({ children }) => <div className="mb-[40px]">{children}</div>
+
+const Heading = ({ level, children }) => {
+  const Tag = `h${level}`
+  const className =
+    level === 3
+      ? 'mb-[12px] text-heading-3 font-[700] text-gray-90'
+      : 'text-heading-5 font-[500] text-gray-60'
+  return <Tag className={className}>{children}</Tag>
+}
+
+const Text = ({ type, children }) => {
+  const className =
+    type === 'body1'
+      ? 'mb-[8px] text-body-1 font-[700] text-gray-80'
+      : 'text-body-2 font-[300] text-gray-60'
+  return <p className={className}>{children}</p>
+}
+
 const weekdays = ['일', '월', '화', '수', '목', '금', '토']
 
 const page = () => {
@@ -42,20 +77,16 @@ const page = () => {
       />
       <div className="m-auto flex w-full max-w-[1920px] flex-col px-[56px]">
         <form className="m-auto flex w-full max-w-[691px] flex-col bg-white py-32">
-          <section className="mb-[100px]">
-            <div className="mb-[40px]">
-              <h3 className="mb-[12px] text-heading-3 font-[700] text-gray-90">
-                광고 영역
-              </h3>
-              <h5 className="text-heading-5 font-[500] text-gray-60">
+          <Section>
+            <Guide>
+              <Heading level={3}>광고 영역</Heading>
+              <Heading level={5}>
                 광고를 원하는 플랫폼, 유형, 카테고리를 선택해 주세요
-              </h5>
-            </div>
+              </Heading>
+            </Guide>
             <div className="flex w-full flex-wrap items-center justify-between">
               <div className="flex-1">
-                <p className="mb-[8px] text-body-1 font-[700] text-gray-80">
-                  플랫폼
-                </p>
+                <Text type="body1">플랫폼</Text>
                 {/* dropdown box 컴포넌트 고려해볼 것 */}
                 <select className="mt-2 w-full min-w-[200px] max-w-[217px] rounded-md border border-gray-300 p-2 text-gray-700">
                   <option value="">선택</option>
@@ -68,9 +99,7 @@ const page = () => {
                 </select>
               </div>
               <div className="flex-1">
-                <p className="mb-[8px] text-body-1 font-[700] text-gray-80">
-                  유형
-                </p>
+                <Text type="body1">유형</Text>
                 <select className="mt-2 w-full min-w-[200px] max-w-[217px] rounded-md border border-gray-300 p-2 text-gray-700">
                   <option value="">선택</option>
                   <option value="visit">방문형</option>
@@ -79,9 +108,7 @@ const page = () => {
                 </select>
               </div>
               <div className="flex-1">
-                <p className="mb-[8px] text-body-1 font-[700] text-gray-80">
-                  카테고리
-                </p>
+                <Text type="body1">카테고리</Text>
                 <select className="mt-2 w-full min-w-[200px] max-w-[217px] rounded-md border border-gray-300 p-2 text-gray-700">
                   <option value="">선택</option>
                   <option value="food">음식</option>
@@ -91,52 +118,34 @@ const page = () => {
               </div>
             </div>
             <div className="flex justify-center">
-              <button className="mb-[32px] mt-[80px] w-full max-w-[216px] rounded-[4px] border border-gray-80 bg-gray-0 px-[20px] py-[12px] text-body-1 font-[700] text-gray-80">
-                다음
-              </button>
+              <NextButton>다음</NextButton>
             </div>
-          </section>
-          <section className="mb-[100px]">
-            <div className="mb-[40px]">
-              <h3 className="mb-[12px] text-heading-3 font-[700] text-gray-90">
-                상호 정보
-              </h3>
-              <h5 className="text-heading-5 font-[500] text-gray-60">
-                상호명과 썸네일을 등록해 주세요
-              </h5>
-            </div>
-            <p className="mb-[8px] text-body-1 font-[700] text-gray-80">
-              상호명
-            </p>
+          </Section>
+          <Section>
+            <Guide>
+              <Heading level={3}>상호 정보</Heading>
+              <Heading level={5}>상호명과 썸네일을 등록해 주세요</Heading>
+            </Guide>
+            <Text type="body1">상호명</Text>
             <input
               className="mb-[26px] h-[40px] w-full rounded-[4px] border border-line-normal pl-[12px]"
               required
             />
-            <p className="mb-[8px] text-body-1 font-[700] text-gray-80">
-              썸네일
-            </p>
-            <p className="text-body-2 font-[300] text-gray-60">
-              10MB 이하 이미지 파일 1개를 첨부해 주세요
-            </p>
+            <Text type="body1">썸네일</Text>
+            <Text type="body2">10MB 이하 이미지 파일 1개를 첨부해 주세요</Text>
             <ImagePreviewer />
             <div className="flex justify-center">
-              <button className="mb-[32px] mt-[80px] w-full max-w-[216px] rounded-[4px] border border-gray-80 bg-gray-0 px-[20px] py-[12px] text-body-1 font-[700] text-gray-80">
-                다음
-              </button>
+              <NextButton>다음</NextButton>
             </div>
-          </section>
-          <section className="mb-[100px]">
-            <div className="mb-[40px]">
-              <h3 className="mb-[12px] text-heading-3 font-[700] text-gray-90">
-                제공 내역
-              </h3>
-              <h5 className="text-heading-5 font-[500] text-gray-60">
+          </Section>
+          <Section>
+            <Guide>
+              <Heading level={3}>제공 내역</Heading>
+              <Heading level={5}>
                 인플루언서에게 제공할 서비스 항목을 입력해 주세요
-              </h5>
-            </div>
-            <p className="mb-[8px] text-body-1 font-[700] text-gray-80">
-              서비스 항목
-            </p>
+              </Heading>
+            </Guide>
+            <Text type="body1">서비스 항목</Text>
             <textarea
               placeholder="서비스 항목을 100자 이내로 입력해 주세요"
               maxLength={100}
@@ -147,23 +156,17 @@ const page = () => {
               <p className="text-caption-1 font-[300] text-gray-30"> 0 / 100</p>
             </div>
             <div className="flex justify-center">
-              <button className="mb-[32px] mt-[80px] w-full max-w-[216px] rounded-[4px] border border-gray-80 bg-gray-0 px-[20px] py-[12px] text-body-1 font-[700] text-gray-80">
-                다음
-              </button>
+              <NextButton>다음</NextButton>
             </div>
-          </section>
-          <section className="mb-[100px]">
-            <div className="mb-[40px]">
-              <h3 className="mb-[12px] text-heading-3 font-[700] text-gray-90">
-                주소
-              </h3>
-              <h5 className="text-heading-5 font-[500] text-gray-60">
+          </Section>
+          <Section>
+            <Guide>
+              <Heading level={3}>주소</Heading>
+              <Heading level={5}>
                 방문 체험이 이루어질 장소의 주소를 입력해 주세요
-              </h5>
-            </div>
-            <p className="mb-[8px] text-body-1 font-[700] text-gray-80">
-              방문 주소
-            </p>
+              </Heading>
+            </Guide>
+            <Text type="body1">방문 주소</Text>
             {/* 주소 검색하는 Input */}
             <div className="flex space-x-[4px]">
               <input
@@ -187,38 +190,32 @@ const page = () => {
               className="h-[40px] w-full rounded-[4px] border border-line-normal pl-[12px]"
             />
             <div className="flex justify-center">
-              <button className="mb-[32px] mt-[80px] w-full max-w-[216px] rounded-[4px] border border-gray-80 bg-gray-0 px-[20px] py-[12px] text-body-1 font-[700] text-gray-80">
-                다음
-              </button>
+              <NextButton>다음</NextButton>
             </div>
-          </section>
-          <section className="mb-[100px]">
-            <div className="mb-[40px]">
-              <h3 className="mb-[12px] text-heading-3 font-[700] text-gray-90">
-                체험 일정
-              </h3>
-              <h5 className="text-heading-5 font-[500] text-gray-60">
+          </Section>
+          <Section>
+            <Guide>
+              <Heading level={3}>체험 일정</Heading>
+              <Heading level={5}>
                 체험 일정을 조율할 수 있는 연락처와 요일, 시간을 입력해 주세요
-              </h5>
-            </div>
-            <p className="mb-[8px] text-body-1 font-[700] text-gray-80">
-              연락처
-            </p>
+              </Heading>
+            </Guide>
+            <Text type="body1">연락처</Text>
             <input
               placeholder="‘-’ 없이 숫자만 작성"
               className="mb-[26px] h-[40px] w-full rounded-[4px] border border-line-normal pl-[12px]"
               required
             />
-            <div className="mb-[40px]">
+            <Guide>
               <div className="flex w-full flex-wrap items-center justify-between">
                 {/* 일월화수목금토 체크박스 */}
                 <div className="">
-                  <p className="mb-[8px] text-body-1 font-[700] text-gray-80">
+                  <Text type="body1">
                     체험 가능 요일{' '}
                     <span className="justify-center text-body-2 font-[700] text-status-destructive">
                       * 1개 이상
                     </span>
-                  </p>
+                  </Text>
                   <div className="mt-[8px] flex h-[90px] min-w-[328px] max-w-[335px] flex-1 items-center justify-around space-x-2 rounded-lg border px-[11px]">
                     {weekdays.map(day => (
                       <WeekdayPicker
@@ -232,9 +229,7 @@ const page = () => {
                 </div>
                 {/* 일월화수목금토 체크박스 */}
                 <div className="">
-                  <p className="mb-[8px] text-body-1 font-[700] text-gray-80">
-                    체험 불가능 요일
-                  </p>
+                  <Text type="body1">체험 불가능 요일</Text>
                   <div className="mt-[8px] flex h-[90px] min-w-[328px] max-w-[335px] flex-1 items-center justify-around space-x-2 rounded-lg border px-[11px]">
                     {weekdays.map(day => (
                       <WeekdayPicker
@@ -247,55 +242,38 @@ const page = () => {
                   </div>
                 </div>
               </div>
-            </div>
-            <p className="mb-[8px] text-body-1 font-[700] text-gray-80">
-              체험 가능 시간
-            </p>
+            </Guide>
+            <Text type="body1">체험 가능 시간</Text>
             <div className="flex justify-center">
-              <button className="mb-[32px] mt-[80px] w-full max-w-[216px] rounded-[4px] border border-gray-80 bg-gray-0 px-[20px] py-[12px] text-body-1 font-[700] text-gray-80">
-                다음
-              </button>
+              <NextButton>다음</NextButton>
             </div>
-          </section>
-          <section className="mb-[100px]">
-            <div className="mb-[40px]">
-              <h3 className="mb-[12px] text-heading-3 font-[700] text-gray-90">
-                사업주 미션
-              </h3>
-              <h5 className="text-heading-5 font-[500] text-gray-60">
+          </Section>
+          <Section>
+            <Guide>
+              <Heading level={3}>사업주 미션</Heading>
+              <Heading level={5}>
                 인플루언서에게 요구하는 사항을 자세히 입력해 주세요
-              </h5>
-            </div>
-            <p className="mb-[8px] text-body-1 font-[700] text-gray-80">
-              요구 사항
-            </p>
+              </Heading>
+            </Guide>
+            <Text type="body1">요구 사항</Text>
             <textarea
               placeholder="서비스 항목을 100자 이내로 입력해 주세요"
               maxLength={100}
               className="h-[167px] w-full rounded-[4px] border border-line-normal p-[9px] pl-[12px]"
               required></textarea>
             {/* 글자수 표시하는 함수 */}
-            <div className="flex justify-end">
-              <p className="text-caption-1 font-[300] text-gray-30"> 0 / 100</p>
-            </div>
             <div className="flex justify-center">
-              <button className="mb-[32px] mt-[80px] w-full max-w-[216px] rounded-[4px] border border-gray-80 bg-gray-0 px-[20px] py-[12px] text-body-1 font-[700] text-gray-80">
-                다음
-              </button>
+              <NextButton>다음</NextButton>
             </div>
-          </section>
-          <section className="mb-[100px]">
-            <div className="mb-[40px]">
-              <h3 className="mb-[12px] text-heading-3 font-[700] text-gray-90">
-                태그 키워드
-              </h3>
-              <h5 className="text-heading-5 font-[500] text-gray-60">
+          </Section>
+          <Section>
+            <Guide>
+              <Heading level={3}>태그 키워드</Heading>
+              <Heading level={5}>
                 해시태그로 사용할 키워드를 10자 이내로 적어 주세요
-              </h5>
-            </div>
-            <p className="mb-[8px] text-body-1 font-[700] text-gray-80">
-              홍보용 키워드
-            </p>
+              </Heading>
+            </Guide>
+            <Text type="body1">홍보용 키워드</Text>
             <div className="flex flex-wrap justify-between space-x-[20px]">
               <input
                 placeholder="키워드 1"
@@ -314,31 +292,23 @@ const page = () => {
               />
             </div>
             <div className="flex justify-center">
-              <button className="mb-[32px] mt-[80px] w-full max-w-[216px] rounded-[4px] border border-gray-80 bg-gray-0 px-[20px] py-[12px] text-body-1 font-[700] text-gray-80">
-                다음
-              </button>
+              <NextButton>다음</NextButton>
             </div>
-          </section>
-          <section className="mb-[100px]">
-            <div className="mb-[40px]">
-              <h3 className="mb-[12px] text-heading-3 font-[700] text-gray-90">
-                모집 인원 & 지급 포인트
-              </h3>
-              <h5 className="text-heading-5 font-[500] text-gray-60">
+          </Section>
+          <Section>
+            <Guide>
+              <Heading level={3}>모집 인원 & 지급 포인트</Heading>
+              <Heading level={5}>
                 모집 인원 수와 지급 포인트를 설정하면 총 사용 포인트가
                 계산됩니다
-              </h5>
-            </div>
-            <p className="mb-[8px] text-body-1 font-[700] text-gray-80">
-              모집 인원 수
-            </p>
+              </Heading>
+            </Guide>
+            <Text type="body1">모집 인원 수</Text>
             <input
               type="number"
               className="mb-[26px] h-[40px] w-full max-w-[216px] rounded-[4px] border border-line-normal pl-[12px]"
             />
-            <p className="mb-[8px] text-body-1 font-[700] text-gray-80">
-              포인트 지급
-            </p>
+            <Text type="body1">포인트 지급</Text>
             <div>
               <button className="h-[40px] w-[106px] rounded-[4px] border border-line-normal pl-[12px] text-body-2 font-[700]">
                 예
@@ -351,24 +321,22 @@ const page = () => {
               placeholder="0 P"
               className="mb-[26px] h-[40px] w-full max-w-[216px] rounded-[4px] border border-line-normal pl-[12px]"
             />
-            <p className="text-body-2 font-[300] text-gray-60">
+            <Text type="body2">
               포인트를 지급할 경우 프리미엄 체험단으로 등록되어 양질의
               인플루언서가 지원할 확률이 높아집니다.
-            </p>
-            <p className="mb-[8px] text-body-1 font-[700] text-gray-80">
-              총 사용 포인트
-            </p>
-            <p className="text-body-2 font-[300] text-gray-60">
+            </Text>
+            <Text type="body1">총 사용 포인트</Text>
+            <Text type="body2">
               1인당 지급 포인트 × 모집 인원수 × 수수료 20%
-            </p>
+            </Text>
             <input
               placeholder="0 P"
               className="mb-[26px] h-[40px] w-full max-w-[216px] rounded-[4px] border border-line-normal pl-[12px]"
             />
-          </section>
+          </Section>
           <div className="flex justify-center">
             <button
-              className="mb-[32px] w-full max-w-[216px] rounded-[4px] bg-red-main px-[20px] py-[12px] text-white"
+              className="mb-[32px] w-full max-w-[216px] rounded-[4px] bg-red-main px-[20px] py-[12px] text-gray-0"
               type="submit"
               // disabled={isSubmitDisabled}
             >

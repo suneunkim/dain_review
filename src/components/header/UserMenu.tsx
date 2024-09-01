@@ -1,7 +1,6 @@
 import DefaultUserIcon from '@/assets/icons/home/default-user-icon.svg'
-import SearchIcon from '@/assets/icons/home/mobile/mobile-search.svg'
 import Notification from './Notification'
-import SearchButton from '../modal/SearchButton'
+import SearchButton from './SearchButton'
 
 const UserMenu = ({ noti }: { noti: number | null }) => {
   return (

@@ -60,7 +60,8 @@ const config: Config = {
         'caption-3': ['10px', '140%'] // Caption 3
       },
       boxShadow: {
-        fotter: 'rgba(100, 100, 100, 0.4) 0px 7px 29px 0px'
+        fotter: 'rgba(100, 100, 100, 0.4) 0px 7px 29px 0px',
+        topCustom: '0 -4px 8px rgba(0, 0, 0, 0.1)'
       },
       screens: {
         desktop: '1440px',

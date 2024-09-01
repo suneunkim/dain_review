@@ -1,16 +1,24 @@
 interface Props {
   flag: 'pick' | 'premium' | null
+  page?: 'detail' // 기본 스타일은 홈의 상품 카드 기준
 }
 
-const Flag = ({ flag }: Props) => {
+const Flag = ({ flag, page }: Props) => {
   if (flag === null) {
     return null
   }
+
+  const flagStyle = `${
+    page === 'detail'
+      ? 'absolute bottom-2 left-[14px] h-[44px] w-[60px] lg:h-[72px] lg:w-[94px] lg:left-[36px] lg:top-0'
+      : 'absolute left-2 top-0 lg:left-6 lg:top-[-19px] lg:h-[72px] lg:w-[94px]'
+  } `
+
   switch (flag) {
     case 'pick':
       return (
         <svg
-          className="absolute left-2 top-0 lg:left-6 lg:top-[-19px] lg:h-[72px] lg:w-[94px]"
+          className={flagStyle}
           width="60"
           height="44"
           viewBox="0 0 60 44"
@@ -40,7 +48,7 @@ const Flag = ({ flag }: Props) => {
     case 'premium':
       return (
         <svg
-          className="absolute left-2 top-0 lg:left-6 lg:top-[-19px] lg:h-[72px] lg:w-[94px]"
+          className={flagStyle}
           width="60"
           height="44"
           viewBox="0 0 60 44"

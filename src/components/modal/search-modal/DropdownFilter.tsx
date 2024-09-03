@@ -19,7 +19,7 @@ const DropdownFilter = () => {
   }
 
   return (
-    <div className="relative font-[500] text-gray-80">
+    <div className="relative z-50 font-[500] text-gray-80">
       <button
         onClick={handleButtonClick}
         className="flex items-center gap-2 rounded-[4px] border px-3 py-[10px]">

@@ -1,10 +1,10 @@
 export const locations = [
   {
     city: '재택',
-    districts: [] // "재택"은 하위 지역이 없으므로 빈 배열을 사용
+    districts: ['재택']
   },
   {
-    city: '서울시',
+    city: '서울',
     districts: [
       '서울 전체',
       '강남구',
@@ -35,7 +35,7 @@ export const locations = [
     ]
   },
   {
-    city: '부산시',
+    city: '부산',
     districts: [
       '부산 전체',
       '강서구',
@@ -57,7 +57,7 @@ export const locations = [
     ]
   },
   {
-    city: '대구시',
+    city: '대구',
     districts: [
       '대구 전체',
       '군위군',
@@ -72,7 +72,7 @@ export const locations = [
     ]
   },
   {
-    city: '인천시',
+    city: '인천',
     districts: [
       '인천 전체',
       '강화군',
@@ -88,19 +88,19 @@ export const locations = [
     ]
   },
   {
-    city: '광주시',
+    city: '광주',
     districts: ['광주 전체', '광산구', '남구', '동구', '북구', '서구']
   },
   {
-    city: '대전시',
+    city: '대전',
     districts: ['대전 전체', '대덕구', '동구', '서구', '유성구', '중구']
   },
   {
-    city: '울산시',
+    city: '울산',
     districts: ['울산 전체', '남구', '동구', '북구', '울주군', '중구']
   },
   {
-    city: '세종시',
+    city: '세종',
     districts: ['세종 전체']
   },
   {
@@ -141,7 +141,7 @@ export const locations = [
     ]
   },
   {
-    city: '경상남도',
+    city: '경남',
     districts: [
       '경남 전체',
       '거제시',
@@ -165,7 +165,7 @@ export const locations = [
     ]
   },
   {
-    city: '경상북도',
+    city: '경북',
     districts: [
       '경북 전체',
       '경산시',
@@ -193,7 +193,7 @@ export const locations = [
     ]
   },
   {
-    city: '충청남도',
+    city: '충남',
     districts: [
       '충남 전체',
       '계룡시',
@@ -215,7 +215,7 @@ export const locations = [
     ]
   },
   {
-    city: '충청북도',
+    city: '충북',
     districts: [
       '충북 전체',
       '괴산군',
@@ -232,7 +232,7 @@ export const locations = [
     ]
   },
   {
-    city: '전라남도',
+    city: '전남',
     districts: [
       '전남 전체',
       '강진군',
@@ -260,7 +260,7 @@ export const locations = [
     ]
   },
   {
-    city: '전라북도',
+    city: '전북',
     districts: [
       '전북 전체',
       '고창군',
@@ -280,7 +280,7 @@ export const locations = [
     ]
   },
   {
-    city: '강원도',
+    city: '강원',
     districts: [
       '강원 전체',
       '강릉시',
@@ -304,7 +304,7 @@ export const locations = [
     ]
   },
   {
-    city: '제주도',
+    city: '제주',
     districts: ['제주 전체', '서귀포시', '제주시']
   }
 ]

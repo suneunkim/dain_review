@@ -38,8 +38,8 @@ const FilterModal = () => {
   }
 
   return (
-    <div className="fixed inset-y-0 z-40 flex items-end bg-black bg-opacity-40 520:right-0 lg:hidden">
-      <div className="relative z-50 min-h-[480px] min-w-[360px] max-w-[520px] rounded-t-3xl bg-white">
+    <div className="fixed inset-0 z-40 flex items-end bg-black bg-opacity-40 lg:hidden">
+      <div className="relative z-50 min-h-[480px] w-full min-w-[360px] rounded-t-3xl bg-white">
         <div className="flex h-20 max-w-[520px] items-center justify-center border-b border-line-neutral text-gray-80 520:w-[97vw]">
           지역설정
         </div>

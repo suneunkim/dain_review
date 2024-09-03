@@ -1,7 +1,10 @@
 import SearchClient from '@/components/client-page/SearchClient'
+import Footer from '@/components/shared/Footer'
 import Header from '@/components/shared/Header'
 
-const page = () => {
+const page = ({ searchParams }: any) => {
+  const { keyword, types } = searchParams
+
   return (
     <div>
       {/* 웹 반응형 헤더 - 프로필 표시 */}
@@ -15,7 +18,8 @@ const page = () => {
           isLogin
         />
       </div>
-      <SearchClient />
+      <SearchClient keyword={keyword} />
+      <Footer />
     </div>
   )
 }

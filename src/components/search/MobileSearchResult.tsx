@@ -1,4 +1,3 @@
-import React from 'react'
 import SearchFilterBox from '../modal/search-modal/SearchFilterBox'
 import DropdownFilter from '../modal/search-modal/DropdownFilter'
 import MobileSearchResultCard from '../modal/search-modal/MobileSearchResultCard'
@@ -10,11 +9,13 @@ interface Props {
 const MobileSearchResult = ({ searchTerm }: Props) => {
   return (
     <div className="w-full overflow-y-auto px-4">
-      <p className="my-4 text-body-1 text-gray-90">
-        <span className="font-medium text-red-main">{`'${searchTerm}'의 `}</span>
-        검색결과
-      </p>
-      <div className="flex gap-2">
+      {searchTerm !== '' && (
+        <p className="mt-4 text-body-1 text-gray-90">
+          <span className="font-medium text-red-main">{`'${searchTerm}'의 `}</span>
+          검색결과
+        </p>
+      )}
+      <div className="mt-4 flex gap-2">
         <SearchFilterBox title="지역" />
         <SearchFilterBox title="필터" />
         <DropdownFilter />

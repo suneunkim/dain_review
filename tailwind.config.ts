@@ -3,7 +3,7 @@ import type { Config } from 'tailwindcss'
 const config: Config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/***/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}'
   ],
   theme: {
@@ -45,21 +45,27 @@ const config: Config = {
           50: '#D32C3E'
         }
       },
-      // to do
       fontSize: {
-        display1: ['3rem', { lineHeight: '4.2rem', fontWeight: '700' }], // ok
-        display2: ['2rem', { lineHeight: '2.5rem', fontWeight: '600' }], // ok
-        heading1: ['1.9rem', { lineHeight: '2.25rem', fontWeight: '600' }],
-        heading2: ['1.8rem', { lineHeight: '2rem', fontWeight: '600' }],
-        heading3: ['1.7rem', { lineHeight: '1.75rem', fontWeight: '600' }],
-        heading4: ['1.6rem', { lineHeight: '1.75rem', fontWeight: '600' }],
-        heading5: ['1.5rem', { lineHeight: '1.75rem', fontWeight: '600' }],
-        body1: ['1rem', { lineHeight: '1.5rem', fontWeight: '400' }], // ok
-        body1r: ['1rem', { lineHeight: '1.75rem', fontWeight: '400' }], // ok
-        body2: ['0.9rem', { lineHeight: '2rem', fontWeight: '400' }], // ok
-        caption1: ['0.75rem', { lineHeight: '1rem', fontWeight: '500' }],
-        caption2: ['0.75rem', { lineHeight: '1rem', fontWeight: '500' }],
-        caption3: ['0.75rem', { lineHeight: '1rem', fontWeight: '500' }]
+        'display-1': ['48px', '140%'], // Display 1
+        'display-2': ['32px', '120%'], // Display 2
+        'heading-1': ['26px', '120%'], // Heading 1
+        'heading-2': ['24px', '120%'], // Heading 2
+        'heading-3': ['22px', '120%'], // Heading 3
+        'heading-4': ['20px', '140%'], // Heading 4
+        'heading-5': ['18px', '140%'], // Heading 5
+        'body-1': ['16px', '140%'], // Body 1
+        'body-2': ['14px', '140%'], // Body 2
+        'caption-1': ['12px', '140%'], // Caption 1
+        'caption-2': ['11px', '140%'], // Caption 2
+        'caption-3': ['10px', '140%'] // Caption 3
+      },
+      boxShadow: {
+        fotter: 'rgba(100, 100, 100, 0.4) 0px 7px 29px 0px',
+        topCustom: '0 -4px 8px rgba(0, 0, 0, 0.1)'
+      },
+      screens: {
+        desktop: '1440px',
+        '520': '520px'
       }
     }
   },

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+
 import './globals.css'
+import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: '다인리뷰',
@@ -14,6 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Script src="https://cdn.iamport.kr/v1/iamport.js" />
       <body>{children}</body>
     </html>
   )

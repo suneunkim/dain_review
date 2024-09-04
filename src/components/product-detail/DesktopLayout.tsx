@@ -15,8 +15,11 @@ import ReviewType from '../home/product/ReviewType'
 import DesttopShare from '@/assets/icons/product-detail/desktop-share.svg'
 import { ProductDetailProps } from '@/models/detailPage'
 import Schedule from './elements/Schedule'
+import Calendar from './Calendar'
 
 const DesktopLayout = ({ productId }: ProductDetailProps) => {
+  const initialApplicationStartDate = '2024-08-05T00:00:00Z'
+
   return (
     <div className="px-5">
       <div className="flex justify-center gap-5">
@@ -182,9 +185,7 @@ const DesktopLayout = ({ productId }: ProductDetailProps) => {
         <div className="mt-10 h-[836px] min-w-[461px] rounded-lg bg-[#F7F8F8] px-6 pb-8 pt-6">
           <p className="text-heading-5 font-bold">체험단 일정</p>
           <Schedule />
-          <div className="mt-4 min-h-[465px] rounded-2xl border border-line-neutral bg-white">
-            달력
-          </div>
+          <Calendar initialDate={initialApplicationStartDate} />
           <div className="mt-[66px]">
             <ButtonAndInfo productId={productId} />
           </div>

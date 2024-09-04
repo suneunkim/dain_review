@@ -13,8 +13,10 @@ import {
 } from '@/data/DetailPageMockData'
 import ReviewType from '@/components/home/product/ReviewType'
 import { ProductDetailProps } from '@/models/detailPage'
+import Calendar from './Calendar'
 
 const MobileLayout = ({ productId }: ProductDetailProps) => {
+  const initialApplicationStartDate = '2024-08-05T00:00:00Z' // API 값 예상해서 임시 사용
   return (
     <div className="px-4">
       <section className="flex flex-col">
@@ -51,7 +53,7 @@ const MobileLayout = ({ productId }: ProductDetailProps) => {
             <p>08.05 (월) ~ 08.14 (수)</p>
           </div>
         </div>
-        <div className="mt-4 min-h-[449px] border">달력</div>
+        <Calendar initialDate={initialApplicationStartDate} />
       </section>
       {/* 사업주 정보 */}
       <div className="mt-12">

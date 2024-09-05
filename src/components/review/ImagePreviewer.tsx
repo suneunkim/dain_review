@@ -3,8 +3,8 @@
 import React, { useState, useCallback } from 'react'
 import { useDropzone, FileRejection } from 'react-dropzone'
 
-import ClipImage from '@/assets/icon/review/clip.svg'
-import ButtonRemove from '@/assets/icon/review/remove.svg'
+import ClipImage from '@/assets/icons/review/clip.svg'
+import ButtonRemove from '@/assets/icons/review/remove.svg'
 
 interface ImagePreviewerProps {
   onFileSelect: (files: File[]) => void

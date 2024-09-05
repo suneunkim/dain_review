@@ -3,6 +3,7 @@ import './globals.css'
 import Script from 'next/script'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import SearchModalHandler from '@/components/shared/SearchModalHandler'
 
 export const metadata: Metadata = {
   title: '다인리뷰',
@@ -27,6 +28,7 @@ export default function RootLayout({
           draggable
           limit={2}
         />
+        <SearchModalHandler />
         {children}
       </body>
     </html>

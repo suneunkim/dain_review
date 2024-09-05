@@ -1,7 +1,10 @@
 import ButtonAndInfo from '@/components/product-detail/elements/ButtonAndInfo'
 import LikeButton from '@/components/product-detail/elements/LikeButton'
 import CheckInfoList from '@/components/product-detail/elements/CheckInfoList'
-import TagKeyword from '@/components/product-detail/elements/TagKeyword'
+import {
+  TagKeyword,
+  TagKeywordContainer
+} from '@/components/product-detail/elements/TagKeyword'
 import DotIcon from '@/assets/icons/product-detail/dot.svg'
 import {
   experienceMessage,
@@ -96,7 +99,7 @@ const MobileLayout = ({ productId }: ProductDetailProps) => {
       <section className="mt-12 flex flex-col gap-2">
         <p className="text-heading-5 font-bold">방문주소</p>
         <p>서울 강남구 봉오대로 677번길 다인카페</p>
-        <KakaoMap />
+        <KakaoMap mapId="map2" />
       </section>
       <section className="mt-12">
         <p className="mb-4 text-heading-5 font-bold">방문 / 예약 안내</p>
@@ -143,25 +146,7 @@ const MobileLayout = ({ productId }: ProductDetailProps) => {
         </ul>
       </section>
       <section className="mt-12">
-        <div>
-          <p className="mb-4 text-heading-5 font-bold">태그 키워드</p>
-          <div className="flex flex-col gap-4 520:flex-row">
-            <div className="flex flex-wrap gap-2">
-              {tagkeywordList.map((tag, i) => (
-                <TagKeyword
-                  info="tag"
-                  tag={tag}
-                  key={i}
-                />
-              ))}
-            </div>
-            <button
-              type="button"
-              className="mt-[25px] w-[78px] border-b-2 border-gray-70 520:mt-0">
-              키워드 복사
-            </button>
-          </div>
-        </div>
+        <TagKeywordContainer tagkeywordList={tagkeywordList} />
       </section>
       <section className="mt-12">
         <p className="mb-4 text-heading-5 font-bold">체험단 미션</p>
@@ -187,7 +172,7 @@ const MobileLayout = ({ productId }: ProductDetailProps) => {
         </ul>
       </section>
 
-      <footer className="mt-32 flex items-center justify-between gap-2">
+      <footer className="mb-6 mt-32 flex items-center justify-between gap-2">
         <LikeButton />
         <ButtonAndInfo productId={productId} />
       </footer>

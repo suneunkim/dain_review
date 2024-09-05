@@ -22,7 +22,14 @@ interface QueryFilters {
   types: number[]
 }
 
-const SearchClient = ({ keyword = '' }: { keyword: string }) => {
+interface Props {
+  keyword: string
+  platform: string
+  type: string
+  category: string
+}
+
+const SearchClient = ({ keyword = '', platform, type, category }: Props) => {
   const { isLocationModalOpen, isFilterModalOpen } = useSearchFilterBoxStore()
   const [searchWord, setSearchWord] = useState(keyword)
   const [queryFilters, setQueryFilters] = useState<QueryFilters>({
@@ -54,9 +61,12 @@ const SearchClient = ({ keyword = '' }: { keyword: string }) => {
     <div className="relative">
       {/* 모바일 지역과 필터 모달 */}
       {isLocationModalOpen && <LocationModal onChange={handleCityChange} />}
-      {isFilterModalOpen && <FilterModal />}
+      {isFilterModalOpen && <FilterModal keyword={searchWord} />}
 
-      <SearchForm onSubmit={onSubmit} />
+      <SearchForm
+        onSubmit={onSubmit}
+        keyword={searchWord}
+      />
       {/* 모바일 검색 결과 - 추후 data를 props로 */}
       <div className="lg:hidden">
         {searchWord && <MobileSearchResult searchTerm={searchWord} />}

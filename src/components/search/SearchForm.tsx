@@ -10,11 +10,14 @@ type SearchFormData = {
 type Props = {
   onSubmit: SubmitHandler<SearchFormData>
   searchPage?: boolean // SearchModal 닫기 또는 검색어 삭제
+  keyword?: string
 }
 
-const SearchForm = ({ onSubmit, searchPage = true }: Props) => {
+const SearchForm = ({ onSubmit, searchPage = true, keyword = '' }: Props) => {
   const { closeModal } = useSearchModalStore()
-  const { handleSubmit, register } = useForm<SearchFormData>()
+  const { handleSubmit, register } = useForm<SearchFormData>({
+    defaultValues: { searchTerm: keyword }
+  })
 
   return (
     <form

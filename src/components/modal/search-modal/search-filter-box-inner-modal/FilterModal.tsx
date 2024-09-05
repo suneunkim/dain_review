@@ -1,40 +1,38 @@
 'use client'
 
-import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { useSearchFilterBoxStore } from '@/store'
+import useThreeFilter from '@/hooks/useThreeFilter'
+import { filterOptions } from '@/data/filterOptions'
 import RefreshIcon from '@/assets/icons/home/mobile/mobile-refresh.svg'
 import XIcon from '@/assets/icons/home/mobile/mobile-x-icon.svg'
-import { useSearchFilterBoxStore } from '@/store'
-import { filterOptions } from '@/data/filterOptions'
 
-const FilterModal = () => {
+const FilterModal = ({ keyword }: { keyword: string }) => {
+  const router = useRouter()
   const { closeFilterModal } = useSearchFilterBoxStore()
 
-  const [selectedFilter, setSelectedFilter] = useState<string>(
-    filterOptions[0].category
-  )
-  const [selectedFilterItems, setSelectedFilterItems] = useState<string[]>([])
+  const {
+    selectedFilter,
+    selectedFilters,
+    handleFilterClick,
+    handleFilterItemClick,
+    handleRemoveItemClick,
+    handleReset
+  } = useThreeFilter()
 
-  const handleFilterClick = (filter: string) => {
-    setSelectedFilter(filter)
-  }
+  const handleSubmit = () => {
+    closeFilterModal()
 
-  const handleFilterItemClick = (item: string) => {
-    setSelectedFilterItems(prevSelected => {
-      if (prevSelected.includes(item)) {
-        // 이미 선택된 하위 지역이면 제거
-        return prevSelected.filter(item => item !== item)
-      } else if (prevSelected.length < 5) {
-        // 선택된 하위 지역이 5개 미만일 때만 추가
-        return [...prevSelected, item]
-      } else {
-        // 선택된 하위 지역이 5개 이상일 때는 그대로 반환
-        return prevSelected
-      }
-    })
-  }
+    const { category, platform, type } = selectedFilters
 
-  const handleReset = () => {
-    setSelectedFilterItems([])
+    const queryParams = new URLSearchParams()
+    queryParams.append('keyword', keyword) // 필터 적용 시 키워드 유지
+    queryParams.append('category', category ? category : '')
+    queryParams.append('platform', platform ? platform : '')
+    queryParams.append('type', type ? type : '')
+
+    const queryString = queryParams.toString()
+    router.push(`/search?${queryString}`)
   }
 
   return (
@@ -61,7 +59,15 @@ const FilterModal = () => {
                 <li
                   onClick={() => handleFilterItemClick(item)}
                   key={item}
-                  className={`p-4 text-body-1 ${selectedFilterItems.includes(item) && 'text-red-main'}`}>
+                  className={`p-4 text-body-1 ${
+                    (selectedFilter === '카테고리' &&
+                      selectedFilters.category === item) ||
+                    (selectedFilter === 'SNS' &&
+                      selectedFilters.platform === item) ||
+                    (selectedFilter === '유형' && selectedFilters.type === item)
+                      ? 'text-red-main'
+                      : ''
+                  } `}>
                   {item}
                 </li>
               ))}
@@ -69,18 +75,28 @@ const FilterModal = () => {
         </div>
         {/* 선택된 요소 */}
         <ul className="flex h-[36px] gap-1 overflow-x-auto px-4 pt-2 shadow-topCustom">
-          {selectedFilterItems.map(item => (
-            <li
-              key={item}
-              className="flex items-center gap-[7px] rounded-2xl border px-3 py-[2px]">
-              <span className="min-w-min whitespace-nowrap text-body-2 text-gray-40">
-                {item}
-              </span>
-              <button onClick={() => handleFilterItemClick(item)}>
-                <XIcon />
-              </button>
-            </li>
-          ))}
+          {['카테고리', 'SNS', '유형'].map(filter => {
+            const selectedItem =
+              filter === '카테고리'
+                ? selectedFilters.category
+                : filter === 'SNS'
+                  ? selectedFilters.platform
+                  : selectedFilters.type
+            return (
+              selectedItem && (
+                <li
+                  key={selectedItem}
+                  className="flex items-center gap-[7px] rounded-2xl border px-3 py-[2px]">
+                  <span className="min-w-min whitespace-nowrap text-body-2 text-gray-40">
+                    {selectedItem}
+                  </span>
+                  <button onClick={() => handleRemoveItemClick(filter)}>
+                    <XIcon />
+                  </button>
+                </li>
+              )
+            )
+          })}
         </ul>
         <div className="flex justify-between gap-[10px] p-4">
           <div className="flex items-center gap-[10px] font-bold">
@@ -95,7 +111,9 @@ const FilterModal = () => {
               닫기
             </button>
           </div>
-          <button className="min-h-[50px] w-full rounded-md bg-red-main text-heading-5 text-white">
+          <button
+            onClick={handleSubmit}
+            className="min-h-[50px] w-full rounded-md bg-red-main text-heading-5 text-white">
             확인
           </button>
         </div>

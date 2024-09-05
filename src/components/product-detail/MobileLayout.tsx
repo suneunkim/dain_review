@@ -14,6 +14,7 @@ import {
 import ReviewType from '@/components/home/product/ReviewType'
 import { ProductDetailProps } from '@/models/detailPage'
 import Calendar from './Calendar'
+import KakaoMap from './KakaoMap'
 
 const MobileLayout = ({ productId }: ProductDetailProps) => {
   const initialApplicationStartDate = '2024-08-05T00:00:00Z' // API 값 예상해서 임시 사용
@@ -95,7 +96,7 @@ const MobileLayout = ({ productId }: ProductDetailProps) => {
       <section className="mt-12 flex flex-col gap-2">
         <p className="text-heading-5 font-bold">방문주소</p>
         <p>서울 강남구 봉오대로 677번길 다인카페</p>
-        <div className="min-h-[176px] bg-gray-200 520:h-[352px]" />
+        <KakaoMap />
       </section>
       <section className="mt-12">
         <p className="mb-4 text-heading-5 font-bold">방문 / 예약 안내</p>

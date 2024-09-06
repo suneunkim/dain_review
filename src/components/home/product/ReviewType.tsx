@@ -1,6 +1,6 @@
 interface ReviewTypeProps {
   snsType: 'naver' | 'youtube' | 'instagram'
-  labelType?: '기자단' | '방문형' | '배송형'
+  labelType?: '기자단' | '방문형' | '배송형' | '카테고리'
   detailPage?: boolean
 }
 

@@ -1,21 +1,18 @@
 'use client'
 
-import SearchIcon from '@/assets/icons/home/mobile/mobile-search.svg'
-import DeleteIcon from '@/assets/icons/home/mobile/mobile-search-delete.svg'
-import { useSearchModalStore } from '@/store'
-import { useState } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import { useRouter } from 'next/navigation'
-import MobileSearchResultCard from './MobileSearchResultCard'
-import SearchFilterBox from './SearchFilterBox'
-import DropdownFilter from './DropdownFilter'
+import DeleteIcon from '@/assets/icons/home/mobile/mobile-search-delete.svg'
+import SearchForm from '@/components/search/SearchForm'
+import { useSearchModalStore } from '@/store'
+
+// TODO: 각 추천 검색어에 쿼리 파라미터 연결, 최근 검색어 상태 필요함
 
 const SearchModal = () => {
-  const [searchTerm, setSearchTerm] = useState('')
+  const { closeModal } = useSearchModalStore()
   const isMobile = useMediaQuery({ query: '(max-width: 1023px)' })
   const router = useRouter()
 
-  const { closeModal } = useSearchModalStore()
   const categories = ['프리미엄 👑', '인기 ⭐', '마감임박 🚨', '신규 🐤']
   const recentSearchTerms = ['하이파이브', '글램핑', '카페', '펜션', '수분크림']
   const popularKeywords = [
@@ -31,76 +28,24 @@ const SearchModal = () => {
   ]
   const campaignLocation = ['전국', '서울', '경기']
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value)
+  const onSubmit = ({ searchTerm }: { searchTerm: string }) => {
+    closeModal()
+    router.push(`/campaign?searchWord=${searchTerm}`)
   }
-
-  const handleSearchSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!isMobile) {
-      router.push('/search-result')
-    }
-  }
-
-  /* 
-<div className="fixed inset-y-0 z-40 flex items-end bg-black bg-opacity-40 520:right-0 lg:hidden">
-<div className="relative z-50 min-h-[480px] min-w-[360px] max-w-[520px] rounded-t-3xl bg-white"> 
-
-<div className="fixed inset-y-0 z-20 max-h-[1000px] max-w-[520px] overflow-y-auto bg-white pb-[64px] pt-5 520:right-0">
-*/
 
   return (
-    <div className="fixed inset-0 z-20 overflow-hidden bg-black bg-opacity-40">
-      <div className="fixed inset-y-0 right-0 z-30 max-h-[1000px] min-w-[360px] max-w-[520px] overflow-y-auto bg-white pb-[64px] pt-5">
-        {/* 검색어 입력 부분 */}
-        <div className="px-4">
-          <form
-            className="flex h-10 items-center gap-2 border-b border-gray-90"
-            onSubmit={handleSearchSubmit}>
-            <SearchIcon />
-            <input
-              className="text-body-1 text-gray-40 outline-none ring-0 focus:text-gray-80"
-              placeholder="찾고있는 체험단을 검색해보세요"
-              value={searchTerm}
-              onChange={handleChange}
+    <>
+      <div className="fixed inset-0 z-20 overflow-hidden bg-black bg-opacity-40">
+        <div className="fixed inset-y-0 right-0 z-30 max-h-[1000px] min-w-[360px] max-w-[520px] overflow-y-auto bg-white pb-[64px] pt-5">
+          {/* 검색어 입력 부분 */}
+          <div className="px-4">
+            <SearchForm
+              onSubmit={onSubmit}
+              searchPage={false}
             />
-            <button
-              className="ml-auto"
-              type="button"
-              onClick={closeModal}>
-              닫기
-            </button>
-          </form>
-        </div>
-        {/* 검색 결과 UI - 모바일은 검색 결과 모달에 노출 */}
-        {isMobile && searchTerm ? (
-          <div className="w-full overflow-y-auto px-4">
-            <p className="my-4 text-body-1 text-gray-90">
-              <span className="font-medium text-red-main">{`'${searchTerm}'의 `}</span>
-              검색결과
-            </p>
-            <div className="flex gap-2">
-              <SearchFilterBox title="지역" />
-              <SearchFilterBox title="필터" />
-              <DropdownFilter />
-            </div>
-            <section>
-              <p className="mb-[6px] mt-10 text-caption-1 text-gray-80">
-                12개의 체험단
-              </p>
-              <div className="grid grid-cols-2 gap-x-4 gap-y-[10px]">
-                <MobileSearchResultCard />
-                <MobileSearchResultCard />
-                <MobileSearchResultCard />
-                <MobileSearchResultCard />
-                <MobileSearchResultCard />
-                <MobileSearchResultCard />
-              </div>
-            </section>
           </div>
-        ) : (
           <>
-            {/* 검색 전 UI - 웹에서는 검색 결과 페이지로 이동 */}
+            {/* 검색 전 UI - 검색 결과는 search 페이지*/}
             <section className="px-4">
               <ul className="mt-4 flex gap-1">
                 {categories.map((category, i) => (
@@ -190,9 +135,9 @@ const SearchModal = () => {
               ))}
             </section>
           </>
-        )}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

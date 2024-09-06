@@ -32,7 +32,7 @@ const page = () => {
 
   return (
     <main>
-      <Header />
+      <Header isLogin />
       <PageTitle
         title="리뷰 등록"
         alignment="center"

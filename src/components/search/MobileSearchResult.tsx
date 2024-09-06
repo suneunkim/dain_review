@@ -3,15 +3,15 @@ import DropdownFilter from '../modal/search-modal/DropdownFilter'
 import MobileSearchResultCard from '../modal/search-modal/MobileSearchResultCard'
 
 interface Props {
-  searchTerm: string
+  keyword: string
 }
 
-const MobileSearchResult = ({ searchTerm }: Props) => {
+const MobileSearchResult = ({ keyword }: Props) => {
   return (
     <div className="w-full overflow-y-auto px-4">
-      {searchTerm !== '' && (
+      {keyword !== '' && (
         <p className="mt-4 text-body-1 text-gray-90">
-          <span className="font-medium text-red-main">{`'${searchTerm}'의 `}</span>
+          <span className="font-medium text-red-main">{`'${keyword}'의 `}</span>
           검색결과
         </p>
       )}

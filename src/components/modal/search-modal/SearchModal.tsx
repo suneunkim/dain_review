@@ -30,7 +30,7 @@ const SearchModal = () => {
 
   const onSubmit = ({ searchTerm }: { searchTerm: string }) => {
     closeModal()
-    router.push(`/search?keyword=${searchTerm}`)
+    router.push(`/campaign?searchWord=${searchTerm}`)
   }
 
   return (

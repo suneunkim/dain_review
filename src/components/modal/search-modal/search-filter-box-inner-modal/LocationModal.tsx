@@ -3,8 +3,9 @@
 import { useSearchFilterBoxStore } from '@/store'
 import { locations } from '@/data/locations'
 import useLocationFilter from '@/hooks/useLocationFilter'
-import RefreshIcon from '@/assets/icons/home/mobile/mobile-refresh.svg'
+
 import XIcon from '@/assets/icons/home/mobile/mobile-x-icon.svg'
+import FilterActionsButtons from '../FilterActionsButtons'
 
 interface Props {
   onChange: (locations: [string, string][]) => void
@@ -22,7 +23,6 @@ const LocationModal = ({ onChange }: Props) => {
   } = useLocationFilter()
 
   const handleConfirm = () => {
-    console.log(selectedLocations)
     onChange(selectedLocations)
     closeLocationModal()
   }
@@ -78,24 +78,12 @@ const LocationModal = ({ onChange }: Props) => {
             </li>
           ))}
         </ul>
-        <div className="flex justify-between gap-[10px] p-4">
-          <div className="flex items-center gap-[10px] font-bold">
-            <button
-              onClick={handleReset}
-              className="min-h-[50px] min-w-10 rounded-md px-2">
-              <RefreshIcon />
-            </button>
-            <button
-              onClick={closeLocationModal}
-              className="min-h-[50px] min-w-[109px] rounded-md bg-gray-5 text-center text-heading-5">
-              닫기
-            </button>
-          </div>
-          <button
-            onClick={handleConfirm}
-            className="min-h-[50px] w-full rounded-md bg-red-main text-heading-5 text-white">
-            확인
-          </button>
+        <div className="p-4">
+          <FilterActionsButtons
+            onReset={handleReset}
+            onClose={closeLocationModal}
+            onSubmit={handleConfirm}
+          />
         </div>
       </div>
     </div>

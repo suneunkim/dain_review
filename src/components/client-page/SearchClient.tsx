@@ -13,6 +13,7 @@ import useLocationFilter from '@/hooks/useLocationFilter'
 import XIcon from '@/assets/icons/home/mobile/mobile-x-icon.svg'
 import SearchFilterBox from '../modal/search-modal/SearchFilterBox'
 import DropdownFilter from '../modal/search-modal/DropdownFilter'
+import DeskTopSearchFilter from '../search/DeskTopSearchFilter'
 
 // MoreButton에 쿼리파라미터 추가해서 보내기 types=premium
 interface QueryFilters {
@@ -69,7 +70,7 @@ const SearchClient = ({ keyword = '', platform, type, category }: Props) => {
       />
       {/* 모바일 검색 결과 - 추후 data를 props로 */}
       <div className="lg:hidden">
-        {searchWord && <MobileSearchResult searchTerm={searchWord} />}
+        {<MobileSearchResult keyword={searchWord} />}
       </div>
       {/* 웹 검색 필터와 결과 */}
       <section className="mx-auto hidden max-w-[1400px] px-4 lg:block">
@@ -122,7 +123,7 @@ const SearchClient = ({ keyword = '', platform, type, category }: Props) => {
             <span>개의 체험단</span>
           </div>
           <div className="flex gap-2">
-            <SearchFilterBox title="필터" />
+            <DeskTopSearchFilter keyword={searchWord} />
             <DropdownFilter />
           </div>
         </div>

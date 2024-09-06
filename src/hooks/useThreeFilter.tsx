@@ -21,12 +21,12 @@ const useThreeFilter = () => {
   }
 
   // 필터 항목 선택 핸들러
-  const handleFilterItemClick = (item: string) => {
-    if (selectedFilter === '카테고리') {
+  const handleFilterItemClick = (filter: ThreeFilter, item: string) => {
+    if (filter === '카테고리') {
       setSelectedFilters(prev => ({ ...prev, category: item }))
-    } else if (selectedFilter === 'SNS') {
+    } else if (filter === 'SNS') {
       setSelectedFilters(prev => ({ ...prev, platform: item }))
-    } else if (selectedFilter === '유형') {
+    } else if (filter === '유형') {
       setSelectedFilters(prev => ({ ...prev, type: item }))
     }
   }

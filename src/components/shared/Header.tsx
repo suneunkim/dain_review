@@ -42,6 +42,7 @@ const Header = ({ isLogin, subtitle, isOnlyBackButton = false }: Props) => {
           <LogoIconBlack />
         </Link>
         <div className="flex items-center gap-[18px]">
+          <UserMenu noti={3} />
           {isLogin ? <UserMenu noti={3} /> : <GuestMenu />}
         </div>
       </section>

@@ -17,7 +17,7 @@ export default function HomeClient() {
 
   return (
     <div className="relative">
-      <Header isLogin={true} />
+      <Header isLogin={false} />
       <main className="mx-auto w-full">
         <div className="relative h-[220px] min-w-[360px] bg-[url('/home-banner/background.png')] bg-cover bg-center lg:h-[592px]">
           <SlideBanner />

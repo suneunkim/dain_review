@@ -56,13 +56,7 @@ const ImagePreviewer: React.FC<ImagePreviewerProps> = ({
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     onDropRejected,
-<<<<<<< HEAD
-    accept: {
-      'image/*': [] // 파일 타입을 지정하는 객체 형식으로 수정
-    },
-=======
     accept: { 'image/': [] },
->>>>>>> 96b07861555d98cc05efb0adb5f2fe757a7b21bc
     maxSize: maxSize * 1024 * 1024 // 최대 파일 크기 설정
   })
 

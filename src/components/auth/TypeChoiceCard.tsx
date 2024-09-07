@@ -23,7 +23,7 @@ export const TypeChoiceCard: FC<TypeChoiceCardProps> = ({
           {discription}
         </p>
       </div>
-      <ChoiceType />
+      {/* <ChoiceType /> */}
     </Link>
   )
 }

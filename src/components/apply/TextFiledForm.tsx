@@ -9,7 +9,7 @@ const TextFiledForm = () => {
       </p>
       <div className="mt-4 flex flex-col gap-1">
         <textarea
-          className="min-h-[181px] rounded-[4px] border border-line-normal px-3 py-[9px]"
+          className="min-h-[181px] rounded-[4px] border border-line-normal px-3 py-[9px] desktop:h-[343px]"
           name=""
           id=""
           placeholder="500자 이내로 작성해주세요"

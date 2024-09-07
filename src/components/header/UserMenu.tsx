@@ -9,7 +9,7 @@ const UserMenu = ({ noti }: { noti: number | null }) => {
       <Notification noti={noti} />
       <div className="flex items-center gap-[9px]">
         <DefaultUserIcon />
-        <p className="text-body-2 text-gray-90">유저아이디</p>
+        <p className="text-body-2 text-gray-90">검색모달 확인용(임시)</p>
       </div>
     </>
   )

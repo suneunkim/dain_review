@@ -3,8 +3,8 @@ const Schedule = () => {
   const experiencePeriods = [
     { label: '체험단 모집기간', period: '08.05 (월) ~ 08.14 (수)' },
     { label: '선정자 발표', period: '08.15 (목)' },
-    { label: '리뷰 & 체험', period: '08.16 (금) ~ 08.25 (일)' },
-    { label: '리뷰 마감', period: '08.26 (월)' }
+    { label: '리뷰 & 체험', period: '08.16 (금) ~ 08.28 (수)' },
+    { label: '리뷰 마감', period: '08.29 (목)' }
   ]
 
   return (

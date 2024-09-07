@@ -5,6 +5,7 @@ import { useSearchFilterBoxStore } from '@/store'
 
 interface Props {
   title: '지역' | '필터'
+  isSearchPage?: boolean // 여기에 필터 드롭다운 만들거나 따로 만들거나
 }
 
 const SearchFilterBox = ({ title }: Props) => {

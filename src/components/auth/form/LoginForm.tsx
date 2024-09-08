@@ -41,9 +41,39 @@ const loginSchema = z.object({
 })
 
 export function LoginForm() {
-  const onSubmit = (data: LoginFormValues) => {
-    console.log(data)
+  const onSubmit = async (data: LoginFormValues) => {
+    try {
+      const response = await fetch(
+        'http://ec2-54-206-111-187.ap-southeast-2.compute.amazonaws.com:8080/api/login',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            email: data.email,
+            pw: data.pw
+          }),
+          headers: {
+            'Access-Control-Allow-Methods': 'true',
+            'Access-Control-Allow-Credentials': 'true',
+            'Content-Type': 'application/json'
+          }
+        }
+      )
+
+      if (!response.ok) {
+        // 서버가 에러 응답을 보낸 경우
+        const errorData = await response.json()
+        console.error('서버 오류:', errorData)
+        return
+      }
+
+      const result = await response.json()
+      console.log('로그인 성공:', result)
+    } catch (error) {
+      // 네트워크 오류 또는 다른 문제가 발생한 경우
+      console.error('요청 실패:', error)
+    }
   }
+
   return (
     <Form
       onSubmit={onSubmit}

@@ -37,7 +37,6 @@ export default function LoginPage() {
               alt="로그인 이미지"
               width={454}
               height={605}
-              priority={false}
             />
           </div>
         </div>

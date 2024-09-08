@@ -19,6 +19,7 @@ import AddressSearch from '../AddressSearch'
 import Modal from '../../shared/Modal'
 import { useSearchModalStore } from '@/store'
 import SignUpDatePicker from '../SignUpDatePicker'
+import { useState } from 'react'
 
 const userSchema: z.ZodSchema = z.object({
   email: z.string().email({ message: '이메일 형식을 입력해주세요.' }),
@@ -48,19 +49,19 @@ const userSchema: z.ZodSchema = z.object({
     ),
   name: z.string().min(1, { message: '이름을 입력해주세요.' }),
   phone: z.string().min(10, { message: '10자리 이상 입력해주세요!' }),
-  address: z.string().optional(),
-  nickname: z.string().optional(),
-  addressDetail: z.string().optional(),
-  birthdate: z.string().optional(), // 날짜 형식 검사가 필요할 경우 refine 사용
-  blog: z.string().url().optional(),
+  address: z.string(),
+  nickname: z.string(),
+  addressDetail: z.string(),
+  birthdate: z.string(), // 날짜 형식 검사가 필요할 경우 refine 사용
+  blog: z.string().url(),
   gender: z.number({ message: '성별을 선택해주세요' }).int(), // 정수형을 나타내며, 선택적 필드로 설정
-  instagram: z.string().optional(),
-  other: z.string().optional(),
-  postalCode: z.string().optional(),
-  profile: z.string().optional(), // 파일 업로드의 경우, URL로 처리하거나 파일 핸들링 방식 설정 필요
-  signupSource: z.string().optional(),
-  tiktok: z.string().optional(),
-  youtube: z.string().optional()
+  instagram: z.string(),
+  other: z.string(),
+  postalCode: z.string(),
+  profile: z.string(), // 파일 업로드의 경우, URL로 처리하거나 파일 핸들링 방식 설정 필요
+  signupSource: z.string(),
+  tiktok: z.string(),
+  youtube: z.string()
 })
 
 const validateEmail = async (email: string) => {
@@ -115,9 +116,43 @@ const validateNumber = async (number: string) => {
 }
 
 export function SignupForm() {
+  const [valid, setValid] = useState({
+    email: false,
+    phone: false
+  })
+
+  // 이메일, 전화번호가 모두 유효한지 확인
+  const isFormValid = valid.email && valid.phone
+
+  // 이메일 중복검사 함수
+  const handleEmailValidation = async (
+    email: string
+  ): Promise<{ isValid: boolean | null; message: string }> => {
+    const response = await validateEmail(email)
+    setValid(prevValues => ({
+      ...prevValues,
+      email: true
+    }))
+    console.log('handleEmailValidation', response)
+    return response
+  }
+
+  // 전화번호 중복검사 함수
+  const handlePhoneValidation = async (
+    phone: string
+  ): Promise<{ isValid: boolean | null; message: string }> => {
+    const response = await validateNumber(phone)
+    setValid(prevValues => ({
+      ...prevValues,
+      phone: true
+    }))
+    return response
+  }
+
   const onSubmit = (data: z.infer<typeof userSchema>) => {
     console.log('SignupForm', data)
   }
+
   return (
     <Form
       onSubmit={onSubmit}
@@ -131,7 +166,7 @@ export function SignupForm() {
           placeholder="사용하실 아이디를 입력해주세요"
           require={true}
           showIcon={true}
-          validationFunction={validateEmail}
+          validationFunction={handleEmailValidation}
         />
 
         <InputField
@@ -164,7 +199,7 @@ export function SignupForm() {
           placeholder="‘-’ 없이 숫자만 작성"
           require={true}
           showIcon={true}
-          validationFunction={validateNumber}
+          validationFunction={handlePhoneValidation}
         />
 
         <InputField
@@ -253,8 +288,11 @@ export function SignupForm() {
       <div className="my-10">
         <Button
           type="submit"
-          variant="solid_primary_red"
-          className="h-[57px] w-full">
+          variant={
+            !isFormValid === true ? 'solid_secondary' : 'solid_primary_red'
+          }
+          className="h-[57px] w-full"
+          disable={!isFormValid}>
           회원가입
         </Button>
       </div>

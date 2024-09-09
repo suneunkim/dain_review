@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useSearchFilterBoxStore, useSearchModalStore } from '@/store'
+import { useSearchFilterBoxStore } from '@/store'
 
 import MobileSearchResult from '../search/MobileSearchResult'
 import SearchForm from '../search/SearchForm'
@@ -11,9 +11,9 @@ import ProductCard from '../home/product/ProductCard'
 import { locations } from '@/data/locations'
 import useLocationFilter from '@/hooks/useLocationFilter'
 import XIcon from '@/assets/icons/home/mobile/mobile-x-icon.svg'
-import SearchFilterBox from '../modal/search-modal/SearchFilterBox'
 import DropdownFilter from '../modal/search-modal/DropdownFilter'
 import DeskTopSearchFilter from '../search/DeskTopSearchFilter'
+import { useRouter } from 'next/navigation'
 
 // MoreButton에 쿼리파라미터 추가해서 보내기 types=premium
 interface QueryFilters {
@@ -31,6 +31,7 @@ interface Props {
 }
 
 const SearchClient = ({ keyword = '', platform, type, category }: Props) => {
+  const router = useRouter()
   const { isLocationModalOpen, isFilterModalOpen } = useSearchFilterBoxStore()
   const [searchWord, setSearchWord] = useState(keyword)
   const [queryFilters, setQueryFilters] = useState<QueryFilters>({
@@ -56,7 +57,9 @@ const SearchClient = ({ keyword = '', platform, type, category }: Props) => {
     }))
   }
 
-  const onSubmit = ({ searchTerm }: { searchTerm: string }) => {}
+  const onSubmit = ({ searchTerm }: { searchTerm: string }) => {
+    router.push(`/campaign?searchWord=${searchTerm}`)
+  }
 
   return (
     <div className="relative">
@@ -73,7 +76,7 @@ const SearchClient = ({ keyword = '', platform, type, category }: Props) => {
         {<MobileSearchResult keyword={searchWord} />}
       </div>
       {/* 웹 검색 필터와 결과 */}
-      <section className="mx-auto hidden max-w-[1400px] px-4 lg:block">
+      <section className="mx-auto mb-28 hidden max-w-[1400px] px-4 lg:block">
         <ul className="mt-12 grid grid-cols-9 gap-[10px] desktop:flex">
           {locations.map(location => (
             <li

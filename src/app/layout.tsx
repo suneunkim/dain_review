@@ -1,6 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
+import Script from 'next/script'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import SearchModalHandler from '@/components/shared/SearchModalHandler'
 
 export const metadata: Metadata = {
   title: '다인리뷰',
@@ -14,7 +17,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <Script src="https://cdn.iamport.kr/v1/iamport.js" />
+      <body>
+        <ToastContainer
+          position="bottom-center"
+          autoClose={2000}
+          hideProgressBar={true}
+          closeButton={false}
+          newestOnTop={false}
+          draggable
+          limit={2}
+        />
+        <SearchModalHandler />
+        {children}
+      </body>
     </html>
   )
 }

@@ -15,9 +15,13 @@ type Props = {
 
 const SearchForm = ({ onSubmit, searchPage = true, keyword = '' }: Props) => {
   const { closeModal } = useSearchModalStore()
-  const { handleSubmit, register } = useForm<SearchFormData>({
+  const { handleSubmit, register, setValue } = useForm<SearchFormData>({
     defaultValues: { searchTerm: keyword }
   })
+
+  const handleClear = () => {
+    setValue('searchTerm', '')
+  }
 
   return (
     <form
@@ -30,7 +34,10 @@ const SearchForm = ({ onSubmit, searchPage = true, keyword = '' }: Props) => {
         {...register('searchTerm', { required: true })}
       />
       {searchPage ? (
-        <button className="ml-auto">
+        <button
+          type="button"
+          onClick={handleClear}
+          className="ml-auto">
           <Xicon />
         </button>
       ) : (

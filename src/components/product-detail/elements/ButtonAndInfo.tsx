@@ -4,9 +4,15 @@ interface Props {
   productId: string
   onClick?: () => void | undefined
   isApplyPage?: boolean
+  desktopSize?: boolean
 }
 
-const ButtonAndInfo = ({ productId, onClick, isApplyPage }: Props) => {
+const ButtonAndInfo = ({
+  productId,
+  onClick,
+  isApplyPage,
+  desktopSize
+}: Props) => {
   return (
     <div className="relative w-full">
       {isApplyPage ? (
@@ -19,14 +25,16 @@ const ButtonAndInfo = ({ productId, onClick, isApplyPage }: Props) => {
       ) : (
         <Link href={`/product/${productId}/apply`}>
           <button
-            className="h-[46px] w-full rounded-md bg-red-main px-4 py-3 text-white"
+            className={`h-[46px] w-full rounded-md bg-red-main px-4 py-3 text-white ${desktopSize && 'h-[57px] text-heading-5 font-bold'} `}
             type="button">
             신청하기
           </button>
         </Link>
       )}
-      <div className="absolute -top-14 flex w-full justify-center">
-        <div className="h-[38px] w-[198px] rounded-lg bg-white px-8 py-2 text-black shadow-xl">
+      <div
+        className={`absolute -top-14 flex w-full justify-center ${desktopSize && '-top-[81px]'} `}>
+        <div
+          className={`h-[38px] w-[198px] rounded-lg bg-white px-8 py-2 text-black shadow-xl ${desktopSize && 'h-[49px] w-[217px] px-10 py-3'} `}>
           <svg
             className="absolute bottom-[-13px] left-1/2 -translate-x-1/2"
             width="17"

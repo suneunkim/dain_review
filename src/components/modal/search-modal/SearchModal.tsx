@@ -35,7 +35,7 @@ const SearchModal = () => {
 
   return (
     <>
-      <div className="fixed inset-0 z-20 overflow-hidden bg-black bg-opacity-40">
+      <div className="fixed inset-0 z-50 overflow-hidden bg-black bg-opacity-40">
         <div className="fixed inset-y-0 right-0 z-30 max-h-[1000px] min-w-[360px] max-w-[520px] overflow-y-auto bg-white pb-[64px] pt-5">
           {/* 검색어 입력 부분 */}
           <div className="px-4">

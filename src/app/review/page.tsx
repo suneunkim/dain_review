@@ -9,7 +9,7 @@ import BlogIcon from '@/assets/icons/review/blog.svg'
 import PointIcon from '@/assets/icons/review/point.svg'
 
 const ExCampaignImage = '/review/ex_campaign.png'
-const ExampleImage = '/review/example.png' // 예시화면 이미지를 등록하세요
+const ExampleImage = '/review/example.png'
 
 // 리뷰 등록: 인플루언서의 체험단 리뷰 등록 및 결과 보고 작성 페이지
 // 홈 - 마이페이지(인플루언서) - 리뷰 등록
@@ -122,7 +122,7 @@ const page = () => {
                 </label>
               </div>
               <button
-                className="mb-[32px] w-full rounded-[4px] bg-red-main px-[20px] py-[12px] text-white"
+                className="mb-[32px] w-full cursor-pointer rounded-[4px] bg-red-main px-[20px] py-[12px] text-white"
                 type="submit"
                 disabled={isSubmitDisabled}>
                 제출

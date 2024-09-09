@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSearchFilterBoxStore } from '@/store'
 
 import MobileSearchResult from '../search/MobileSearchResult'
@@ -33,7 +33,6 @@ interface Props {
 const SearchClient = ({ keyword = '', platform, type, category }: Props) => {
   const router = useRouter()
   const { isLocationModalOpen, isFilterModalOpen } = useSearchFilterBoxStore()
-  const [searchWord, setSearchWord] = useState(keyword)
   const [queryFilters, setQueryFilters] = useState<QueryFilters>({
     cities: [], // ['서울-강남구']
     categorySeqs: [], // 카테고리 필터
@@ -65,15 +64,15 @@ const SearchClient = ({ keyword = '', platform, type, category }: Props) => {
     <div className="relative">
       {/* 모바일 지역과 필터 모달 */}
       {isLocationModalOpen && <LocationModal onChange={handleCityChange} />}
-      {isFilterModalOpen && <FilterModal keyword={searchWord} />}
+      {isFilterModalOpen && <FilterModal keyword={keyword} />}
 
       <SearchForm
         onSubmit={onSubmit}
-        keyword={searchWord}
+        keyword={keyword}
       />
       {/* 모바일 검색 결과 - 추후 data를 props로 */}
       <div className="lg:hidden">
-        {<MobileSearchResult keyword={searchWord} />}
+        {<MobileSearchResult keyword={keyword} />}
       </div>
       {/* 웹 검색 필터와 결과 */}
       <section className="mx-auto mb-28 hidden max-w-[1400px] px-4 lg:block">
@@ -126,7 +125,7 @@ const SearchClient = ({ keyword = '', platform, type, category }: Props) => {
             <span>개의 체험단</span>
           </div>
           <div className="flex gap-2">
-            <DeskTopSearchFilter keyword={searchWord} />
+            <DeskTopSearchFilter keyword={keyword} />
             <DropdownFilter />
           </div>
         </div>

@@ -1,35 +1,15 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useMediaQuery } from 'react-responsive'
 import ProductCard from './ProductCard'
 import MoreButton from './MoreButton'
 
 const ProductCardContainer = () => {
-  const [mobileShow, setMobileShow] = useState(false) // 화면 너비 작으면 인기 4개만 노출
-  const popularProducts = Array(8).fill(null)
+  const isMobile = useMediaQuery({ query: '(max-width: 1023px)' })
+  const displayedProducts = Array(8).fill(null)
 
-  useEffect(() => {
-    const updateNumOfCards = () => {
-      if (window.innerWidth >= 1024) {
-        setMobileShow(false) // 1024px 이상에서는 모든 카드 노출
-      } else {
-        setMobileShow(true) // 모바일 화면에서는 기본적으로 4개만 노출
-      }
-    }
-
-    // 컴포넌트가 마운트될 때 및 윈도우 크기 변화 감지
-    updateNumOfCards()
-    window.addEventListener('resize', updateNumOfCards)
-
-    // 컴포넌트 언마운트 시 이벤트 리스너 해제
-    return () => {
-      window.removeEventListener('resize', updateNumOfCards)
-    }
-  }, [])
-
-  const displayedProducts = mobileShow
-    ? popularProducts.splice(0, 4)
-    : popularProducts
+  // 웹 크기에서 8개 노출, 모바일 4개 노출
+  const visibleCards = isMobile ? 4 : 8
 
   return (
     <>
@@ -41,7 +21,7 @@ const ProductCardContainer = () => {
           <MoreButton />
         </section>
         <div className="grid grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-4 lg:gap-x-5 lg:gap-y-10">
-          {displayedProducts?.map((_, i) => (
+          {displayedProducts.slice(0, visibleCards).map((_, i) => (
             <ProductCard
               flag={null}
               key={i}

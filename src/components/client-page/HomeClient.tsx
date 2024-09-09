@@ -9,11 +9,13 @@ import PremiumCardContainer from '@/components/home/premium/PremiumCardContainer
 import ProductCardContainer from '@/components/home/product/ProductCardContainer'
 import DeadlineProductContainer from '@/components/home/deadline/DeadlineProductContainer'
 import SearchModal from '../modal/search-modal/SearchModal'
-import { useSearchModalStore } from '@/store'
+import { useSearchModalStore, useHamburgerModalStore } from '@/store'
 import NearByProductContainer from '../home/near/NearByProductContainer'
+import HamburgerMenuModal from '../modal/hamburger-modal/HamburgerMenuModal'
 
 export default function HomeClient() {
   const { isOpen } = useSearchModalStore()
+  const { isHamburgerOpen } = useHamburgerModalStore()
 
   return (
     <div className="relative">
@@ -41,6 +43,11 @@ export default function HomeClient() {
         <Footer />
       </main>
       {isOpen && <SearchModal />}
+      {isHamburgerOpen && (
+        <div className="lg:hidden">
+          <HamburgerMenuModal />
+        </div>
+      )}
     </div>
   )
 }

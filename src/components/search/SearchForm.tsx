@@ -35,7 +35,7 @@ const SearchForm = ({ onSubmit, searchPage = true, keyword = '' }: Props) => {
         </button>
       ) : (
         <button
-          className="ml-auto w-[36px] border"
+          className="ml-auto min-w-[36px] border"
           type="button"
           onClick={closeModal}>
           닫기

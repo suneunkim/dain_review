@@ -2,12 +2,19 @@ const SlideBanner = () => {
   return (
     <div className="flex items-center">
       <div className="mx-auto flex h-[220px] max-w-[1400px] items-center lg:h-[592px] lg:items-start lg:justify-between">
-        <section className="desktop:mr-[68px] flex h-[144px] w-[155px] flex-col sm:w-[280px] lg:mt-[135px] lg:w-[475px]">
+        <section className="flex h-[144px] w-[155px] flex-col sm:w-[280px] lg:mt-[135px] lg:w-[475px] desktop:mr-[68px]">
           <p className="text-caption-3 text-gray-0 lg:text-body-2">
             인플루언서와 사업주를 위한 플랫폼
           </p>
           <h3 className="mt-[8px] text-body-1 font-[700] text-white lg:mt-[16px] lg:text-display-2">
-            <p className="">다인리뷰에서 특별한 경험을 해보세요</p>
+            <p className="hidden lg:block">
+              다인리뷰에서 특별한 경험을 해보세요
+            </p>
+            <p className="lg:hidden">
+              다인리뷰에서
+              <br />
+              특별한 경험을 해보세요
+            </p>
           </h3>
           <button className="mt-[16px] w-[148px] rounded-br-md rounded-tl-md border bg-[#FFFFFF1A] px-[8px] py-[7px] opacity-90 lg:mt-[58px] lg:h-full lg:w-[266px] lg:rounded-br-2xl lg:rounded-tl-2xl lg:px-[24px] lg:py-[16px]">
             <div className="flex items-center gap-1 lg:gap-2">

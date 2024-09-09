@@ -13,8 +13,8 @@ const HamburgerMenuModal = () => {
         <section className="relative flex h-[186px] flex-col items-center justify-center py-10">
           <button
             onClick={HamburderCloseModal}
-            className="absolute right-0 top-0 p-4">
-            X
+            className="absolute right-4 top-4 px-[2px] py-[5px] text-body-1">
+            닫기
           </button>
           <Image
             alt="star"

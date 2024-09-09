@@ -4,11 +4,10 @@ import UserMenu from '../header/UserMenu'
 import GuestMenu from '../header/GuestMenu'
 import Notification from '../header/Notification'
 import MobileSubtitleHeader from '../header/mobile/MobileSubtitleHeader'
+import HamburgerButton from '../header/HamburgerButton'
 import SearchButton from '../header/SearchButton'
 import BackButton from '../header/BackButton'
-import { useSearchModalStore } from '@/store'
 import LogoIconBlack from '@/assets/icons/home/logo-icon-black.svg'
-import MobileMenu from '@/assets/icons/home/mobile/mobile-menu.svg'
 import Link from 'next/link'
 interface Props {
   isLogin: boolean
@@ -17,7 +16,6 @@ interface Props {
 }
 
 const Header = ({ isLogin, subtitle, isOnlyBackButton = false }: Props) => {
-  const { openModal } = useSearchModalStore()
   return (
     <header className="mx-auto h-[56px] max-w-[1400px] bg-white px-4 md:bg-inherit lg:h-[160px] desktop:p-0">
       {/* 모바일 반응형 헤더 - 비로그인 시 UI & 다른 페이지랑 아이콘 위치가 달라서 디자인 팀 확인 필요*/}
@@ -25,7 +23,7 @@ const Header = ({ isLogin, subtitle, isOnlyBackButton = false }: Props) => {
         <MobileSubtitleHeader subtitle={subtitle} />
       ) : (
         <div className="flex h-full items-center justify-between lg:hidden">
-          {isOnlyBackButton ? <BackButton /> : <MobileMenu />}
+          {isOnlyBackButton ? <BackButton /> : <HamburgerButton />}
 
           {!isOnlyBackButton && (
             <div className="flex items-center gap-4">

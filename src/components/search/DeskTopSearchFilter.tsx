@@ -27,7 +27,7 @@ const DeskTopSearchFilter = ({ keyword = '' }: { keyword: string }) => {
   }
 
   return (
-    <div className="relative z-50 font-[500] text-gray-80">
+    <div className="relative z-40 font-[500] text-gray-80">
       <button
         onClick={handleButtonClick}
         className="flex items-center gap-2 rounded-[4px] border px-3 py-[10px]">
@@ -53,7 +53,7 @@ const DeskTopSearchFilter = ({ keyword = '' }: { keyword: string }) => {
               <h5 className="mb-2 text-heading-5 font-medium text-gray-90">
                 {filter.category}
               </h5>
-              <div className="flex flex-wrap gap-[10px]">
+              <div className="flex cursor-pointer flex-wrap gap-[10px]">
                 {filter.items.map(item => (
                   <span
                     onClick={() => handleFilterItemClick(filter.category, item)}

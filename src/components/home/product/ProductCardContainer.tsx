@@ -3,13 +3,24 @@
 import { useMediaQuery } from 'react-responsive'
 import ProductCard from './ProductCard'
 import MoreButton from './MoreButton'
+import { useEffect, useState } from 'react'
 
 const ProductCardContainer = () => {
+  const [desktop, setDesktop] = useState(false)
   const isMobile = useMediaQuery({ query: '(max-width: 1023px)' })
   const displayedProducts = Array(8).fill(null)
 
+  useEffect(() => {
+    if (isMobile) {
+      setDesktop(false)
+    } else {
+      setDesktop(true)
+    }
+    return () => {}
+  }, [isMobile])
+
   // 웹 크기에서 8개 노출, 모바일 4개 노출
-  const visibleCards = isMobile ? 4 : 8
+  const visibleCards = desktop ? 8 : 4
 
   return (
     <>

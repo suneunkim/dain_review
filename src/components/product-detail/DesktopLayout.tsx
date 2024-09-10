@@ -172,12 +172,17 @@ const DesktopLayout = ({ productId }: ProductDetailProps) => {
           </section>
         </div>
         {/* 오른쪽 레이아웃 */}
-        <div className="mt-10 h-[836px] min-w-[461px] rounded-lg bg-[#F7F8F8] px-6 pb-8 pt-6">
-          <p className="text-heading-5 font-bold">체험단 일정</p>
+        <div className="mt-10 flex h-[892px] min-w-[461px] flex-col rounded-lg bg-[#F7F8F8] px-6 pb-8 pt-6">
+          <p className="mb-2 text-heading-5 font-bold">체험단 일정</p>
           <Schedule />
-          <Calendar initialDate={initialApplicationStartDate} />
-          <div className="mt-[66px]">
-            <ButtonAndInfo productId={productId} />
+          <div className="mt-4">
+            <Calendar initialDate={initialApplicationStartDate} />
+          </div>
+          <div className="mt-auto">
+            <ButtonAndInfo
+              productId={productId}
+              desktopSize
+            />
           </div>
         </div>
       </div>

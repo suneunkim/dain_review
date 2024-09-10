@@ -3,7 +3,7 @@ import Footer from '@/components/shared/Footer'
 import Header from '@/components/shared/Header'
 
 const page = ({ searchParams }: any) => {
-  const { keyword, platform, type, category } = searchParams
+  const { searchWord, platform, type, category } = searchParams
 
   return (
     <div>
@@ -19,7 +19,7 @@ const page = ({ searchParams }: any) => {
         />
       </div>
       <SearchClient
-        keyword={keyword}
+        keyword={searchWord}
         platform={platform}
         type={type}
         category={category}

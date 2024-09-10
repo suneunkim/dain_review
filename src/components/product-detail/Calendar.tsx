@@ -80,8 +80,8 @@ const Calendar = ({ initialDate }: any) => {
   const DAY_LIST = ['일', '월', '화', '수', '목', '금', '토']
 
   return (
-    <div className="mt-5 h-[449px] min-h-[465px] min-w-[328px] rounded-lg border border-line-neutral bg-white text-body-1 text-gray-60">
-      <header className="flex h-[64px] items-center justify-between px-8 py-4 font-medium">
+    <div className="h-[449px] min-h-[465px] min-w-[328px] rounded-lg border border-line-neutral bg-white text-body-1 text-gray-60">
+      <header className="flex h-[64px] items-center justify-between px-8 py-4 text-heading-5 font-bold">
         <button onClick={handlePrevMonth}>
           <svg
             width="32"
@@ -128,12 +128,12 @@ const Calendar = ({ initialDate }: any) => {
         {DAY_LIST.map((day, index) => (
           <div
             key={index}
-            className="w-full px-5 py-1 text-center first:text-red-main last:text-blue-50">
+            className="w-full px-5 py-1 text-center text-body-2 text-gray-60 first:text-red-main last:text-blue-50">
             {day}
           </div>
         ))}
       </div>
-      <div className="calendar">
+      <div className="font-medium">
         {weekCalendarList.slice(0, 5).map((week, weekIndex) => (
           <div
             className="flex w-full border-t"
@@ -164,7 +164,7 @@ const Calendar = ({ initialDate }: any) => {
                   {eventStyle && (
                     <div
                       className={`mt-1 flex h-5 items-center justify-center text-caption-1 ${eventStyle} `}>
-                      <span>{eventLabel}</span>
+                      <span className="text-body-2">{eventLabel}</span>
                     </div>
                   )}
                 </div>

@@ -8,7 +8,7 @@ const Schedule = () => {
   ]
 
   return (
-    <div className="mt-2 flex min-h-[152px] flex-col rounded-2xl border border-line-neutral bg-white px-4 py-3 text-body-2">
+    <div className="flex min-h-[152px] flex-col rounded-2xl border border-line-neutral bg-white px-4 py-3 text-body-2 font-medium">
       {experiencePeriods.map((item, i) => (
         <div
           key={i}

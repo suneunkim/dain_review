@@ -39,3 +39,24 @@ body {
   margin: 0;
   padding: 0;
 }
+
+:root {
+  --swiper-pagination-color: #ffffff; /* 페이지네이션 점 색상 */
+}
+
+/* 각 페이지네이션 점 */
+
+.swiper-pagination-bullet {
+  width: 40px;
+  height: 20px;
+  background: transparent;
+  border: 1px solid red;
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  width: 40px;
+  transition: width 0.5s;
+  border-radius: 5px;
+  border: 1px solid transparent;
+}

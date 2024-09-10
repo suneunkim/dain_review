@@ -3,13 +3,25 @@
 import { useMediaQuery } from 'react-responsive'
 import PremiumCard from './PremiumCard'
 import MoreButton from '../product/MoreButton'
+import { useEffect, useState } from 'react'
 
 const PremiumCardContainer = () => {
+  const [desktop, setDesktop] = useState(false)
   const isMobile = useMediaQuery({ query: '(max-width: 1023px)' })
+
+  useEffect(() => {
+    if (isMobile) {
+      setDesktop(false)
+    } else {
+      setDesktop(true)
+    }
+    return () => {}
+  }, [isMobile])
+
   const premiumProducts = Array(4).fill(null)
 
   // 웹 크기에서 3개 노출, 모바일 4개 노출
-  const visibleCards = isMobile ? 4 : 3
+  const visibleCards = desktop ? 3 : 4
 
   return (
     <>

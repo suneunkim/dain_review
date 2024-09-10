@@ -13,12 +13,6 @@ import { useSearchModalStore, useHamburgerModalStore } from '@/store'
 import NearByProductContainer from '../home/near/NearByProductContainer'
 import HamburgerMenuModal from '../modal/hamburger-modal/HamburgerMenuModal'
 
-import { Swiper, SwiperSlide } from 'swiper/react'
-import { Navigation, Scrollbar, Autoplay } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
-
 export default function HomeClient() {
   const { isOpen } = useSearchModalStore()
   const { isHamburgerOpen } = useHamburgerModalStore()

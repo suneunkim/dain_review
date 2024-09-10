@@ -8,7 +8,7 @@ const PremiumPick = () => {
         <MobilePickBanner />
       </div>
 
-      <div className="desktop:hidden hidden md:block">
+      <div className="hidden md:block desktop:hidden">
         <svg
           className="h-[200px] w-full"
           width="991"
@@ -78,7 +78,7 @@ const PremiumPick = () => {
           </defs>
         </svg>
       </div>
-      <div className="desktop:block hidden">
+      <div className="hidden desktop:block">
         <PickBanner />
       </div>
     </div>

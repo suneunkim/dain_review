@@ -41,22 +41,28 @@ body {
 }
 
 :root {
-  --swiper-pagination-color: #ffffff; /* 페이지네이션 점 색상 */
+  --swiper-pagination-color: #ffffff;
 }
 
-/* 각 페이지네이션 점 */
+/* 페이지네이션 불렛 스타일과 위치 */
 
 .swiper-pagination-bullet {
-  width: 40px;
-  height: 20px;
+  width: 9px !important;
+  height: 2px !important;
   background: transparent;
-  border: 1px solid red;
-  opacity: 1;
+  border-radius: 0 !important;
 }
 
-.swiper-pagination-bullet-active {
-  width: 40px;
-  transition: width 0.5s;
-  border-radius: 5px;
-  border: 1px solid transparent;
+.swiper-pagination {
+  position: absolute;
+  bottom: 18px !important;
+  left: 18px !important;
+  display: flex;
+  justify-content: flex-start;
+}
+
+@media (min-width: 1024px) {
+  .swiper-pagination {
+    left: 32px !important;
+  }
 }

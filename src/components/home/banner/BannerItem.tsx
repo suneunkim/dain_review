@@ -18,7 +18,7 @@ const BannerItem = ({
   imgClassName
 }: BannerItemProps) => {
   return (
-    <div className="flex h-[220px] justify-center px-5 sm:gap-[27px] lg:h-[592px] lg:gap-0">
+    <div className="flex h-[220px] justify-center px-5 sm:gap-[27px] lg:h-[592px] lg:gap-0 lg:px-0">
       <section className="flex h-[144px] w-[155px] flex-col sm:w-[240px] lg:w-[465px]">
         <p className="mt-[43px] text-caption-3 text-gray-0 lg:mt-[152px] lg:text-body-2">
           {description}

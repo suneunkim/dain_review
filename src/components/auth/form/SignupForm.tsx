@@ -162,12 +162,12 @@ export function SignupForm() {
         <CertifyField
           id="email"
           name="아이디(이메일)"
-          children="중복확인"
           placeholder="사용하실 아이디를 입력해주세요"
           require={true}
           showIcon={true}
-          validationFunction={handleEmailValidation}
-        />
+          validationFunction={handleEmailValidation}>
+          중복확인
+        </CertifyField>
 
         <InputField
           id="pw"

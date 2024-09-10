@@ -125,14 +125,14 @@ function ModifyMyForm() {
           placeholder="전화번호 입력"
           require={true}
           description=""
-          children="인증"
           showIcon={true}
           validationFunction={phoneValidation}
           register={register('phone')}
           errors={errors}
           setValue={setValue}
-          watch={watch}
-        />
+          watch={watch}>
+          인증
+        </CertifyField>
 
         <CertifyField
           id="nickname"
@@ -140,14 +140,14 @@ function ModifyMyForm() {
           placeholder="닉네임"
           require={true}
           description=""
-          children="중복확인"
           showIcon={true}
           validationFunction={phoneValidation}
           register={register('nickname')}
           errors={errors}
           setValue={setValue}
-          watch={watch}
-        />
+          watch={watch}>
+          중복확인
+        </CertifyField>
         <div>
           <div className="my-[108px]">
             <Label

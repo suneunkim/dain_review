@@ -15,9 +15,13 @@ type Props = {
 
 const SearchForm = ({ onSubmit, searchPage = true, keyword = '' }: Props) => {
   const { closeModal } = useSearchModalStore()
-  const { handleSubmit, register } = useForm<SearchFormData>({
+  const { handleSubmit, register, setValue } = useForm<SearchFormData>({
     defaultValues: { searchTerm: keyword }
   })
+
+  const handleClear = () => {
+    setValue('searchTerm', '')
+  }
 
   return (
     <form
@@ -25,17 +29,20 @@ const SearchForm = ({ onSubmit, searchPage = true, keyword = '' }: Props) => {
       className={`flex h-10 items-center gap-2 border-b border-gray-90 ${searchPage && 'mx-auto w-[328px] lg:mt-[48px] lg:w-[746px]'} `}>
       <SearchIcon />
       <input
-        className="text-body-1 text-gray-40 outline-none ring-0 focus:text-gray-80"
+        className="w-full text-body-1 text-gray-40 outline-none ring-0 focus:text-gray-80"
         placeholder="찾고있는 체험단을 검색해보세요"
         {...register('searchTerm', { required: true })}
       />
       {searchPage ? (
-        <button className="ml-auto">
+        <button
+          type="button"
+          onClick={handleClear}
+          className="ml-auto">
           <Xicon />
         </button>
       ) : (
         <button
-          className="ml-auto"
+          className="ml-auto min-w-[36px] border"
           type="button"
           onClick={closeModal}>
           닫기

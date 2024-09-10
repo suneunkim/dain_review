@@ -194,13 +194,13 @@ export function SignupForm() {
 
         <CertifyField
           id="phone"
-          children="인증"
           name="전화번호"
           placeholder="‘-’ 없이 숫자만 작성"
           require={true}
           showIcon={true}
-          validationFunction={handlePhoneValidation}
-        />
+          validationFunction={handlePhoneValidation}>
+          인증
+        </CertifyField>
 
         <InputField
           id="nickname"

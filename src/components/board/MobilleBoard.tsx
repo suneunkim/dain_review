@@ -1,11 +1,13 @@
-import BoardItem, { PostData } from "./BoardItem"
+import Link from 'next/link'
+import BoardListItem, { PostProps } from './BoardListItem'
 
-const MobilleBoard = ({ data }: { data: PostData }) => {
-  return <div className="mx-auto max-w-[1023px]">
-    <section className="p-5">
+const MobilleBoard = ({ data }: { data: PostProps }) => {
+  return (
+    <div className="mx-auto max-w-[1023px]">
+      <section className="p-5">
         <h2 className="text-center text-heading-2 font-bold">게시판</h2>
         <div className="mx-auto mt-[29px] flex w-[303px] text-heading-5">
-          <h3 className="border-b border-gray-90 px-[19px] py-[5px]">
+          <h3 className="border-b border-gray-90 px-[19px] py-[5px] font-bold">
             공지사항
           </h3>
           <h3 className="border-b border-line-neutral px-[19px] py-[5px]">
@@ -18,10 +20,13 @@ const MobilleBoard = ({ data }: { data: PostData }) => {
       </section>
       <section className="p-5">
         <div className="px-2 pb-[14px] pt-[10px]">
-          <BoardItem data={data}/>
+          <Link href={`/board/${data.id}`}>
+            <BoardListItem data={data} />
+          </Link>
         </div>
       </section>
-  </div>
+    </div>
+  )
 }
 
 export default MobilleBoard

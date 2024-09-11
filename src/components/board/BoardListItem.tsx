@@ -1,13 +1,14 @@
-export interface PostData {
-  type: string // 게시물의 분류 (예: 공지)
-  title: string // 게시물 제목
-  description: string // 게시물 설명 (내용)
-  author: string // 작성자
-  date: string // 작성일
-  views: number // 조회수
+export interface PostProps {
+  id: string
+  type?: string
+  title: string
+  description: string
+  author: string
+  date: string
+  views: number
 }
 
-const BoardItem = ({ data }: { data: PostData }) => {
+const BoardListItem = ({ data }: { data: PostProps }) => {
   return (
     <div>
       <h3 className="mb-2 text-body-2 font-semibold text-gray-70 lg:mb-4">
@@ -24,7 +25,7 @@ const BoardItem = ({ data }: { data: PostData }) => {
         <p className="mb-[6.5px] line-clamp-2 h-[34px] w-[312px] text-caption-1 text-gray-60 lg:h-[40px] lg:w-[921px] lg:text-body-2">
           {data.description}
         </p>
-        <div className="flex gap-[15px] lg:min-w-[56px]">
+        <div className="flex items-center justify-center gap-[15px] lg:min-w-[56px]">
           <svg
             width="20"
             height="20"
@@ -36,7 +37,7 @@ const BoardItem = ({ data }: { data: PostData }) => {
               fill="#5D5F67"
             />
           </svg>
-          <span>{data.views}</span>
+          <span className="text-gray-60">{data.views}</span>
         </div>
       </div>
 
@@ -47,7 +48,7 @@ const BoardItem = ({ data }: { data: PostData }) => {
         </div>
 
         {/* 모바일 레이아웃 조회수 */}
-        <div className="flex lg:hidden">
+        <div className="flex items-center justify-center gap-[2px] lg:hidden">
           <svg
             width="20"
             height="20"
@@ -59,11 +60,11 @@ const BoardItem = ({ data }: { data: PostData }) => {
               fill="#5D5F67"
             />
           </svg>
-          <span>{data.views}</span>
+          <span className="">{data.views}</span>
         </div>
       </div>
     </div>
   )
 }
 
-export default BoardItem
+export default BoardListItem

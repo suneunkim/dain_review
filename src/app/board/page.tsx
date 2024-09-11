@@ -1,8 +1,8 @@
-import BoardItem from '@/components/board/BoardItem'
 import DesktopBoard from '@/components/board/DesktopBoard'
 import MobilleBoard from '@/components/board/MobilleBoard'
 
 const mockdata = {
+  id: '1',
   type: '공지',
   title: '포인트 환급 기준 변경',
   description:

@@ -1,6 +1,7 @@
-import BoardItem, { PostData } from './BoardItem'
+import Link from 'next/link'
+import BoardListItem, { PostProps } from './BoardListItem'
 
-const DesktopBoard = ({ data }: { data: PostData }) => {
+const DesktopBoard = ({ data }: { data: PostProps }) => {
   return (
     <div className="mx-auto flex max-w-[1400px] gap-14">
       <section className="w-[247px] px-6 py-10">
@@ -17,7 +18,9 @@ const DesktopBoard = ({ data }: { data: PostData }) => {
         <h3 className="text-display-2 font-bold">게시판</h3>
         <h4 className="mt-14 text-heading-2 font-bold">공지사항</h4>
         <div className="mt-[10px] max-w-[1065px] bg-background-gray px-[30px] py-6">
-          <BoardItem data={data} />
+          <Link href={`/board/${data.id}`}>
+            <BoardListItem data={data} />
+          </Link>
         </div>
       </section>
     </div>

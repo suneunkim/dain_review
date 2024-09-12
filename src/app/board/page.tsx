@@ -1,7 +1,8 @@
-import DesktopBoard from '@/components/board/DesktopBoard'
-import MobilleBoard from '@/components/board/MobilleBoard'
+import BoardLayout from '@/components/board/BoardLayout'
+import BoardListItem from '@/components/board/BoardListItem'
+import Link from 'next/link'
 
-const mockdata = {
+const data = {
   id: '1',
   type: '공지',
   title: '포인트 환급 기준 변경',
@@ -15,12 +16,28 @@ const mockdata = {
 const page = () => {
   return (
     <div className="mx-auto max-w-[1400px]">
+      {/* 모바일 레이아웃 */}
       <div className="lg:hidden">
-        <MobilleBoard data={mockdata} />
+        <BoardLayout
+          isMobile
+          currentTab="공지사항">
+          <div className="px-2 pb-[14px] pt-[10px]">
+            <Link href={`/board/${data.id}`}>
+              <BoardListItem data={data} />
+            </Link>
+          </div>
+        </BoardLayout>
       </div>
 
+      {/* 데스크탑 레이아웃 */}
       <div className="hidden lg:block">
-        <DesktopBoard data={mockdata} />
+        <BoardLayout currentTab="공지사항">
+          <div className="mt-[10px] max-w-[1065px] bg-background-gray px-[30px] py-6">
+            <Link href={`/board/${data.id}`}>
+              <BoardListItem data={data} />
+            </Link>
+          </div>
+        </BoardLayout>
       </div>
     </div>
   )

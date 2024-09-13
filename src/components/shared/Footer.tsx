@@ -74,7 +74,7 @@ const Footer = () => {
       </div>
       {/* 웹 푸터 */}
       <div className="hidden h-[286px] w-full bg-background-red lg:block">
-        <div className="px-4 text-base font-[400] text-gray-40">
+        <div className="px-4 text-caption-1 font-[400] text-gray-40">
           <section className="mx-auto flex h-[208px] max-w-[1400px] flex-col gap-2 py-[48px]">
             <div className="flex items-center gap-[6px] font-[700]">
               <p>{`(주)`} 다인기획</p>

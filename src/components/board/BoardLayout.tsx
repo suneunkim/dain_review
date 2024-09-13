@@ -39,32 +39,33 @@ const BoardLayout = ({ isMobile = false, children, currentTab }: Props) => {
       </div>
     )
   } else {
+    // 데스크탑 레이아웃
     return (
-      <div className="mx-auto flex max-w-[1400px] gap-14">
-        <section className="w-[247px] px-6 py-10">
-          <ul className="text-body-1 text-gray-90">
-            <li className="min-w-[199px] border-b py-[20.5px] pl-[10px] font-bold">
+      <div className="mx-auto flex max-w-[1400px] gap-5 px-4">
+        <section className="w-[247px] py-10">
+          <ul className="w-[247px] text-body-1 text-gray-90">
+            <li className="flex h-[66px] min-w-[199px] items-center border-b px-[10px] text-heading-5 font-bold">
               게시판
             </li>
             <Link href="/board">
               <li
-                className={`py-[20.5px] pl-[10px] ${isNoticeTab && 'font-bold'}`}>
+                className={`flex h-[66px] items-center px-[10px] ${isNoticeTab && 'font-bold'}`}>
                 공지사항
               </li>
             </Link>
             <Link href="/board/community">
               <li
-                className={`py-[20.5px] pl-[10px] ${isCommunityTab && 'font-bold'}`}>
+                className={`flex h-[66px] items-center px-[10px] ${isCommunityTab && 'font-bold'}`}>
                 커뮤니티
               </li>
             </Link>
             <li
-              className={`py-[20.5px] pl-[10px] ${isFollowTab && 'font-bold'}`}>
+              className={`flex h-[66px] items-center px-[10px] ${isFollowTab && 'font-bold'}`}>
               맞팔 / 서이추
             </li>
           </ul>
         </section>
-        <section className="w-full px-4 py-10">
+        <section className="w-full py-10">
           <h3 className="text-display-2 font-bold">게시판</h3>
           <div className="mt-14 flex items-end gap-[10px]">
             <h4 className="text-heading-2 font-bold">{currentTab}</h4>

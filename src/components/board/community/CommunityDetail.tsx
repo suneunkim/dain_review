@@ -1,6 +1,18 @@
-import Link from 'next/link'
+'use client'
 
-export interface NoticeDetailProps {
+import Link from 'next/link'
+import { SubmitHandler, useForm } from 'react-hook-form'
+
+type SearchBarType = {
+  comment: string
+}
+
+type Props = {
+  onSubmit: SubmitHandler<SearchBarType>
+}
+
+export interface PostDetailProps {
+  category: string
   title: string
   content: string
   author: string
@@ -8,10 +20,32 @@ export interface NoticeDetailProps {
   viewCount: number
 }
 
-const BoardDetail = ({ data }: { data: NoticeDetailProps }) => {
+const CommunityDetail = ({ data }: { data: PostDetailProps }) => {
+  const { handleSubmit, register } = useForm<SearchBarType>()
+
+  const onSubmit = () => {}
+
   return (
     <div>
-      <h4 className="text-body-2 font-bold text-gray-90 lg:mb-2 lg:text-body-1">
+      <div className="mb-4 flex items-center justify-between">
+        <h4 className="flex text-body-2 font-semibold leading-[1] text-red-main">
+          {data.category}
+        </h4>
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M10 5H10.0083M10 10H10.0083M10 15H10.0083"
+            stroke="#19191B"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+        </svg>
+      </div>
+      <h4 className="text-body-2 font-semibold text-gray-90 lg:mb-2 lg:text-body-1">
         {data.title}
       </h4>
       <div className="mt-[5px] flex justify-between text-caption-1 lg:mt-[11px]">
@@ -27,6 +61,22 @@ const BoardDetail = ({ data }: { data: NoticeDetailProps }) => {
           {data.content}
         </div>
       </div>
+
+      {/* 댓글 */}
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex h-[105px] flex-col border border-gray-10 p-2">
+        <textarea
+          {...register('comment', { required: true })}
+          placeholder="댓글을 남겨 보세요."
+          className="h-[50px] w-full resize-none border-none outline-none"
+        />
+        <button
+          type="submit"
+          className="ml-auto rounded bg-gray-90 px-4 py-[9px] text-gray-0">
+          등록
+        </button>
+      </form>
 
       {/* 버튼 */}
       <div className="mt-8 flex justify-between text-body-2 font-bold">
@@ -99,4 +149,4 @@ const BoardDetail = ({ data }: { data: NoticeDetailProps }) => {
   )
 }
 
-export default BoardDetail
+export default CommunityDetail

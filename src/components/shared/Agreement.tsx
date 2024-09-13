@@ -80,7 +80,7 @@ function AgreementDescription({
                 size="t6"
                 weight={400}
                 color="gray40"
-                className="ml-3 text-body2">
+                className="text-body2 ml-3">
                 (필수)
               </Text>
             ) : (
@@ -88,7 +88,7 @@ function AgreementDescription({
                 size="t6"
                 weight={400}
                 color="gray40"
-                className="ml-3 text-body2">
+                className="text-body2 ml-3">
                 (선택)
               </Text>
             )}

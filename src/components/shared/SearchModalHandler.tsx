@@ -3,6 +3,7 @@
 import { useHamburgerModalStore, useSearchModalStore } from '@/store'
 import SearchModal from '../modal/search-modal/SearchModal'
 import { useEffect } from 'react'
+import HamburgerMenuModal from '../modal/hamburger-modal/HamburgerMenuModal'
 
 const SearchModalHandler = () => {
   const { isOpen } = useSearchModalStore()
@@ -20,7 +21,12 @@ const SearchModalHandler = () => {
     }
   }, [isOpen, isHamburgerOpen])
 
-  return <>{isOpen && <SearchModal />}</>
+  return (
+    <>
+      {isOpen && <SearchModal />}
+      {isHamburgerOpen && <HamburgerMenuModal />}
+    </>
+  )
 }
 
 export default SearchModalHandler

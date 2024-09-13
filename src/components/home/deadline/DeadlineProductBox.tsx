@@ -8,7 +8,7 @@ interface DeadlineBoxProps {
 
 const DeadlineProductBox = ({ title }: DeadlineBoxProps) => {
   return (
-    <div className="desktop:w-[580px] min-w-[328px] lg:h-[715px] lg:w-[37vw] lg:min-w-[422px]">
+    <div className="min-w-[328px] lg:h-[715px] lg:w-[37vw] lg:min-w-[422px] desktop:w-[580px]">
       <div className="mb-4 flex justify-between">
         <p className="text-heading-5 font-[700] text-gray-90 lg:text-heading-3">
           {title}

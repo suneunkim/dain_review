@@ -76,11 +76,11 @@ const page = () => {
               <CertifyField
                 id="address"
                 name="사업장 주소"
-                children="검색"
                 placeholder="우편번호"
                 // description=""
-                require={true}
-              />
+                require={true}>
+                검색
+              </CertifyField>
               <Input
                 id={'addressDetail1'}
                 type={'text'}

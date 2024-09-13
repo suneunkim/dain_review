@@ -50,7 +50,9 @@ const Header = ({ isLogin, subtitle, isOnlyBackButton = false }: Props) => {
             <li>체험단</li>
           </Link>
           <li>이용안내</li>
-          <li>게시판</li>
+          <Link href="/board">
+            <li>게시판</li>
+          </Link>
           <li>포인트</li>
         </ul>
       </section>

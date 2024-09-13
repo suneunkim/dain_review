@@ -54,10 +54,10 @@ export function SignupForm() {
         <CertifyField
           id="email"
           name="아이디(이메일)"
-          children="중복확인"
           placeholder="사용하실 아이디를 입력해주세요"
-          require={true}
-        />
+          require={true}>
+          중복확인
+        </CertifyField>
 
         <InputField
           id="pw"
@@ -84,11 +84,11 @@ export function SignupForm() {
 
         <CertifyField
           id="phone"
-          children="인증"
           name="전화번호"
           placeholder="‘-’ 없이 숫자만 작성"
-          require={true}
-        />
+          require={true}>
+          인증
+        </CertifyField>
 
         <InputField
           id="nickname"
@@ -170,11 +170,11 @@ export function SignupForm() {
           <CertifyField
             id="address"
             name="주소"
-            children="검색"
             placeholder="우편번호"
             description="체험단 응모 시 사용할 주소를 입력해 주세요. / 체험단 모집 시 사용할 주소를 입력해 주세요."
-            require={true}
-          />
+            require={true}>
+            검색
+          </CertifyField>
           <Input
             id={'addressDetail1'}
             type={'text'}

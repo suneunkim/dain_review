@@ -56,6 +56,7 @@ const DeskTopSearchFilter = ({ keyword = '' }: { keyword: string }) => {
               <div className="flex cursor-pointer flex-wrap gap-[10px]">
                 {filter.items.map(item => (
                   <span
+                    key={item}
                     onClick={() => handleFilterItemClick(filter.category, item)}
                     className={`rounded border border-line-normal px-4 py-[10px] text-body-1 font-medium text-gray-80 ${
                       (filter.category === '카테고리' &&

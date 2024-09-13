@@ -7,6 +7,10 @@ const HamburgerMenuModal = () => {
   const isLogin = true
   const { HamburderCloseModal } = useHamburgerModalStore()
 
+  const handleLinkClick = () => {
+    HamburderCloseModal() // 모달 닫기
+  }
+
   return (
     <div className="fixed inset-0 z-40 bg-black bg-opacity-40">
       <div className="fixed inset-y-0 z-50 min-w-[360px] max-w-[520px] overflow-y-auto bg-white">
@@ -39,15 +43,25 @@ const HamburgerMenuModal = () => {
         </section>
 
         <section className="px-4 text-body-1 font-medium text-gray-90">
-          <Link href="/campaign">
+          <Link
+            onClick={handleLinkClick}
+            href="/campaign">
             <div className="border-b border-line-neutral py-5">체험단</div>
           </Link>
           <div className="border-b border-line-neutral py-5">포인트</div>
           <div>
             <p className="border-b border-line-neutral py-5">게시판</p>
             <ul className="text-body-2 font-normal text-gray-70">
-              <li className="py-[10px]">공지사항</li>
-              <li className="py-[10px]">커뮤니티</li>
+              <Link
+                onClick={handleLinkClick}
+                href="/board">
+                <li className="py-[10px]">공지사항</li>
+              </Link>
+              <Link
+                onClick={handleLinkClick}
+                href="/board/community">
+                <li className="py-[10px]">커뮤니티</li>
+              </Link>
               <li className="border-b border-line-neutral py-[10px]">
                 맞팔/서이추
               </li>

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 interface Props {
-  productId: string
+  productId?: number
   onClick?: () => void | undefined
   isApplyPage?: boolean
   desktopSize?: boolean

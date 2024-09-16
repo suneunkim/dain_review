@@ -5,7 +5,11 @@ import MobileLayout from '../product-detail/MobileLayout'
 import Footer from '@/components/shared/Footer'
 import { ProductDetailProps } from '@/models/detailPage'
 
-const ProductDetailClient = ({ productId }: ProductDetailProps) => {
+interface Props {
+  data: ProductDetailProps
+}
+
+const ProductDetailClient = ({ data }: Props) => {
   return (
     <>
       {/* 공통 제품 상세 헤더 및 이미지 */}
@@ -19,11 +23,11 @@ const ProductDetailClient = ({ productId }: ProductDetailProps) => {
       </div>
       {/* 웹 반응형 레이아웃 */}
       <div className="hidden lg:block">
-        <DesktopLayout productId={productId} />
+        <DesktopLayout data={data} />
       </div>
       {/* 모바일 반응형 레이아웃 */}
       <div className="lg:hidden">
-        <MobileLayout productId={productId} />
+        <MobileLayout data={data} />
       </div>
       {/* 웹 반응형 푸터 */}
       <div className="hidden lg:block">

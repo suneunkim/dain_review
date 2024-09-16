@@ -3,7 +3,6 @@ import {
   experienceMessage,
   missionList,
   staticData,
-  tagkeywordList,
   요청사항,
   필수체크사항
 } from '@/data/DetailPageMockData'
@@ -20,7 +19,12 @@ import Calendar from './Calendar'
 import KakaoMap from './KakaoMap'
 import { notify } from '@/utils/toast'
 
-const DesktopLayout = ({ productId }: ProductDetailProps) => {
+interface Props {
+  data: ProductDetailProps
+}
+
+const DesktopLayout = ({ data }: Props) => {
+  const tagkeywordList = [data.keyword1, data.keyword2, data.keyword3]
   const initialApplicationStartDate = '2024-08-05T00:00:00Z'
 
   const handleClick = () => {
@@ -174,13 +178,13 @@ const DesktopLayout = ({ productId }: ProductDetailProps) => {
         {/* 오른쪽 레이아웃 */}
         <div className="mt-10 flex h-[892px] min-w-[461px] flex-col rounded-lg bg-[#F7F8F8] px-6 pb-8 pt-6">
           <p className="mb-2 text-heading-5 font-bold">체험단 일정</p>
-          <Schedule />
+          <Schedule data={data} />
           <div className="mt-4">
             <Calendar initialDate={initialApplicationStartDate} />
           </div>
           <div className="mt-auto">
             <ButtonAndInfo
-              productId={productId}
+              productId={data.seq}
               desktopSize
             />
           </div>

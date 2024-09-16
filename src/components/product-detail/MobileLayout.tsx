@@ -11,12 +11,12 @@ import {
   missionList,
   필수체크사항
 } from '@/data/DetailPageMockData'
-import ReviewType from '@/components/home/product/ReviewType'
 import { ProductDetailProps } from '@/models/detailPage'
 import Calendar from './Calendar'
 import KakaoMap from './KakaoMap'
 import { getDayInfo } from '@/utils/detailPageDays'
 import Schedule from './elements/Schedule'
+import PlatformType from '../home/product/PlatformType'
 
 const MobileLayout = ({ data }: { data: ProductDetailProps }) => {
   const tagkeywordList = [data.keyword1, data.keyword2, data.keyword3]
@@ -41,9 +41,13 @@ const MobileLayout = ({ data }: { data: ProductDetailProps }) => {
     <div className="px-4">
       <section className="flex flex-col">
         <div className="mt-5">
-          <ReviewType
-            snsType="naver"
+          <PlatformType
+            type={data.type}
+            category={data.category}
             detailPage
+            platform={
+              data.platform as '블로그' | '유튜브' | '인스타그램' | '틱톡'
+            }
           />
         </div>
         <h3 className="mt-2 text-heading-2 font-bold">{data.title}</h3>
@@ -161,7 +165,10 @@ const MobileLayout = ({ data }: { data: ProductDetailProps }) => {
 
       <footer className="mb-6 mt-32 flex items-center justify-between gap-2">
         <LikeButton />
-        <ButtonAndInfo />
+        <ButtonAndInfo
+          recruiter={data.recruiter}
+          productId={data.seq}
+        />
       </footer>
     </div>
   )

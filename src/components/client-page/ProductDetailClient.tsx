@@ -15,9 +15,13 @@ const ProductDetailClient = ({ data }: Props) => {
       {/* 공통 제품 상세 헤더 및 이미지 */}
       <ProductDetailHeader />
       <div className="relative mx-auto w-full max-w-[1400px]">
-        <div className="min-h-[184px] bg-gray-300 520:h-[240px] lg:h-[464px]" />
+        {/* <div className="min-h-[184px] bg-gray-400 520:h-[240px] lg:h-[464px]" /> */}
+        <img
+          src={data.image}
+          className="min-h-[184px] w-full object-cover 520:h-[240px] lg:h-[464px]"
+        />
         <Flag
-          flag="premium"
+          flag={data.segment === '프리미엄' ? 'premium' : 'pick'}
           page="detail"
         />
       </div>

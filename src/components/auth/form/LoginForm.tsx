@@ -6,6 +6,7 @@ import { z } from 'zod'
 import { LoginFormValues } from '@/models/auth'
 import Form from '../../shared/Form'
 import Button from '../../shared/Button'
+import { toast } from 'react-toastify'
 
 /**
  * 유효성검사 에러 메세지 주석
@@ -62,14 +63,24 @@ export function LoginForm() {
       if (!response.ok) {
         // 서버가 에러 응답을 보낸 경우
         const errorData = await response.json()
+        toast.error(errorData.data.errorMessage[0], {
+          position: 'top-right',
+          autoClose: 5000
+        })
         console.error('서버 오류:', errorData)
         return
       }
 
       const result = await response.json()
       console.log('로그인 성공:', result)
+      toast.success('로그인 성공!', {
+        position: 'top-left',
+        autoClose: 3000
+      })
+      localStorage.setItem('token', result.data.token)
     } catch (error) {
       // 네트워크 오류 또는 다른 문제가 발생한 경우
+      console.log(error)
       console.error('요청 실패:', error)
     }
   }

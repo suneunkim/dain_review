@@ -25,7 +25,7 @@ export default function LoginPage() {
             </div>
             <div className="text-center">
               <a
-                href=""
+                href="/auth/sign-up"
                 className="font-bold leading-4">
                 회원가입
               </a>

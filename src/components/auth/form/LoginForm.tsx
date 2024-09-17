@@ -44,21 +44,18 @@ const loginSchema = z.object({
 export function LoginForm() {
   const onSubmit = async (data: LoginFormValues) => {
     try {
-      const response = await fetch(
-        'http://ec2-54-206-111-187.ap-southeast-2.compute.amazonaws.com:8080/api/login',
-        {
-          method: 'POST',
-          body: JSON.stringify({
-            email: data.email,
-            pw: data.pw
-          }),
-          headers: {
-            'Access-Control-Allow-Methods': 'true',
-            'Access-Control-Allow-Credentials': 'true',
-            'Content-Type': 'application/json'
-          }
+      const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/login`, {
+        method: 'POST',
+        body: JSON.stringify({
+          email: data.email,
+          pw: data.pw
+        }),
+        headers: {
+          'Access-Control-Allow-Methods': 'true',
+          'Access-Control-Allow-Credentials': 'true',
+          'Content-Type': 'application/json'
         }
-      )
+      })
 
       if (!response.ok) {
         // 서버가 에러 응답을 보낸 경우

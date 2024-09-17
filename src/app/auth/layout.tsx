@@ -1,5 +1,7 @@
 import Header from '@/components/shared/Header'
 
+import Header from '@/components/shared/Header'
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="">

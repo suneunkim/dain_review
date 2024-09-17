@@ -3,12 +3,12 @@ const Schedule = () => {
   const experiencePeriods = [
     { label: '체험단 모집기간', period: '08.05 (월) ~ 08.14 (수)' },
     { label: '선정자 발표', period: '08.15 (목)' },
-    { label: '리뷰 & 체험', period: '08.16 (금) ~ 08.25 (일)' },
-    { label: '리뷰 마감', period: '08.26 (월)' }
+    { label: '리뷰 & 체험', period: '08.16 (금) ~ 08.28 (수)' },
+    { label: '리뷰 마감', period: '08.29 (목)' }
   ]
 
   return (
-    <div className="mt-2 flex min-h-[152px] flex-col rounded-2xl border border-line-neutral bg-white px-4 py-3 text-body-2">
+    <div className="flex min-h-[152px] flex-col rounded-2xl border border-line-neutral bg-white px-4 py-3 text-body-2 font-medium">
       {experiencePeriods.map((item, i) => (
         <div
           key={i}

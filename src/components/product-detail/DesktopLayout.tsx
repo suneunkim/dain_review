@@ -1,3 +1,4 @@
+'use client'
 import {
   experienceMessage,
   missionList,
@@ -9,14 +10,23 @@ import {
 import CheckInfoList from './elements/CheckInfoList'
 import LikeButton from './elements/LikeButton'
 import ButtonAndInfo from './elements/ButtonAndInfo'
-import TagKeyword from './elements/TagKeyword'
+import { TagKeyword, TagKeywordContainer } from './elements/TagKeyword'
 import DotIcon from '@/assets/icons/product-detail/dot.svg'
 import ReviewType from '../home/product/ReviewType'
 import DesttopShare from '@/assets/icons/product-detail/desktop-share.svg'
 import { ProductDetailProps } from '@/models/detailPage'
 import Schedule from './elements/Schedule'
+import Calendar from './Calendar'
+import KakaoMap from './KakaoMap'
+import { notify } from '@/utils/toast'
 
 const DesktopLayout = ({ productId }: ProductDetailProps) => {
+  const initialApplicationStartDate = '2024-08-05T00:00:00Z'
+
+  const handleClick = () => {
+    notify('복사 되었습니다')
+  }
+
   return (
     <div className="px-5">
       <div className="flex justify-center gap-5">
@@ -39,6 +49,7 @@ const DesktopLayout = ({ productId }: ProductDetailProps) => {
                 <LikeButton deskTop />
               </div>
             </div>
+
             <div className="mt-[40px]">
               <p className="mb-6 text-heading-5 font-bold">제공 내역</p>
               <p className="mb-4 mt-3 text-gray-80">
@@ -87,7 +98,7 @@ const DesktopLayout = ({ productId }: ProductDetailProps) => {
           <section className="mt-12 flex flex-col gap-2">
             <p className="text-heading-5 font-bold">주소</p>
             <p>서울 강남구 봉오대로 677번길 다인카페</p>
-            <div className="min-h-[344px] bg-gray-200" />
+            <KakaoMap mapId="map1" />
           </section>
           <section className="mt-12">
             <p className="mb-4 text-heading-5 font-bold">방문 / 예약 안내</p>
@@ -134,25 +145,7 @@ const DesktopLayout = ({ productId }: ProductDetailProps) => {
             </ul>
           </section>
           <section className="mt-12">
-            <div>
-              <p className="mb-4 text-heading-5 font-bold">태그 키워드</p>
-              <div className="flex flex-col gap-4 520:flex-row">
-                <div className="flex flex-wrap gap-2">
-                  {tagkeywordList.map((tag, i) => (
-                    <TagKeyword
-                      info="tag"
-                      tag={tag}
-                      key={i}
-                    />
-                  ))}
-                </div>
-                <button
-                  type="button"
-                  className="mt-[25px] w-[78px] border-b-2 border-gray-70 520:mt-0">
-                  키워드 복사
-                </button>
-              </div>
-            </div>
+            <TagKeywordContainer tagkeywordList={tagkeywordList} />
           </section>
           <section className="mt-12">
             <p className="mb-4 text-heading-5 font-bold">체험단 미션</p>
@@ -179,14 +172,17 @@ const DesktopLayout = ({ productId }: ProductDetailProps) => {
           </section>
         </div>
         {/* 오른쪽 레이아웃 */}
-        <div className="mt-10 h-[836px] min-w-[461px] rounded-lg bg-[#F7F8F8] px-6 pb-8 pt-6">
-          <p className="text-heading-5 font-bold">체험단 일정</p>
+        <div className="mt-10 flex h-[892px] min-w-[461px] flex-col rounded-lg bg-[#F7F8F8] px-6 pb-8 pt-6">
+          <p className="mb-2 text-heading-5 font-bold">체험단 일정</p>
           <Schedule />
-          <div className="mt-4 min-h-[465px] rounded-2xl border border-line-neutral bg-white">
-            달력
+          <div className="mt-4">
+            <Calendar initialDate={initialApplicationStartDate} />
           </div>
-          <div className="mt-[66px]">
-            <ButtonAndInfo productId={productId} />
+          <div className="mt-auto">
+            <ButtonAndInfo
+              productId={productId}
+              desktopSize
+            />
           </div>
         </div>
       </div>

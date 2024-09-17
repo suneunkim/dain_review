@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React, { FC } from 'react'
-import ChoiceType from '@/app/assets/icons/auth/ChoiceType.svg'
+import ChoiceType from '@/assets/icons/auth/ChoiceType.svg'
 
 interface TypeChoiceCardProps {
   title: string
@@ -23,7 +23,7 @@ export const TypeChoiceCard: FC<TypeChoiceCardProps> = ({
           {discription}
         </p>
       </div>
-      <ChoiceType />
+      {/* <ChoiceType /> */}
     </Link>
   )
 }

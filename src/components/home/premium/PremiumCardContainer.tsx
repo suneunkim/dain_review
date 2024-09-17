@@ -1,28 +1,27 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useMediaQuery } from 'react-responsive'
 import PremiumCard from './PremiumCard'
 import MoreButton from '../product/MoreButton'
+import { useEffect, useState } from 'react'
 
 const PremiumCardContainer = () => {
-  const [numOfCards, setNumOfCards] = useState(4)
+  const [desktop, setDesktop] = useState(false)
+  const isMobile = useMediaQuery({ query: '(max-width: 1023px)' })
 
   useEffect(() => {
-    const updateNumOfCards = () => {
-      if (window.innerWidth >= 1024) {
-        setNumOfCards(3) // 1024px 이상에서는 3개의 카드만 보여줌
-      } else {
-        setNumOfCards(4) // 1024px 미만에서는 4개의 카드 보여줌
-      }
+    if (isMobile) {
+      setDesktop(false)
+    } else {
+      setDesktop(true)
     }
+    return () => {}
+  }, [isMobile])
 
-    updateNumOfCards() // 컴포넌트가 마운트될 때 실행
-    window.addEventListener('resize', updateNumOfCards) // 윈도우 크기 변화 감지
+  const premiumProducts = Array(4).fill(null)
 
-    return () => {
-      window.removeEventListener('resize', updateNumOfCards)
-    }
-  }, [])
+  // 웹 크기에서 3개 노출, 모바일 4개 노출
+  const visibleCards = desktop ? 3 : 4
 
   return (
     <>
@@ -34,14 +33,13 @@ const PremiumCardContainer = () => {
           <MoreButton />
         </section>
         <div className="grid grid-cols-2 gap-x-4 gap-y-[22px] lg:grid-cols-3">
-          {Array(numOfCards)
-            .fill(null)
-            .map((_, index) => (
-              <PremiumCard
-                flag="premium"
-                key={index}
-              />
-            ))}
+          {/* 실제 데이터를 받으면 slice(numOfCards)로 변경할 예정 */}
+          {premiumProducts.slice(0, visibleCards).map((_, index) => (
+            <PremiumCard
+              flag="premium"
+              key={index}
+            />
+          ))}
         </div>
       </div>
     </>

@@ -1,3 +1,5 @@
+'use client'
+
 import { SocialLinkGroups } from '@/components/auth/SocialLinkGroups'
 import { SocialLinkMobileGroups } from '@/components/auth/SocialLinkMobileGroups'
 

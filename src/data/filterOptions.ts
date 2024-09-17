@@ -1,4 +1,6 @@
-export const filterOptions = [
+export type ThreeFilter = '카테고리' | 'SNS' | '유형'
+
+export const filterOptions: { category: ThreeFilter; items: string[] }[] = [
   {
     category: '카테고리',
     items: ['맛집', '뷰티', '여행', '문화', '식품', '생활', '디지털']

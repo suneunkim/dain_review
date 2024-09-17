@@ -3,8 +3,8 @@
 import React, { useState, useCallback } from 'react'
 import { useDropzone, FileRejection } from 'react-dropzone'
 
-import ClipImage from '@/assets/icon/review/clip.svg'
-import ButtonRemove from '@/assets/icon/review/remove.svg'
+import ClipImage from '@/assets/icons/review/clip.svg'
+import ButtonRemove from '@/assets/icons/review/remove.svg'
 
 interface ImagePreviewerProps {
   onFileSelect: (files: File[]) => void
@@ -56,7 +56,7 @@ const ImagePreviewer: React.FC<ImagePreviewerProps> = ({
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     onDropRejected,
-    accept: 'image/*',
+    accept: { 'image/': [] },
     maxSize: maxSize * 1024 * 1024 // 최대 파일 크기 설정
   })
 

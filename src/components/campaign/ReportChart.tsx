@@ -5,7 +5,13 @@ import { ResponsiveLine } from '@nivo/line'
 // 반응형 컴포넌트를 사용할 때 부모 컨테이너의 높이가 정의되어 있는지 확인
 // 그렇지 않으면 높이가 0이 되어 차트가 렌더링되지 않음
 
-const ReportChart = ({ data /* see data tab */ }) => (
+type ReportChartData = {
+  id: string
+  color?: string
+  data: { x: string | number; y: number }[]
+}[]
+
+const ReportChart = ({ data }: { data: ReportChartData }) => (
   <ResponsiveLine
     data={data}
     margin={{ top: 10, right: 10, bottom: 30, left: 35 }}

@@ -5,7 +5,7 @@ import CoinIcon from '@/assets/icons/product-detail/coin.svg'
 import Schedule from '../product-detail/elements/Schedule'
 
 interface Props {
-  id: string
+  id: number
 }
 const ApplyClient = ({ id }: Props) => {
   return (

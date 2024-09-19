@@ -12,8 +12,8 @@ interface CertifyFieldProps {
   require: boolean
   description?: string
   children: string
-  showIcon: boolean
-  validationFunction: (
+  showIcon?: boolean
+  validationFunction?: (
     value: string
   ) => Promise<{ isValid: boolean | null; message: string }>
 }
@@ -41,16 +41,17 @@ const CertifyField: React.FC<CertifyFieldProps> = ({
   const handleValidation = useCallback(async () => {
     if (!inputValue) return '값을 입력해주세요.'
 
-    const result = await validationFunction(inputValue)
-
-    setIsVerified(result.isValid)
-    if (result.isValid === true) {
-      setValue(id, inputValue, { shouldValidate: true })
-      setisVerifiedMessage(result.message)
-      return true // 유효한 경우 true 반환
-    } else if (result.isValid === false) {
-      setisVerifiedMessage(result.message)
-      return result.message || '유효성 검사에 실패했습니다.' // 유효하지 않은 경우 오류 메시지 반환
+    if (validationFunction) {
+      const result = await validationFunction(inputValue)
+      setIsVerified(result.isValid)
+      if (result.isValid === true) {
+        setValue(id, inputValue, { shouldValidate: true })
+        setisVerifiedMessage(result.message)
+        return true // 유효한 경우 true 반환
+      } else if (result.isValid === false) {
+        setisVerifiedMessage(result.message)
+        return result.message || '유효성 검사에 실패했습니다.' // 유효하지 않은 경우 오류 메시지 반환
+      }
     }
   }, [inputValue, validationFunction, setValue])
 

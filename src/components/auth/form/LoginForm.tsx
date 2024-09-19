@@ -7,6 +7,8 @@ import { LoginFormValues } from '@/models/auth'
 import Form from '../../shared/Form'
 import Button from '../../shared/Button'
 import { toast } from 'react-toastify'
+import { useUserStore } from '@/store/useUserStore'
+import { useRouter } from 'next/navigation'
 
 /**
  * 유효성검사 에러 메세지 주석
@@ -42,6 +44,10 @@ const loginSchema = z.object({
 })
 
 export function LoginForm() {
+  const setUser = useUserStore(state => state.setUser)
+  const getUserState = useUserStore.getState
+  const router = useRouter()
+
   const onSubmit = async (data: LoginFormValues) => {
     try {
       const response = await fetch(
@@ -72,12 +78,15 @@ export function LoginForm() {
       }
 
       const result = await response.json()
-      console.log('로그인 성공:', result)
+      // console.log('로그인 성공:', result)
       toast.success('로그인 성공!', {
         position: 'top-left',
         autoClose: 3000
       })
+
       localStorage.setItem('token', result.data.token)
+
+      router.push('/')
     } catch (error) {
       // 네트워크 오류 또는 다른 문제가 발생한 경우
       console.log(error)

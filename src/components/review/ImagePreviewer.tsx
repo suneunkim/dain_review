@@ -2,6 +2,7 @@
 
 import React, { useState, useCallback } from 'react'
 import { useDropzone, FileRejection } from 'react-dropzone'
+import Image from 'next/image'
 
 import ClipImage from '@/assets/icons/review/clip.svg'
 import ButtonRemove from '@/assets/icons/review/remove.svg'
@@ -86,11 +87,12 @@ const ImagePreviewer: React.FC<ImagePreviewerProps> = ({
             key={index}
             className="relative mr-4 flex-shrink-0"
             style={{ width: '180px' }}>
-            <img
+            <Image
               src={URL.createObjectURL(file)}
               alt={`Preview ${index}`}
+              width={180}
+              height={150}
               className="rounded border border-gray-300"
-              style={{ width: '180px', height: 'auto' }}
             />
             <button
               type="button"

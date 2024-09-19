@@ -7,6 +7,8 @@ import PageTitle from '@/components/shared/PageTitle'
 import ImagePreviewer from '@/components/review/ImagePreviewer'
 import BlogIcon from '@/assets/icons/review/blog.svg'
 import PointIcon from '@/assets/icons/review/point.svg'
+import Image from 'next/image'
+import Link from 'next/link'
 
 const ExCampaignImage = '/img/campaign.png'
 const ExampleImage = '/img/example.png'
@@ -32,7 +34,10 @@ const Page = () => {
 
   return (
     <main>
-      <Header isLogin />
+      <Header
+        subtitle="리뷰 등록"
+        isLogin
+      />
       <PageTitle
         title="리뷰 등록"
         alignment="center"
@@ -42,9 +47,15 @@ const Page = () => {
         <div className="m-auto mb-[200px] flex w-full max-w-[1400px] flex-col items-center justify-center lg:flex-row lg:items-start">
           {/* 일단 하드코딩함. 카드 컴포넌트로 교체 예정 */}
           <div className="my-[40px] flex size-full max-h-[494px] max-w-[453px] flex-col items-center justify-center rounded-[8px] bg-background-gray p-[24px]">
-            <img
+            {/* <img
               src={ExCampaignImage}
               alt="Example Campaign"
+            /> */}
+            <Image
+              src={ExCampaignImage}
+              alt="Example Campaign"
+              width={405}
+              height={248}
             />
             <h4 className="mb-[14px] mt-[24px] w-full text-left text-heading-4 font-[700]">
               다인카페 체험단 모집합니다
@@ -53,7 +64,7 @@ const Page = () => {
               음료 메뉴 2잔 + 디저트 메뉴 1종 (선택 가능) + 애견 동반 입장료
               무료 (매너벨트 1개 포함)
             </p>
-            <hr className="w-full border-[1px] border-line-neutral" />
+            <hr className="w-full border border-line-neutral" />
             <div className="my-[17px] flex">
               <div className="mr-[16px] flex bg-gray-5">
                 <PointIcon />
@@ -69,7 +80,7 @@ const Page = () => {
                 방문형/맛집
               </div>
             </div>
-            <hr className="w-full border-[1px] border-line-neutral" />
+            <hr className="w-full border border-line-neutral" />
           </div>
           <div className="ml-[20px] mt-[40px] w-full max-w-[927px]">
             <form>
@@ -103,9 +114,15 @@ const Page = () => {
                 &nbsp;&nbsp;키워드로 검색 시 검색되는 본인의 게시물을 캡처해
                 주세요
               </p>
-              <img
+              {/* <img
                 src={ExampleImage}
                 alt="Example Image"
+              /> */}
+              <Image
+                src={ExampleImage}
+                alt="Example Image"
+                width={927}
+                height={510}
               />
               <div className="my-4">
                 <label className="flex items-center">
@@ -116,14 +133,19 @@ const Page = () => {
                     className="mr-2"
                   />
                   <p className="text-body-2">
-                    <span className="text-gray-90 underline">
+                    <Link
+                      href="/legal/privacy-policy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-gray-90 underline">
                       개인정보 수집 및 이용
-                    </span>{' '}
+                    </Link>{' '}
                     <span className="">동의</span>{' '}
                     <span className="text-gray-60">(필수)</span>
                   </p>
                 </label>
               </div>
+
               <button
                 className="mb-[32px] w-full cursor-pointer rounded-[4px] bg-red-main px-[20px] py-[12px] text-white"
                 type="submit"

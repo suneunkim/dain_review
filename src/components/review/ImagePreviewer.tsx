@@ -89,8 +89,8 @@ const ImagePreviewer: React.FC<ImagePreviewerProps> = ({
         className="my-3 cursor-pointer rounded border-2 border-dashed p-4">
         <input {...getInputProps()} />
         <div className="flex h-[68px] w-full items-center justify-center rounded-[4px] text-body-1 text-gray-40">
-          <ClipImage className="mr-[5px]" />
-          <p>
+          <ClipImage className="mr-[5px] flex-shrink-0" />
+          <p className="text-left text-body-1 text-gray-40">
             {isDragActive
               ? '드래그한 파일을 이곳에 놓으세요'
               : '이미지를 드래그 앤 드롭하거나 클릭하여 파일을 선택하세요'}

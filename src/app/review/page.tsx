@@ -80,8 +80,9 @@ const Page = () => {
                 플랫폼에 작성한 리뷰 URL을 입력해 주세요
               </p>
               <input
-                className="mb-[26px] h-[38px] w-full rounded-[4px] border border-line-normal pl-[12px]"
                 required
+                maxLength={300}
+                className="mb-[26px] h-[38px] w-full rounded-[4px] border border-line-normal pl-[12px]"
               />
               <h4 className="text-body-1 font-[800]">
                 파일 선택<strong className="text-red-main">*</strong>

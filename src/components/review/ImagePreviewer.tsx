@@ -64,31 +64,33 @@ const ImagePreviewer: React.FC<ImagePreviewerProps> = ({
     <div>
       <div
         {...getRootProps()}
-        className="cursor-pointer rounded border-2 border-dashed p-4">
+        className="my-3 cursor-pointer rounded border-2 border-dashed p-4">
         <input {...getInputProps()} />
         {isDragActive && (
-          <div className="text-body1r flex h-[68px] w-full items-center justify-center rounded-[4px] text-gray-40">
+          <div className="flex h-[68px] w-full items-center justify-center rounded-[4px] text-body-1 text-gray-40">
             <ClipImage className="mr-[5px]" />
             <p>드래그한 파일을 이곳에 놓으세요</p>
           </div>
         )}
         {!isDragActive && (
-          <div className="text-body1r flex h-[68px] w-full items-center justify-center rounded-[4px] text-gray-40">
+          <div className="flex h-[68px] w-full items-center justify-center rounded-[4px] text-body-1 text-gray-40">
             <ClipImage className="mr-[5px]" />
             <p>이미지를 드래그 앤 드롭하거나 클릭하여 파일을 선택하세요</p>
           </div>
         )}
       </div>
       {errorMessage && <p className="mt-2 text-red-500">{errorMessage}</p>}
-      <div className="mt-4 grid grid-cols-2 gap-2">
+      <div className="flex overflow-x-auto">
         {selectedFiles.map((file, index) => (
           <div
             key={index}
-            className="relative">
+            className="relative mr-4 flex-shrink-0"
+            style={{ width: '180px' }}>
             <img
               src={URL.createObjectURL(file)}
               alt={`Preview ${index}`}
-              className="w-full max-w-[200px] rounded border border-gray-300"
+              className="rounded border border-gray-300"
+              style={{ width: '180px', height: 'auto' }}
             />
             <button
               type="button"
@@ -96,7 +98,8 @@ const ImagePreviewer: React.FC<ImagePreviewerProps> = ({
               onClick={e => {
                 e.stopPropagation() // 이벤트 버블링 방지
                 removeFile(index)
-              }}>
+              }}
+              style={{ zIndex: 10 }}>
               <ButtonRemove />
             </button>
           </div>

@@ -1,29 +1,33 @@
+'use client'
+
 import ProfileImage from '@/assets/icons/auth/ProfileImage.svg'
 import ProfilePoint from '@/assets/icons/auth/ProfilePoint.svg'
 import Button from '@/components/shared/Button'
 
-import SocialInstagramLink from '@/assets/icons/auth/SocialInstagramLink.svg'
-import SocialTikTokLink from '@/assets/icons/auth/SocialTikTokLink.svg'
-import SocialNaverBlogLink from '@/assets/icons/auth/SocialNaverBlogLink.svg'
-import SocialYoutubeLink from '@/assets/icons/auth/SocialYoutubeLink.svg'
-
-import NaverMobile from '@/assets/icons/my-profile/NaverMobile.svg'
-import TiktokMobile from '@/assets/icons/my-profile/TiktokMobile.svg'
-import YoutubeMobile from '@/assets/icons/my-profile/YoutubeMobile.svg'
-import InstagramMobile from '@/assets/icons/my-profile/InstagramMobile.svg'
-
-import Premium from '@/assets/icons/my-profile/Premium.svg'
-import Luxury from '@/assets/icons/my-profile/Luxury.svg'
-import Penalty from '@/assets/icons/my-profile/Penalty.svg'
 import Setting from '@/assets/icons/my-profile/Setting.svg'
 
 import Arrow from '@/assets/icons/my-profile/Arrow.svg'
 import TabMenu from '@/components/shared/TabMenu'
 import Footer from '@/components/shared/Footer'
 
-import BusinessBoard from '@/components/auth/BusinessBoard'
+import StateBoard from '../my-page/StateBoard'
+import ConnectedSNS from '../my-page/ConnectedSNS'
+import { useState } from 'react'
+
+const data = {
+  nickname: '하이파이브',
+  point: 0,
+  instagram: 'instagram.com/highfive',
+  blog: 'blog.naver.com/highfive',
+  youtube: 'https://youtube.com/example',
+  tiktok: ''
+}
 
 const MypageClient = () => {
+  const [isModalOpen, setModalOpen] = useState(false)
+  const handleMouseEnter = () => setModalOpen(true)
+  const handleMouseLeave = () => setModalOpen(false)
+
   return (
     <div className="mx-auto w-full">
       <div className="flex h-[250px] w-full justify-center bg-slate-400 max-lg:bg-white">
@@ -47,7 +51,7 @@ const MypageClient = () => {
                       </p>
                       <p className="mb-2 text-heading-2 font-[400]">
                         <strong className="text-display-2 font-[700]">
-                          하이파이브님
+                          {data.nickname}님
                         </strong>
                         의 포인트는
                       </p>
@@ -57,7 +61,7 @@ const MypageClient = () => {
                           height={40}
                         />
                         <strong className="text-display-2 font-[700] text-red-main">
-                          430,280
+                          {data.point}
                         </strong>
                         입니다.
                       </p>
@@ -78,74 +82,7 @@ const MypageClient = () => {
                   </div>
                 </div>
               </div>
-
-              <div className="box-border px-20">
-                <h4 className="mb-10 text-[22px] font-bold">
-                  다인리뷰와 연결된 SNS
-                </h4>
-                <ul>
-                  <li className="flex items-center gap-2">
-                    <div className="top-[10px] flex h-5 w-5 items-center justify-center overflow-hidden rounded-md">
-                      <SocialInstagramLink
-                        width={20}
-                        height={20}
-                      />
-                    </div>
-                    <input
-                      id="instagram"
-                      type="text"
-                      placeholder="instagram.com/highfive"
-                      value={'instagram.com/highfive'}
-                      className="w-[189px] text-[18px]"
-                    />
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <div className="top-[10px] flex h-5 w-5 items-center justify-center overflow-hidden rounded-md">
-                      <SocialNaverBlogLink
-                        width={20}
-                        height={20}
-                      />
-                    </div>
-                    <input
-                      id="instagram"
-                      type="text"
-                      placeholder="instagram.com/highfive"
-                      value={'instagram.com/highfive'}
-                      className="w-[189px] text-[18px]"
-                    />
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <div className="top-[10px] flex h-5 w-5 items-center justify-center overflow-hidden rounded-md">
-                      <SocialYoutubeLink
-                        width={20}
-                        height={20}
-                      />
-                    </div>
-                    <input
-                      id="instagram"
-                      type="text"
-                      placeholder="instagram.com/highfive"
-                      value={'instagram.com/highfive'}
-                      className="w-[189px] text-[18px]"
-                    />
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <div className="top-[10px] flex h-5 w-5 items-center justify-center overflow-hidden rounded-md">
-                      <SocialTikTokLink
-                        width={20}
-                        height={20}
-                      />
-                    </div>
-                    <input
-                      id="instagram"
-                      type="text"
-                      placeholder="instagram.com/highfive"
-                      value={'instagram.com/highfive'}
-                      className="w-[189px] text-[18px]"
-                    />
-                  </li>
-                </ul>
-              </div>
+              <ConnectedSNS isMobile={false} />
             </div>
           </div>
         </section>
@@ -162,7 +99,7 @@ const MypageClient = () => {
               <div className="ml-4">
                 <h4 className="text-xs font-[400] text-gray-60">인플루언서</h4>
                 <div className="flex items-center gap-1">
-                  <h2 className="text-lg font-[700]">하이파이브님</h2>
+                  <h2 className="text-lg font-[700]">{data.nickname}님</h2>
                   <Setting
                     width={17}
                     height={16}
@@ -180,64 +117,15 @@ const MypageClient = () => {
                   보유 포인트
                 </p>
                 <p className="text-lg font-bold">
-                  457,870 <span className="text-lg font-normal">P</span>
+                  {data.point} <span className="text-lg font-normal">P</span>
                 </p>
               </div>
               <button className="rounded-md bg-gray-100 px-6 py-2 text-black">
                 출금하기
               </button>
             </div>
-            <div className="mt-6 w-full rounded-[4px] border-[1px] pt-4">
-              <h3 className="mb-2 border-b px-2 text-center font-[500] text-black">
-                다인리뷰와 연결된 SNS
-              </h3>
-              <div className="box-border flex items-center justify-around px-2 py-2">
-                <div className="flex flex-col items-center gap-4">
-                  <InstagramMobile
-                    width={20}
-                    height={20}
-                  />
-                  <span className="flex items-center gap-1 rounded-[4px] bg-gray-5 px-1 py-[2px] text-[10px]">
-                    프리미어
-                    <Premium
-                      width={16}
-                      height={16}
-                    />
-                  </span>
-                </div>
-                <div className="flex flex-col items-center gap-4">
-                  <YoutubeMobile
-                    width={20}
-                    height={20}
-                  />
-                  <span className="flex items-center gap-1 rounded-[4px] bg-gray-5 px-1 py-[2px] text-[10px]">
-                    고급
-                    <Luxury
-                      width={16}
-                      height={16}
-                    />
-                  </span>
-                </div>
-                <div className="w text-gray-500">
-                  <NaverMobile
-                    width={20}
-                    height={20}
-                  />
-                </div>
-                <div className="w text-gray-500">
-                  <TiktokMobile
-                    width={20}
-                    height={20}
-                  />
-                </div>
-                <div className="w text-gray-500">
-                  <YoutubeMobile
-                    width={20}
-                    height={20}
-                  />
-                </div>
-              </div>
-            </div>
+
+            <ConnectedSNS isMobile />
           </div>
         </div>
       </div>
@@ -258,8 +146,12 @@ const MypageClient = () => {
         </div>
 
         {/* 테이블 */}
-        {/* <MyActivityDashboard /> */}
-        <BusinessBoard />
+        <StateBoard
+          isModalOpen={isModalOpen}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        />
+
         <TabMenu />
       </div>
       <Footer />

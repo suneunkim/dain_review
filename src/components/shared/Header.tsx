@@ -9,7 +9,7 @@ import SearchButton from '../header/SearchButton'
 import BackButton from '../header/BackButton'
 import LogoIconBlack from '@/assets/icons/home/logo-icon-black.svg'
 import Link from 'next/link'
-import { useUserStore } from '@/store/useUserStore'
+import { useUserStore } from '@/store'
 import useUserInfo from '@/hooks/useUserInfo'
 interface Props {
   isLogin?: boolean

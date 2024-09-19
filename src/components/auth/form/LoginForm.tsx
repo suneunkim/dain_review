@@ -7,7 +7,7 @@ import { LoginFormValues } from '@/models/auth'
 import Form from '../../shared/Form'
 import Button from '../../shared/Button'
 import { toast } from 'react-toastify'
-import { useUserStore } from '@/store/useUserStore'
+import { useUserStore } from '@/store'
 import { useRouter } from 'next/navigation'
 
 /**

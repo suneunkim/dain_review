@@ -1,11 +1,16 @@
-import { useHamburgerModalStore } from '@/store'
+'use client'
+
+import { useHamburgerModalStore, useUserStore } from '@/store'
 import Image from 'next/image'
 import ArrowRight from '@/assets/icons/home/mobile/mobile-arrow-right.svg'
 import Link from 'next/link'
+import useLogout from '@/hooks/useLogout'
 
 const HamburgerMenuModal = () => {
-  const isLogin = true
   const { HamburderCloseModal } = useHamburgerModalStore()
+  const { name } = useUserStore()
+
+  const logout = useLogout()
 
   const handleLinkClick = () => {
     HamburderCloseModal() // 모달 닫기
@@ -28,14 +33,16 @@ const HamburgerMenuModal = () => {
             priority
           />
           <div className="py-3 text-body-1 font-bold text-gray-80">
-            {isLogin ? (
+            {name ? (
               <>
-                <span>하이파이브</span>
+                <span>{name}</span>
                 <span className="font-medium">님 환영합니다</span>
               </>
             ) : (
               <div className="flex items-center justify-center gap-2">
-                <button>로그인/회원가입</button>
+                <Link href="/auth/login">
+                  <button>로그인/회원가입</button>
+                </Link>
                 <ArrowRight />
               </div>
             )}
@@ -83,8 +90,10 @@ const HamburgerMenuModal = () => {
             <div className="border-b border-line-neutral py-5">대행사 신청</div>
           </Link>
         </section>
-        {isLogin && (
-          <button className="text-b1 mb-[34px] mt-10 w-full px-4 text-center text-gray-40">
+        {name && (
+          <button
+            onClick={logout}
+            className="text-b1 mb-[34px] mt-10 w-full px-4 text-center text-gray-40">
             로그아웃
           </button>
         )}

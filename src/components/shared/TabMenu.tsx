@@ -46,8 +46,11 @@ const TabMenu = () => {
       {/* Tab Content */}
       <div className="grid grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-4 lg:gap-x-5 lg:gap-y-10">
         {/* Example content - Replace with actual content */}
-        {[...Array(8)].map((_, index) => (
-          <ProductCard flag={'premium'} />
+        {[...Array(2)].map((_, index) => (
+          <ProductCard
+            key={index}
+            flag={'premium'}
+          />
         ))}
       </div>
 

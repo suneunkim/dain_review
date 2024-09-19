@@ -43,14 +43,14 @@ export function FindPwForm() {
         name={'전화번호'}
         require={false}
         placeholder="‘-’ 없이 숫자만 작성"
-        children={'인증'}
         showIcon={false}
         validationFunction={function (
           value: string
         ): Promise<{ isValid: boolean | null; message: string }> {
           throw new Error('Function not implemented.')
-        }}
-      />
+        }}>
+        인증
+      </CertifyField>
       <Button
         className="mt-6 h-[57px] w-full text-lg font-bold"
         variant="solid_primary_red">

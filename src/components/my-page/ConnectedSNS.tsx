@@ -21,7 +21,7 @@ interface Props {
   isMobile: boolean
 }
 
-const ConnectedSNS = ({isMobile}:Props) => {
+const ConnectedSNS = ({ isMobile }: Props) => {
   if (isMobile) {
     return (
       <div className="mt-6 w-full rounded border px-4 py-[10px] lg:hidden">

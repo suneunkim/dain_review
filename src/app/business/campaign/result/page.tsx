@@ -143,7 +143,7 @@ const page = () => {
                   </h4>
                 </div>
               </div>
-              <div className="aspect-w-16 aspect-h-9 rounded-[4px] border border-gray-0 bg-gray-0">
+              <div className="aspect-h-9 aspect-w-16 rounded-[4px] border border-gray-0 bg-gray-0">
                 <ReportChart data={data} />
               </div>
             </div>

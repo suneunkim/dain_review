@@ -93,7 +93,11 @@ const Page = () => {
                 <br />
                 10MB 이하의 이미지 파일 10개까지 업로드 가능합니다
               </p>
-              <ImagePreviewer onFileSelect={handleFileSelect} />
+              <ImagePreviewer
+                onFileSelect={handleFileSelect}
+                maxFiles={10}
+                maxSize={10}
+              />
               <p className="my-[5px] text-body-2 text-gray-60">
                 <strong className="text-gray-60">예시화면</strong>
                 &nbsp;&nbsp;키워드로 검색 시 검색되는 본인의 게시물을 캡처해

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { useDropzone, FileRejection } from 'react-dropzone'
 import Image from 'next/image'
 
@@ -19,6 +19,7 @@ const ImagePreviewer: React.FC<ImagePreviewerProps> = ({
   maxSize
 }) => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([])
+  const [previewUrls, setPreviewUrls] = useState<string[]>([]) // 미리보기 URL
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const onDrop = useCallback(
@@ -28,14 +29,12 @@ const ImagePreviewer: React.FC<ImagePreviewerProps> = ({
         return
       }
 
-      setSelectedFiles(prevFiles => {
-        const newFiles = [...prevFiles, ...acceptedFiles].slice(0, maxFiles)
-        onFileSelect(newFiles)
-        return newFiles
-      })
+      const newFiles = [...selectedFiles, ...acceptedFiles].slice(0, maxFiles)
+      setSelectedFiles(newFiles)
+      onFileSelect(newFiles)
       setErrorMessage(null)
     },
-    [maxFiles, selectedFiles.length, onFileSelect]
+    [maxFiles, selectedFiles, onFileSelect]
   )
 
   const onDropRejected = useCallback(
@@ -49,13 +48,24 @@ const ImagePreviewer: React.FC<ImagePreviewerProps> = ({
     [maxSize]
   )
 
-  const removeFile = (index: number) => {
-    setSelectedFiles(prevFiles => {
-      const newFiles = prevFiles.filter((_, i) => i !== index)
+  const removeFile = useCallback(
+    (index: number) => {
+      const newFiles = selectedFiles.filter((_, i) => i !== index)
+      setSelectedFiles(newFiles)
       onFileSelect(newFiles)
-      return newFiles
-    })
-  }
+    },
+    [selectedFiles, onFileSelect]
+  )
+
+  // 미리보기 URL 생성 및 메모리 해제
+  useEffect(() => {
+    const newPreviews = selectedFiles.map(file => URL.createObjectURL(file))
+    setPreviewUrls(newPreviews)
+
+    return () => {
+      newPreviews.forEach(url => URL.revokeObjectURL(url))
+    }
+  }, [selectedFiles])
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -78,28 +88,26 @@ const ImagePreviewer: React.FC<ImagePreviewerProps> = ({
         {...getRootProps()}
         className="my-3 cursor-pointer rounded border-2 border-dashed p-4">
         <input {...getInputProps()} />
-        {isDragActive && (
-          <div className="flex h-[68px] w-full items-center justify-center rounded-[4px] text-body-1 text-gray-40">
-            <ClipImage className="mr-[5px]" />
-            <p>드래그한 파일을 이곳에 놓으세요</p>
-          </div>
-        )}
-        {!isDragActive && (
-          <div className="flex h-[68px] w-full items-center justify-center rounded-[4px] text-body-1 text-gray-40">
-            <ClipImage className="mr-[5px]" />
-            <p>이미지를 드래그 앤 드롭하거나 클릭하여 파일을 선택하세요</p>
-          </div>
-        )}
+        <div className="flex h-[68px] w-full items-center justify-center rounded-[4px] text-body-1 text-gray-40">
+          <ClipImage className="mr-[5px]" />
+          <p>
+            {isDragActive
+              ? '드래그한 파일을 이곳에 놓으세요'
+              : '이미지를 드래그 앤 드롭하거나 클릭하여 파일을 선택하세요'}
+          </p>
+        </div>
       </div>
+
       {errorMessage && <p className="mt-2 text-red-500">{errorMessage}</p>}
+
       <div className="flex overflow-x-auto">
-        {selectedFiles.map((file, index) => (
+        {previewUrls.map((previewUrl, index) => (
           <div
             key={index}
             className="relative mr-4 flex-shrink-0"
             style={{ width: '180px' }}>
             <Image
-              src={URL.createObjectURL(file)}
+              src={previewUrl}
               alt={`Preview ${index}`}
               width={180}
               height={150}
@@ -109,7 +117,7 @@ const ImagePreviewer: React.FC<ImagePreviewerProps> = ({
               type="button"
               className="absolute right-0 top-0 p-1 text-red-500"
               onClick={e => {
-                e.stopPropagation() // 이벤트 버블링 방지
+                e.stopPropagation()
                 removeFile(index)
               }}
               style={{ zIndex: 10 }}>

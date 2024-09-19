@@ -9,14 +9,14 @@ import ButtonRemove from '@/assets/icons/review/remove.svg'
 
 interface ImagePreviewerProps {
   onFileSelect: (files: File[]) => void
-  maxFiles?: number // 최대 파일 개수
-  maxSize?: number // 최대 파일 크기 (MB 단위)
+  maxFiles: number // 최대 파일 개수
+  maxSize: number // 최대 파일 크기 (MB 단위)
 }
 
 const ImagePreviewer: React.FC<ImagePreviewerProps> = ({
   onFileSelect,
-  maxFiles = 10, // 기본값 10개
-  maxSize = 10 // 기본값 10MB
+  maxFiles,
+  maxSize
 }) => {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([])
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -24,7 +24,7 @@ const ImagePreviewer: React.FC<ImagePreviewerProps> = ({
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       if (acceptedFiles.length + selectedFiles.length > maxFiles) {
-        setErrorMessage('파일은 최대 10개까지 첨부할 수 있습니다.')
+        setErrorMessage(`파일은 최대 ${maxFiles}개까지 첨부할 수 있습니다.`)
         return
       }
 
@@ -38,13 +38,16 @@ const ImagePreviewer: React.FC<ImagePreviewerProps> = ({
     [maxFiles, selectedFiles.length, onFileSelect]
   )
 
-  const onDropRejected = useCallback((rejectedFiles: FileRejection[]) => {
-    rejectedFiles.forEach(rejection => {
-      if (rejection.errors.some(e => e.code === 'file-too-large')) {
-        setErrorMessage('10MB 이하의 파일만 업로드할 수 있습니다.')
-      }
-    })
-  }, [])
+  const onDropRejected = useCallback(
+    (rejectedFiles: FileRejection[]) => {
+      rejectedFiles.forEach(rejection => {
+        if (rejection.errors.some(e => e.code === 'file-too-large')) {
+          setErrorMessage(`${maxSize}MB 이하의 파일만 업로드할 수 있습니다.`)
+        }
+      })
+    },
+    [maxSize]
+  )
 
   const removeFile = (index: number) => {
     setSelectedFiles(prevFiles => {

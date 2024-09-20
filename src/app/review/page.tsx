@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import Header from '@/components/shared/Header'
 import Footer from '@/components/shared/Footer'
 import PageTitle from '@/components/shared/PageTitle'
@@ -16,7 +18,6 @@ const ExampleImage = '/img/example.png'
 
 // 리뷰 등록: 인플루언서의 체험단 리뷰 등록 및 결과 보고 작성 페이지
 // 홈 - 마이페이지(인플루언서) - 리뷰 등록
-
 interface FormData {
   reviewUrl: string
   isAgreed: boolean
@@ -25,7 +26,6 @@ interface FormData {
 const Page = () => {
   const [files, setFiles] = useState<File[]>([])
   const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
 
   const {
     register,
@@ -40,18 +40,19 @@ const Page = () => {
   const handleFileSelect = (selectedFiles: File[]) => {
     setFiles(selectedFiles)
     if (selectedFiles.length > 0) {
-      setError(null) // 파일 선택 시 에러 초기화
+      toast.dismiss() // 파일 선택 시 에러 토스트 닫기
     }
   }
 
   const onSubmit = async (data: FormData) => {
+    // 파일 선택 여부 검사
     if (files.length === 0) {
-      setError('이미지 파일을 선택해 주세요.')
+      toast.error('이미지 파일을 선택해 주세요.')
       return
     }
 
     setLoading(true)
-    setError(null)
+    toast.dismiss() // 이전 에러 메시지 제거
 
     const formData = new FormData()
     formData.append('reviewUrl', data.reviewUrl)
@@ -72,13 +73,29 @@ const Page = () => {
         throw new Error('리뷰 등록에 실패했습니다.')
       }
 
-      alert('리뷰가 성공적으로 등록되었습니다.')
+      toast.success('리뷰가 성공적으로 등록되었습니다.')
       reset() // 폼 리셋
       setFiles([]) // 첨부된 파일 리셋
     } catch (error: any) {
-      setError(error.message || '리뷰 등록 중 오류가 발생했습니다.')
+      toast.error(error.message || '리뷰 등록 중 오류가 발생했습니다.')
     } finally {
       setLoading(false)
+    }
+  }
+
+  // 유효성 검사 실패 시 에러를 즉시 토스트로 출력
+  const onError = (errors: any) => {
+    if (errors.reviewUrl) {
+      toast.error(errors.reviewUrl.message)
+    }
+
+    // 파일 선택 여부 확인 (errors와 별개로 체크)
+    if (files.length === 0) {
+      toast.error('이미지 파일을 선택해 주세요.')
+    }
+
+    if (errors.isAgreed) {
+      toast.error(errors.isAgreed.message)
     }
   }
 
@@ -129,7 +146,7 @@ const Page = () => {
             <hr className="w-full border border-line-neutral" />
           </div>
           <div className="ml-[20px] mt-[40px] w-full max-w-[927px]">
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={handleSubmit(onSubmit, onError)}>
               <h4 className="text-body-1 font-[800]">
                 리뷰 URL<strong className="text-red-main">*</strong>
               </h4>
@@ -143,12 +160,6 @@ const Page = () => {
                 maxLength={300}
                 className="mb-[26px] h-[38px] w-full rounded-[4px] border border-line-normal pl-[12px]"
               />
-              {errors.reviewUrl && (
-                <p className="text-red-500">{errors.reviewUrl.message}</p>
-              )}
-              {/* 리뷰 URL 입력 중 300자를 초과하는 경우, 
-              '해당 플랫폼에서 제공하는 [공유하기] 또는 [URL 복사] 기능을 이용하여 게시글의 원주소를 입력해 주세요' 
-              얼럿 메시지 출력하는 것은 어떤지? */}
               <h4 className="text-body-1 font-[800]">
                 파일 선택<strong className="text-red-main">*</strong>
               </h4>
@@ -163,7 +174,6 @@ const Page = () => {
                 maxFiles={10}
                 maxSize={10}
               />
-              {error && <p className="text-red-500">{error}</p>}
               <p className="mb-[12px] mt-[24px] text-body-2 text-gray-60">
                 <strong className="text-gray-60">예시화면</strong>
                 &nbsp;&nbsp;키워드로 검색 시 검색되는 본인의 게시물을 캡처해
@@ -201,9 +211,6 @@ const Page = () => {
                   </p>
                 </label>
               </div>
-              {errors.isAgreed && (
-                <p className="text-red-500">{errors.isAgreed.message}</p>
-              )}
               <button
                 className="mb-[32px] w-full cursor-pointer rounded-[4px] bg-red-main px-[20px] py-[12px] text-white"
                 type="submit"
@@ -215,6 +222,18 @@ const Page = () => {
         </div>
       </div>
       <Footer />
+      <ToastContainer
+        toastStyle={{
+          backgroundColor: '#19191B',
+          color: '#030303',
+          minWidth: '400px'
+        }}
+        hideProgressBar={true} // 진행시간 바 숨김처리
+        icon={false} // 아이콘 숨김처리
+        pauseOnFocusLoss={false}
+        position="bottom-center"
+        autoClose={3000}
+      />
     </main>
   )
 }

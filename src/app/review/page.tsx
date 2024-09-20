@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import Header from '@/components/shared/Header'
 import Footer from '@/components/shared/Footer'
 import PageTitle from '@/components/shared/PageTitle'
@@ -16,21 +17,70 @@ const ExampleImage = '/img/example.png'
 // 리뷰 등록: 인플루언서의 체험단 리뷰 등록 및 결과 보고 작성 페이지
 // 홈 - 마이페이지(인플루언서) - 리뷰 등록
 
+interface FormData {
+  reviewUrl: string
+  isAgreed: boolean
+}
+
 const Page = () => {
-  const [isAgreed, setIsAgreed] = useState(false)
   const [files, setFiles] = useState<File[]>([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    watch
+  } = useForm<FormData>()
+
+  const isAgreed = watch('isAgreed', false) // 체크박스 상태 확인
 
   const handleFileSelect = (selectedFiles: File[]) => {
     setFiles(selectedFiles)
+    if (selectedFiles.length > 0) {
+      setError(null) // 파일 선택 시 에러 초기화
+    }
   }
 
-  const handleAgreementChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setIsAgreed(event.target.checked)
-  }
+  const onSubmit = async (data: FormData) => {
+    if (files.length === 0) {
+      setError('이미지 파일을 선택해 주세요.')
+      return
+    }
 
-  const isSubmitDisabled = !isAgreed || files.length === 0
+    setLoading(true)
+    setError(null)
+
+    const formData = new FormData()
+    formData.append('reviewUrl', data.reviewUrl)
+    files.forEach((file, index) => {
+      formData.append(`file${index + 1}`, file)
+    })
+
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/inf/review`,
+        {
+          method: 'POST',
+          body: formData
+        }
+      )
+
+      if (!response.ok) {
+        throw new Error('리뷰 등록에 실패했습니다.')
+      }
+
+      alert('리뷰가 성공적으로 등록되었습니다.')
+      reset() // 폼 리셋
+      setFiles([]) // 첨부된 파일 리셋
+    } catch (error: any) {
+      setError(error.message || '리뷰 등록 중 오류가 발생했습니다.')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <main>
@@ -79,7 +129,7 @@ const Page = () => {
             <hr className="w-full border border-line-neutral" />
           </div>
           <div className="ml-[20px] mt-[40px] w-full max-w-[927px]">
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <h4 className="text-body-1 font-[800]">
                 리뷰 URL<strong className="text-red-main">*</strong>
               </h4>
@@ -87,10 +137,15 @@ const Page = () => {
                 플랫폼에 작성한 리뷰 URL을 입력해 주세요
               </p>
               <input
-                required
+                {...register('reviewUrl', {
+                  required: '리뷰 URL을 입력해 주세요'
+                })}
                 maxLength={300}
                 className="mb-[26px] h-[38px] w-full rounded-[4px] border border-line-normal pl-[12px]"
               />
+              {errors.reviewUrl && (
+                <p className="text-red-500">{errors.reviewUrl.message}</p>
+              )}
               {/* 리뷰 URL 입력 중 300자를 초과하는 경우, 
               '해당 플랫폼에서 제공하는 [공유하기] 또는 [URL 복사] 기능을 이용하여 게시글의 원주소를 입력해 주세요' 
               얼럿 메시지 출력하는 것은 어떤지? */}
@@ -108,6 +163,7 @@ const Page = () => {
                 maxFiles={10}
                 maxSize={10}
               />
+              {error && <p className="text-red-500">{error}</p>}
               <p className="mb-[12px] mt-[24px] text-body-2 text-gray-60">
                 <strong className="text-gray-60">예시화면</strong>
                 &nbsp;&nbsp;키워드로 검색 시 검색되는 본인의 게시물을 캡처해
@@ -123,8 +179,9 @@ const Page = () => {
                 <label className="flex items-center">
                   <input
                     type="checkbox"
-                    checked={isAgreed}
-                    onChange={handleAgreementChange}
+                    {...register('isAgreed', {
+                      required: '개인정보 수집 및 이용에 동의해 주세요.'
+                    })}
                     className="mr-2"
                   />
                   <p className="text-body-2">
@@ -144,12 +201,14 @@ const Page = () => {
                   </p>
                 </label>
               </div>
-
+              {errors.isAgreed && (
+                <p className="text-red-500">{errors.isAgreed.message}</p>
+              )}
               <button
                 className="mb-[32px] w-full cursor-pointer rounded-[4px] bg-red-main px-[20px] py-[12px] text-white"
                 type="submit"
-                disabled={isSubmitDisabled}>
-                제출
+                disabled={loading}>
+                {loading ? '제출 중...' : '제출'}
               </button>
             </form>
           </div>

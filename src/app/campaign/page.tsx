@@ -4,15 +4,24 @@ import Header from '@/components/shared/Header'
 import { fetchCampaignList } from '@/lib/api'
 
 const page = async ({ searchParams }: any) => {
-  const { searchWord, platformSeq, typeSeq, categorySeq, orderParam } =
-    searchParams
+  const {
+    searchWord,
+    platformSeq,
+    typeSeq,
+    categorySeq,
+    orderParam,
+    districts,
+    city
+  } = searchParams
 
   const data = await fetchCampaignList({
     categorySeq: categorySeq || '',
     searchWord: searchWord || '',
     platformSeq: platformSeq || '',
     typeSeq: typeSeq || '',
-    orderParam: orderParam || '' // 필요한 경우 기본값 지정
+    orderParam: orderParam || '',
+    districts: districts || '',
+    city: city || ''
   })
 
   return (

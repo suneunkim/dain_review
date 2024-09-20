@@ -16,10 +16,12 @@ export const fetchCampaignList = async ({
   searchWord,
   platformSeq,
   typeSeq,
-  orderParam
+  orderParam,
+  city,
+  districts
 }: any) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/campaign?status=3&categorySeq=${categorySeq}&searchWord=${searchWord}&platformSeq=${platformSeq}&typeSeq=${typeSeq}&orderParam=${orderParam}`,
+    `${process.env.NEXT_PUBLIC_API_URL}/api/campaign?status=3&categorySeq=${categorySeq}&searchWord=${searchWord}&platformSeq=${platformSeq}&typeSeq=${typeSeq}&orderParam=${orderParam}&city=${city}&districts=${districts}`,
     {
       cache: 'no-store'
     }

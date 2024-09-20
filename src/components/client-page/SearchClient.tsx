@@ -1,8 +1,6 @@
 'use client'
 
-import { useState } from 'react'
 import { useSearchFilterBoxStore } from '@/store'
-
 import SegmentProductCard from '../home/product/SegmentProductCard'
 import MobileSearchResult from '../search/MobileSearchResult'
 import SearchForm from '../search/SearchForm'
@@ -10,6 +8,7 @@ import LocationModal from '../modal/search-modal/search-filter-box-inner-modal/L
 import FilterModal from '../modal/search-modal/search-filter-box-inner-modal/FilterModal'
 import { locations } from '@/data/locations'
 import useLocationFilter from '@/hooks/useLocationFilter'
+
 import XIcon from '@/assets/icons/home/mobile/mobile-x-icon.svg'
 import DropdownFilter from '../modal/search-modal/DropdownFilter'
 import DeskTopSearchFilter from '../search/DeskTopSearchFilter'
@@ -17,8 +16,9 @@ import { useRouter } from 'next/navigation'
 import { CampaignProps } from '@/models/campaignList'
 
 // MoreButton에 쿼리파라미터 추가해서 보내기 types=premium
-interface QueryFilters {
-  cities: string[]
+type LocationData = {
+  city: string
+  districts: string[]
 }
 
 interface Props {
@@ -29,36 +29,76 @@ interface Props {
 const SearchClient = ({ keyword = '', data }: Props) => {
   const router = useRouter()
   const { isLocationModalOpen, isFilterModalOpen } = useSearchFilterBoxStore()
-  const [queryFilters, setQueryFilters] = useState<QueryFilters>({
-    cities: [] // ['서울-강남구']
-  })
 
   const {
     selectedCity,
-    selectedLocations,
+    selectedDistricts,
     handleCityClick,
     handleDistrictClick,
     removeLocation,
     handleReset
   } = useLocationFilter()
 
-  const handleCityChange = (locations: [string, string][]) => {
-    setQueryFilters(prev => ({
-      ...prev,
-      cities: locations.map(([city, district]) => `${city}-${district}`) // 튜플을 '서울-강남구' 형식으로 변환
-    }))
-  }
-
-  console.log(queryFilters.cities)
-
   const onSubmit = ({ searchTerm }: { searchTerm: string }) => {
     router.push(`/campaign?searchWord=${searchTerm}`)
+  }
+
+  // 모바일 지역 선택 모달에서 확인 누르면 쿼리 파라미터 보냄
+  const handleConfirmLocation = (location: LocationData) => {
+    const { city, districts } = location
+
+    // 도시 ID 찾기 (서울 1 부산 2)
+    const selectedLocation = locations.find(loc => loc.city === city)
+    if (!selectedLocation) return
+
+    const cityId = locations.indexOf(selectedLocation)
+
+    let queryParams = new URLSearchParams()
+    if (districts[0] === `${city} 전체`) {
+      // `${city} 전체`로 비교
+      queryParams.set('city', cityId.toString())
+    } else {
+      const filteredDistricts = districts.filter(
+        dist => dist !== `${city} 전체`
+      )
+      queryParams.set('districts', filteredDistricts.join(','))
+      queryParams.set('city', cityId.toString())
+    }
+
+    router.push(`/campaign?${queryParams.toString()}`)
+  }
+
+  // 웹에서 하위 지역 선택 시 쿼리 파라미터 보냄
+  const handleDistrictSelect = (district: string) => {
+    if (selectedDistricts.includes(district)) {
+      // 선택 해제 시
+      const updatedDistricts = selectedDistricts.filter(
+        dist => dist !== district
+      )
+
+      // 쿼리 파라미터 업데이트
+      handleConfirmLocation({ city: selectedCity, districts: updatedDistricts })
+    } else {
+      if (district === `${selectedCity} 전체`) {
+        // 전체 클릭 시 도시 ID만 쿼리 파라미터로 보냄
+        handleConfirmLocation({ city: selectedCity, districts: [district] })
+      } else {
+        // 구 클릭 시 해당 구를 선택하고 바로 쿼리 파라미터를 설정
+        handleDistrictClick(district)
+        handleConfirmLocation({
+          city: selectedCity,
+          districts: [...selectedDistricts, district]
+        })
+      }
+    }
   }
 
   return (
     <div className="relative">
       {/* 모바일 지역과 필터 모달 */}
-      {isLocationModalOpen && <LocationModal onChange={handleCityChange} />}
+      {isLocationModalOpen && (
+        <LocationModal onChange={handleConfirmLocation} />
+      )}
       {isFilterModalOpen && <FilterModal keyword={keyword} />}
 
       <SearchForm
@@ -72,8 +112,8 @@ const SearchClient = ({ keyword = '', data }: Props) => {
           keyword={keyword}
         />
       </div>
-      {/* 웹 검색 필터와 결과 */}
       <section className="mx-auto mb-28 hidden max-w-[1400px] px-4 lg:block">
+        {/* 도시 선택 */}
         <ul className="mt-12 grid grid-cols-9 gap-[10px] desktop:flex">
           {locations.map(location => (
             <li
@@ -84,17 +124,17 @@ const SearchClient = ({ keyword = '', data }: Props) => {
             </li>
           ))}
         </ul>
-        <ul className="my-5 grid grid-cols-10 border-b border-t py-3">
+        {/* 도시 하위 지역 선택 */}
+        <ul
+          className={`my-5 grid grid-cols-10 border-t py-3 ${selectedCity && 'border-b'} `}>
           {locations
             .find(location => location.city === selectedCity)
             ?.districts.map(district => {
-              const isSelected = selectedLocations.some(
-                ([city, dist]) => city === selectedCity && dist === district
-              )
+              const isSelected = selectedDistricts.includes(district)
               // 선택된 도시와 구의 조합이 존재하는지 확인
               return (
                 <li
-                  onClick={() => handleDistrictClick(district)}
+                  onClick={() => handleDistrictSelect(district)}
                   key={district}
                   className={`min-w-[100px] cursor-pointer gap-4 px-4 py-2 text-center text-body-2 text-gray-60 ${isSelected && 'text-red-main'} `}>
                   {district}
@@ -104,14 +144,14 @@ const SearchClient = ({ keyword = '', data }: Props) => {
         </ul>
         {/* 선택된 지역 보여주는 UI */}
         <ul className="flex h-[28px] gap-1 px-4">
-          {selectedLocations.map(([city, district]) => (
+          {selectedDistricts.map(district => (
             <li
-              key={`${city}-${district}`}
+              key={district}
               className="flex items-center gap-[7px] rounded-2xl border px-3 py-[2px]">
               <span className="min-w-min whitespace-nowrap text-body-2 text-gray-40">
-                {city} {district}
+                {district}
               </span>
-              <button onClick={() => removeLocation(city, district)}>
+              <button onClick={() => removeLocation(district)}>
                 <XIcon />
               </button>
             </li>

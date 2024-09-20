@@ -47,10 +47,6 @@ const Page = () => {
         <div className="m-auto mb-[200px] flex w-full max-w-[1400px] flex-col items-center justify-center lg:flex-row lg:items-start">
           {/* 일단 하드코딩함. 카드 컴포넌트로 교체 예정 */}
           <div className="my-[40px] flex size-full max-h-[494px] max-w-[453px] flex-col items-center justify-center rounded-[8px] bg-background-gray p-[24px]">
-            {/* <img
-              src={ExCampaignImage}
-              alt="Example Campaign"
-            /> */}
             <Image
               src={ExCampaignImage}
               alt="Example Campaign"
@@ -95,6 +91,9 @@ const Page = () => {
                 maxLength={300}
                 className="mb-[26px] h-[38px] w-full rounded-[4px] border border-line-normal pl-[12px]"
               />
+              {/* 리뷰 URL 입력 중 300자를 초과하는 경우, 
+              '해당 플랫폼에서 제공하는 [공유하기] 또는 [URL 복사] 기능을 이용하여 게시글의 원주소를 입력해 주세요' 
+              얼럿 메시지 출력하는 것은 어떤지? */}
               <h4 className="text-body-1 font-[800]">
                 파일 선택<strong className="text-red-main">*</strong>
               </h4>
@@ -109,22 +108,18 @@ const Page = () => {
                 maxFiles={10}
                 maxSize={10}
               />
-              <p className="my-[5px] text-body-2 text-gray-60">
+              <p className="mb-[12px] mt-[24px] text-body-2 text-gray-60">
                 <strong className="text-gray-60">예시화면</strong>
                 &nbsp;&nbsp;키워드로 검색 시 검색되는 본인의 게시물을 캡처해
                 주세요
               </p>
-              {/* <img
-                src={ExampleImage}
-                alt="Example Image"
-              /> */}
               <Image
                 src={ExampleImage}
                 alt="Example Image"
                 width={927}
                 height={510}
               />
-              <div className="my-4">
+              <div className="my-[32px]">
                 <label className="flex items-center">
                   <input
                     type="checkbox"
@@ -137,11 +132,15 @@ const Page = () => {
                       href="/legal/privacy-policy"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-90 underline">
+                      className="text-body-2 font-[700] text-gray-90 underline">
                       개인정보 수집 및 이용
                     </Link>{' '}
-                    <span className="">동의</span>{' '}
-                    <span className="text-gray-60">(필수)</span>
+                    <span className="text-body-2 font-[500] text-gray-90">
+                      동의
+                    </span>{' '}
+                    <span className="text-body-2 font-[300] text-gray-40">
+                      (필수)
+                    </span>
                   </p>
                 </label>
               </div>

@@ -34,7 +34,7 @@ const Input: React.FC<InputProps> = ({
   return (
     <div className="relative w-full">
       {icon ? (
-        <div className="absolute left-3 top-[10px] flex h-5 w-5 items-center justify-center overflow-hidden rounded-md">
+        <div className="absolute left-3 top-[10px] flex size-5 items-center justify-center overflow-hidden rounded-md">
           {icon}
         </div>
       ) : null}

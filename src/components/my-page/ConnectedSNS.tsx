@@ -28,7 +28,7 @@ const ConnectedSNS = ({ isMobile }: Props) => {
         <h3 className="mb-2 border-b px-2 font-[500] text-black">
           다인리뷰와 연결된 SNS
         </h3>
-        <div className="box-border flex items-center justify-around px-2 py-2">
+        <div className="box-border flex items-center justify-around p-2">
           <div className="flex flex-col items-center gap-4">
             <InstagramMobile
               width={24}
@@ -68,7 +68,7 @@ const ConnectedSNS = ({ isMobile }: Props) => {
         <h4 className="mb-10 text-[22px] font-bold">다인리뷰와 연결된 SNS</h4>
         <ul className="flex flex-col gap-[10px] text-heading-5 text-gray-80">
           <li className="flex items-center gap-2">
-            <span className="top-[10px] flex h-5 w-5 items-center justify-center overflow-hidden rounded-md">
+            <span className="top-[10px] flex size-5 items-center justify-center overflow-hidden rounded-md">
               <SocialInstagramLink
                 width={20}
                 height={20}
@@ -83,7 +83,7 @@ const ConnectedSNS = ({ isMobile }: Props) => {
             </span>
           </li>
           <li className="flex items-center gap-2">
-            <span className="flex h-5 w-5 items-center justify-center overflow-hidden rounded-md">
+            <span className="flex size-5 items-center justify-center overflow-hidden rounded-md">
               <SocialNaverBlogLink
                 width={20}
                 height={20}
@@ -98,7 +98,7 @@ const ConnectedSNS = ({ isMobile }: Props) => {
             </span>
           </li>
           <li className="flex items-center gap-2">
-            <span className="top-[10px] flex h-5 w-5 items-center justify-center overflow-hidden rounded-md">
+            <span className="top-[10px] flex size-5 items-center justify-center overflow-hidden rounded-md">
               <SocialYoutubeLink
                 width={20}
                 height={20}
@@ -113,7 +113,7 @@ const ConnectedSNS = ({ isMobile }: Props) => {
             </span>
           </li>
           <li className="flex items-center gap-2">
-            <span className="top-[10px] flex h-5 w-5 items-center justify-center overflow-hidden rounded-md">
+            <span className="top-[10px] flex size-5 items-center justify-center overflow-hidden rounded-md">
               <SocialTikTokLink
                 width={20}
                 height={20}

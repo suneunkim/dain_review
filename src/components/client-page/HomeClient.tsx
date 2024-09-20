@@ -37,7 +37,7 @@ export default function HomeClient() {
         <DeadlineProductContainer />
         <img
           src="home-banner/contact-us.png"
-          className="mb-[74px] h-full w-full sm:hidden"
+          className="mb-[74px] size-full sm:hidden"
         />
         <TopButton />
         <Footer />

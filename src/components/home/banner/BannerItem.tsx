@@ -32,7 +32,7 @@ const BannerItem = ({
               {buttonText}
             </p>
             <svg
-              className="lg:h-3 lg:w-3"
+              className="lg:size-3"
               width="5"
               height="8"
               viewBox="0 0 5 8"

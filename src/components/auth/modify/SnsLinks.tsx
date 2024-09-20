@@ -52,13 +52,13 @@ const SnsLinks = () => {
           name="naver"
           type="button"
           onClick={handleButtonClick}
-          className="h-10 w-10">
+          className="size-10">
           {inputState.naver ? (
-            <div className="h-10 w-10 overflow-hidden rounded-full">
+            <div className="size-10 overflow-hidden rounded-full">
               <SocialNaverBlogLink />
             </div>
           ) : (
-            <div className="h-10 w-10 overflow-hidden rounded-full">
+            <div className="size-10 overflow-hidden rounded-full">
               <SocialNaverBlogLinkDisable />
             </div>
           )}
@@ -68,13 +68,13 @@ const SnsLinks = () => {
           name="instagram"
           type="button"
           onClick={handleButtonClick}
-          className="h-10 w-10">
+          className="size-10">
           {inputState.instagram ? (
-            <div className="h-10 w-10 overflow-hidden rounded-full">
+            <div className="size-10 overflow-hidden rounded-full">
               <SocialInstagramLink />
             </div>
           ) : (
-            <div className="h-10 w-10 overflow-hidden rounded-full">
+            <div className="size-10 overflow-hidden rounded-full">
               <SocialInstagramLinkDisable />
             </div>
           )}
@@ -84,13 +84,13 @@ const SnsLinks = () => {
           name="youtube"
           type="button"
           onClick={handleButtonClick}
-          className="h-10 w-10">
+          className="size-10">
           {inputState.youtube ? (
-            <div className="h-10 w-10 overflow-hidden rounded-full">
+            <div className="size-10 overflow-hidden rounded-full">
               <SocialYoutubeLink />
             </div>
           ) : (
-            <div className="h-10 w-10 overflow-hidden rounded-full">
+            <div className="size-10 overflow-hidden rounded-full">
               <SocialYoutubeLinkDisable />
             </div>
           )}
@@ -100,13 +100,13 @@ const SnsLinks = () => {
           name="tiktok"
           type="button"
           onClick={handleButtonClick}
-          className="h-10 w-10">
+          className="size-10">
           {inputState.tiktok ? (
-            <div className="h-10 w-10 overflow-hidden rounded-full">
+            <div className="size-10 overflow-hidden rounded-full">
               <SocialTikTokLink />
             </div>
           ) : (
-            <div className="h-10 w-10 overflow-hidden rounded-full">
+            <div className="size-10 overflow-hidden rounded-full">
               <SocialTikTokLinkDisable />
             </div>
           )}
@@ -116,13 +116,13 @@ const SnsLinks = () => {
           name="other"
           type="button"
           onClick={handleButtonClick}
-          className="h-10 w-10">
+          className="size-10">
           {inputState.other ? (
-            <div className="h-10 w-10 overflow-hidden rounded-full">
+            <div className="size-10 overflow-hidden rounded-full">
               <SocialAddButtonLink />
             </div>
           ) : (
-            <div className="h-10 w-10 overflow-hidden rounded-full">
+            <div className="size-10 overflow-hidden rounded-full">
               <SocialAddButtonLinkDisable />
             </div>
           )}

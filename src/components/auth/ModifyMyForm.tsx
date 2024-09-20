@@ -165,7 +165,7 @@ function ModifyMyForm() {
             require={false}
             description="10MB 미만의 이미지를 업로드해주세요."
           />
-          <label className="relative block h-[100px] w-[100px]">
+          <label className="relative block size-[100px]">
             <ProfileImage />
             <div className="absolute bottom-0 right-0">
               <CameraProfile />

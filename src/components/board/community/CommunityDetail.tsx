@@ -46,7 +46,7 @@ const CommunityDetail = ({ data, comments }: Props) => {
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
-        <h4 className="flex text-body-2 font-semibold leading-[1] text-red-main">
+        <h4 className="flex text-body-2 font-semibold leading-none text-red-main">
           {data.postType}
         </h4>
         <svg

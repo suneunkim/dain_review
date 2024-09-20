@@ -50,7 +50,7 @@ export function SignupForm() {
       onSubmit={onSubmit}
       schema={userSchema}>
       {/* 추가내용 1 */}
-      <div className="mb-9 space-y-2 border-2 bg-white px-10 py-10">
+      <div className="mb-9 space-y-2 border-2 bg-white p-10">
         <CertifyField
           id="email"
           name="아이디(이메일)"
@@ -115,7 +115,7 @@ export function SignupForm() {
       </div>
 
       {/* 추가내용 2 */}
-      <div className="mb-10 space-y-2 border-2 bg-white px-10 py-10">
+      <div className="mb-10 space-y-2 border-2 bg-white p-10">
         <Label
           id={'link'}
           name={'SNS'}
@@ -124,19 +124,19 @@ export function SignupForm() {
 
         <div className="">
           <div className="mb-10 flex gap-3">
-            <div className="h-10 w-10 overflow-hidden rounded-full">
+            <div className="size-10 overflow-hidden rounded-full">
               <SocialNaverBlogLink />
             </div>
-            <div className="h-10 w-10 overflow-hidden rounded-full">
+            <div className="size-10 overflow-hidden rounded-full">
               <SocialInstagramLink />
             </div>
-            <div className="h-10 w-10 overflow-hidden rounded-full">
+            <div className="size-10 overflow-hidden rounded-full">
               <SocialYoutubeLink />
             </div>
-            <div className="h-10 w-10 overflow-hidden rounded-full">
+            <div className="size-10 overflow-hidden rounded-full">
               <SocialTikTokLink />
             </div>
-            <div className="h-10 w-10 overflow-hidden rounded-full">
+            <div className="size-10 overflow-hidden rounded-full">
               <SocialAddButtonLink />
             </div>
           </div>
@@ -165,7 +165,7 @@ export function SignupForm() {
       </div>
 
       {/* 추가 내용 3 */}
-      <div className="mb-10 space-y-6 border-2 bg-white px-10 py-10">
+      <div className="mb-10 space-y-6 border-2 bg-white p-10">
         <div className="mb-6 space-y-2">
           <CertifyField
             id="address"
@@ -194,7 +194,7 @@ export function SignupForm() {
             require={false}
             description="10MB 미만의 이미지를 업로드해주세요."
           />
-          <label className="relative block h-[100px] w-[100px]">
+          <label className="relative block size-[100px]">
             <ProfileImage />
             <div className="absolute bottom-0 right-0">
               <CameraProfile />

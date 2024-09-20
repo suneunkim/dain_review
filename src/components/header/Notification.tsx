@@ -4,7 +4,7 @@ const Notification = ({ noti }: { noti: number }) => {
   return (
     <div className="relative">
       {noti !== 0 && noti && (
-        <div className="absolute right-[-7px] top-[-7px] flex h-5 w-5 items-center justify-center rounded-full bg-red-main text-xs text-white">
+        <div className="absolute right-[-7px] top-[-7px] flex size-5 items-center justify-center rounded-full bg-red-main text-xs text-white">
           <p className="text-caption-2 font-bold text-white">{noti}</p>
         </div>
       )}

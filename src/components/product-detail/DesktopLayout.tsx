@@ -175,7 +175,7 @@ const DesktopLayout = ({ data }: Props) => {
               ))}
             </div>
           </section>
-          <section className="mb-12 mt-12">
+          <section className="my-12">
             <p className="mb-4 text-heading-5 font-bold">사업주 요청 사항</p>
             <p>{data.mission}</p>
             {/* <ul className="flex flex-col gap-2">

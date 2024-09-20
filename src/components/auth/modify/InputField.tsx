@@ -38,7 +38,7 @@ const InputField = ({
         placeholder={placeholder}
         disabled={disable}
         value={value}
-        className={`${disable === true ? 'bg-gray-10' : ''} focus:ring-primary focus:border-primary block w-full rounded-[4px] border-[1px] px-2 py-2 focus:outline-none`}
+        className={`${disable === true ? 'bg-gray-10' : ''} block w-full rounded-[4px] border p-2 focus:outline-none`}
         {...register}
       />
       {description && <p className="text-sm text-gray-500">{description}</p>}

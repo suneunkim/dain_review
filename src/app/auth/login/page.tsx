@@ -6,7 +6,7 @@ import Image from 'next/image'
 export default function LoginPage() {
   return (
     <div className="h-[calc(100vh-10rem)] w-full bg-background-gray">
-      <div className="flex h-full w-full justify-center bg-background-gray">
+      <div className="flex size-full justify-center bg-background-gray">
         <div className="flex w-[908px] items-center">
           <div className="box-border flex-1 border-b-2 border-l-2 border-t-2 bg-white px-[40px] py-[44px] max-lg:border-r-2">
             <h1 className="mb-[32px] text-center text-[26px] font-bold leading-8">

@@ -11,7 +11,7 @@ interface Props {
 }
 const ApplyClient = ({ data }: Props) => {
   return (
-    <div className="max-[1400px] mx-auto flex h-full flex-col px-4 py-5 desktop:min-h-max desktop:flex-row desktop:justify-center desktop:gap-10">
+    <div className="mx-auto flex h-full max-w-[1400px] flex-col px-4 py-5 desktop:min-h-max desktop:flex-row desktop:justify-center desktop:gap-10">
       <div className="flex-1 desktop:flex-none">
         <TextFiledForm />
       </div>

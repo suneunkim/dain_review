@@ -38,7 +38,7 @@ const SearchBar = ({ onSubmit }: Props) => {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-4 lg:gap-3">
       <section className="flex items-center gap-2 lg:gap-[15px]">
-        <div className="flex w-[288px] items-center justify-center gap-[6px] border-b border-gray-90 py-[5px] pl-2 pr-[10px] lg:w-[478px] lg:px-0 lg:px-[15px] lg:py-[10px]">
+        <div className="flex w-[288px] items-center justify-center gap-[6px] border-b border-gray-90 py-[5px] pl-2 pr-[10px] lg:w-[478px] lg:px-0 lg:py-[10px]">
           <select
             className="lg:w-[114px]"
             {...register('searchType')}>

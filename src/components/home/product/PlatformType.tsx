@@ -19,7 +19,7 @@ const PlatformType = ({
   const icons = {
     블로그: (
       <svg
-        className="size-5 lg:h-6 lg:w-6"
+        className="size-5 lg:size-6"
         width="24"
         height="24"
         viewBox="0 0 24 24"
@@ -69,7 +69,7 @@ const PlatformType = ({
     ),
     유튜브: (
       <svg
-        className="size-5 lg:h-6 lg:w-6"
+        className="size-5 lg:size-6"
         width="24"
         height="24"
         viewBox="0 0 24 24"
@@ -116,7 +116,7 @@ const PlatformType = ({
     ),
     인스타그램: (
       <svg
-        className="size-5 lg:h-6 lg:w-6"
+        className="size-5 lg:size-6"
         width="24"
         height="24"
         viewBox="0 0 24 24"
@@ -214,7 +214,7 @@ const PlatformType = ({
     ),
     틱톡: (
       <svg
-        className="size-5 lg:h-6 lg:w-6"
+        className="size-5 lg:size-6"
         width="24"
         height="24"
         viewBox="0 0 24 24"
@@ -312,7 +312,7 @@ const PlatformType = ({
     ),
     쇼츠: (
       <svg
-        className="size-5 lg:h-6 lg:w-6"
+        className="size-5 lg:size-6"
         width="24"
         height="24"
         viewBox="0 0 24 24"

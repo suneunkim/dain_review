@@ -9,7 +9,7 @@ const ReviewType = ({ snsType, labelType, detailPage }: ReviewTypeProps) => {
   const icons = {
     naver: (
       <svg
-        className="size-5 lg:h-6 lg:w-6"
+        className="size-5 lg:size-6"
         width="24"
         height="24"
         viewBox="0 0 24 24"
@@ -59,7 +59,7 @@ const ReviewType = ({ snsType, labelType, detailPage }: ReviewTypeProps) => {
     ),
     youtube: (
       <svg
-        className="size-5 lg:h-6 lg:w-6"
+        className="size-5 lg:size-6"
         width="24"
         height="24"
         viewBox="0 0 24 24"
@@ -106,7 +106,7 @@ const ReviewType = ({ snsType, labelType, detailPage }: ReviewTypeProps) => {
     ),
     instagram: (
       <svg
-        className="size-5 lg:h-6 lg:w-6"
+        className="size-5 lg:size-6"
         width="24"
         height="24"
         viewBox="0 0 24 24"

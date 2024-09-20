@@ -100,6 +100,13 @@ const ImagePreviewer: React.FC<ImagePreviewerProps> = ({
 
       {errorMessage && <p className="mt-2 text-red-500">{errorMessage}</p>}
 
+      <p className="my-[8px] text-body-2 font-[700] text-gray-60">
+        추가된 이미지{' '}
+        <span className="font-[300]">
+          {selectedFiles.length}/{maxFiles}
+        </span>
+      </p>
+
       <div className="flex overflow-x-auto">
         {previewUrls.map((previewUrl, index) => (
           <div

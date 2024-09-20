@@ -3,7 +3,7 @@
 import { useState } from 'react'
 
 const useLocationFilter = () => {
-  const [selectedCity, setSelectedCity] = useState<string>('서울') // ui 용도
+  const [selectedCity, setSelectedCity] = useState<string>('') // ui 용도
   const [selectedLocations, setSelectedLocations] = useState<
     [string, string][]
   >([]) // 시와 구 튜플로 저장

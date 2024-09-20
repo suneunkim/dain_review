@@ -19,33 +19,18 @@ import { CampaignProps } from '@/models/campaignList'
 // MoreButton에 쿼리파라미터 추가해서 보내기 types=premium
 interface QueryFilters {
   cities: string[]
-  categorySeqs: number[]
-  platformSeqs: number[]
-  types: number[]
 }
 
 interface Props {
   keyword: string
-  platform: string
-  type: string
-  category: string
   data: any
 }
 
-const SearchClient = ({
-  keyword = '',
-  platform,
-  type,
-  category,
-  data
-}: Props) => {
+const SearchClient = ({ keyword = '', data }: Props) => {
   const router = useRouter()
   const { isLocationModalOpen, isFilterModalOpen } = useSearchFilterBoxStore()
   const [queryFilters, setQueryFilters] = useState<QueryFilters>({
-    cities: [], // ['서울-강남구']
-    categorySeqs: [], // 카테고리 필터
-    platformSeqs: [], // SNS 필터
-    types: [] // 유형 필터
+    cities: [] // ['서울-강남구']
   })
 
   const {
@@ -64,6 +49,8 @@ const SearchClient = ({
     }))
   }
 
+  console.log(queryFilters.cities)
+
   const onSubmit = ({ searchTerm }: { searchTerm: string }) => {
     router.push(`/campaign?searchWord=${searchTerm}`)
   }
@@ -78,7 +65,7 @@ const SearchClient = ({
         onSubmit={onSubmit}
         keyword={keyword}
       />
-      {/* 모바일 검색 결과 - 추후 data를 props로 */}
+      {/* 모바일 검색 결과 */}
       <div className="lg:hidden">
         <MobileSearchResult
           data={data}
@@ -115,6 +102,7 @@ const SearchClient = ({
               )
             })}
         </ul>
+        {/* 선택된 지역 보여주는 UI */}
         <ul className="flex h-[28px] gap-1 px-4">
           {selectedLocations.map(([city, district]) => (
             <li
@@ -129,6 +117,7 @@ const SearchClient = ({
             </li>
           ))}
         </ul>
+
         {/* 웹 검색 결과 */}
         <div className="mt-12 flex items-center justify-between">
           <div className="text-heading-4 text-gray-90">
@@ -141,14 +130,25 @@ const SearchClient = ({
           </div>
         </div>
         <div className="mt-[32px] hidden lg:block">
-          <div className="grid grid-cols-4 gap-x-5 gap-y-10">
-            {data.map((campaign: CampaignProps) => (
-              <SegmentProductCard
-                data={campaign}
-                key={campaign.seq}
-              />
-            ))}
-          </div>
+          {data.length === 0 ? (
+            <div className="text-center">
+              <p className="mb-4 text-heading-4 font-medium text-gray-90">
+                찾으시는 체험단이 없어요.
+              </p>
+              <p className="text-body-1 text-gray-60">
+                적용한 필터나 키워드를 변경하여 찾아 보세요.
+              </p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-4 gap-x-5 gap-y-10">
+              {data.map((campaign: CampaignProps) => (
+                <SegmentProductCard
+                  data={campaign}
+                  key={campaign.seq}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </div>

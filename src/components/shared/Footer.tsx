@@ -1,9 +1,13 @@
+import Link from 'next/link'
+
 const Footer = () => {
   return (
     <>
       {/* 모바일 반응형 푸터 */}
       <div className="fixed bottom-0 z-30 flex h-[64px] w-full items-center justify-between rounded-tl-2xl rounded-tr-2xl bg-white text-caption-3 font-bold shadow-fotter lg:hidden">
-        <div className="flex w-full flex-col items-center justify-center gap-[2px]">
+        <Link
+          className="flex w-full flex-col items-center justify-center gap-[2px]"
+          href="/">
           <svg
             width="24"
             height="24"
@@ -28,9 +32,12 @@ const Footer = () => {
               </clipPath>
             </defs>
           </svg>
-          <span className="">홈</span>
-        </div>
-        <div className="flex w-full flex-col items-center justify-center gap-[2px]">
+          <span>홈</span>
+        </Link>
+
+        <Link
+          className="flex w-full flex-col items-center justify-center gap-[2px]"
+          href="/campaign">
           <svg
             width="24"
             height="24"
@@ -53,9 +60,12 @@ const Footer = () => {
               </clipPath>
             </defs>
           </svg>
-          <span className="">체험단</span>
-        </div>
-        <div className="flex w-full flex-col items-center justify-center gap-[2px]">
+          <span>체험단</span>
+        </Link>
+        
+        <Link
+          className="flex w-full flex-col items-center justify-center gap-[2px]"
+          href="/my-page">
           <svg
             width="24"
             height="24"
@@ -69,9 +79,10 @@ const Footer = () => {
               fill="#A9ABB1"
             />
           </svg>
-          <span className="">마이페이지</span>
-        </div>
+          <span>마이페이지</span>
+        </Link>
       </div>
+
       {/* 웹 푸터 */}
       <div className="hidden h-[286px] w-full bg-background-red lg:block">
         <div className="px-4 text-caption-1 text-gray-40">

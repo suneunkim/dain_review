@@ -1,14 +1,14 @@
 import Link from 'next/link'
 
-export interface PostDetailProps {
+export interface NoticeDetailProps {
   title: string
-  description: string
+  content: string
   author: string
-  date: string
-  views: number
+  createdDate: string
+  viewCount: number
 }
 
-const BoardDetail = ({ data }: { data: PostDetailProps }) => {
+const BoardDetail = ({ data }: { data: NoticeDetailProps }) => {
   return (
     <div>
       <h4 className="text-body-2 font-bold text-gray-90 lg:mb-2 lg:text-body-1">
@@ -17,14 +17,14 @@ const BoardDetail = ({ data }: { data: PostDetailProps }) => {
       <div className="mt-[5px] flex justify-between text-caption-1 lg:mt-[11px]">
         <div className="flex items-center gap-[10px]">
           <p className="font-semibold lg:text-body-2">{data.author}</p>
-          <span>{data.date}</span>
+          <span>{data.createdDate}</span>
         </div>
-        <div>조회 {data.views}회</div>
+        <div>조회 {data.viewCount}회</div>
       </div>
 
       <div className="min-h-[170px] px-[15px] py-2 lg:mt-4 lg:min-h-[223px] lg:p-0">
         <div className="w-full text-caption-1 lg:text-heading-5 lg:text-gray-60">
-          {data.description}
+          {data.content}
         </div>
       </div>
 
@@ -38,7 +38,7 @@ const BoardDetail = ({ data }: { data: PostDetailProps }) => {
               viewBox="0 0 21 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg">
-              <g clip-path="url(#clip0_8228_35098)">
+              <g clipPath="url(#clip0_8228_35098)">
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"

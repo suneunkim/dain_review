@@ -7,15 +7,20 @@ import useLocationFilter from '@/hooks/useLocationFilter'
 import XIcon from '@/assets/icons/home/mobile/mobile-x-icon.svg'
 import FilterActionsButtons from '../FilterActionsButtons'
 
-interface Props {
-  onChange: (locations: [string, string][]) => void
+type LocationData = {
+  city: string
+  districts: string[]
 }
 
-const LocationModal = ({ onChange }: Props) => {
+const LocationModal = ({
+  onChange
+}: {
+  onChange: (locations: LocationData) => void
+}) => {
   const { closeLocationModal } = useSearchFilterBoxStore()
   const {
     selectedCity,
-    selectedLocations,
+    selectedDistricts,
     handleCityClick,
     handleDistrictClick,
     removeLocation,
@@ -23,7 +28,7 @@ const LocationModal = ({ onChange }: Props) => {
   } = useLocationFilter()
 
   const handleConfirm = () => {
-    onChange(selectedLocations)
+    onChange({ city: selectedCity, districts: selectedDistricts }) // 올바른 형태로 전달
     closeLocationModal()
   }
 
@@ -47,15 +52,13 @@ const LocationModal = ({ onChange }: Props) => {
           <ul className="max-h-[282px] w-full overflow-y-auto border-r border-line-neutral">
             {locations
               .find(location => location.city === selectedCity)
-              ?.districts.map((district, i) => {
+              ?.districts.map(district => {
                 // 선택된 도시와 구의 조합이 존재하는지 확인
-                const isSelected = selectedLocations.some(
-                  ([city, dist]) => city === selectedCity && dist === district
-                )
+                const isSelected = selectedDistricts.includes(district)
                 return (
                   <li
                     onClick={() => handleDistrictClick(district)}
-                    key={`${selectedCity}-${district}`}
+                    key={district}
                     className={`p-4 text-body-1 ${isSelected && 'text-red-main'}`}>
                     {district}
                   </li>
@@ -65,14 +68,14 @@ const LocationModal = ({ onChange }: Props) => {
         </div>
         {/* 선택된 구 표시*/}
         <ul className="flex h-[36px] gap-1 overflow-x-auto px-4 pt-2 shadow-topCustom">
-          {selectedLocations.map(([city, district]) => (
+          {selectedDistricts.map(district => (
             <li
-              key={`${city}-${district}`}
+              key={district}
               className="flex items-center gap-[7px] rounded-2xl border px-3 py-[2px]">
               <span className="min-w-min whitespace-nowrap text-body-2 text-gray-40">
                 {district}
               </span>
-              <button onClick={() => removeLocation(city, district)}>
+              <button onClick={() => removeLocation(district)}>
                 <XIcon />
               </button>
             </li>

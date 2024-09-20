@@ -1,10 +1,19 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 type DropdownType = '추천순' | '인기순' | '마감임박순' | '최신순'
 
+const orderMap: Record<DropdownType, string> = {
+  추천순: 'point',
+  인기순: 'latest', //  popularity 오류남
+  마감임박순: 'deadline',
+  최신순: 'latest'
+}
+
 const DropdownFilter = () => {
+  const router = useRouter()
   const dropdown: DropdownType[] = ['추천순', '인기순', '마감임박순', '최신순']
   const [seletedDropDown, setSeletedDropDown] = useState(false)
   const [seletedValue, setSeletedValue] = useState<DropdownType>('추천순')
@@ -15,6 +24,11 @@ const DropdownFilter = () => {
   const handleValueClick = (drop: DropdownType) => {
     setSeletedValue(drop)
     setSeletedDropDown(false)
+
+    const orderParam = orderMap[drop]
+    const queryParams = new URLSearchParams(window.location.search)
+    queryParams.set('orderParam', orderParam)
+    router.push(`${window.location.pathname}?${queryParams.toString()}`)
   }
 
   return (

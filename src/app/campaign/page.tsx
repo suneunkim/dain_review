@@ -4,10 +4,25 @@ import Header from '@/components/shared/Header'
 import { fetchCampaignList } from '@/lib/api'
 
 const page = async ({ searchParams }: any) => {
-  const { searchWord, platform, type, category } = searchParams
+  const {
+    searchWord,
+    platformSeq,
+    typeSeq,
+    categorySeq,
+    orderParam,
+    districts,
+    city
+  } = searchParams
 
-  const data = await fetchCampaignList()
-  const displayData = data.list.slice(0, 20)
+  const data = await fetchCampaignList({
+    categorySeq: categorySeq || '',
+    searchWord: searchWord || '',
+    platformSeq: platformSeq || '',
+    typeSeq: typeSeq || '',
+    orderParam: orderParam || '',
+    districts: districts || '',
+    city: city || ''
+  })
 
   return (
     <div>
@@ -24,10 +39,7 @@ const page = async ({ searchParams }: any) => {
       </div>
       <SearchClient
         keyword={searchWord}
-        platform={platform}
-        type={type}
-        category={category}
-        data={displayData}
+        data={data.list}
       />
       <Footer />
     </div>

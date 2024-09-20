@@ -1,35 +1,53 @@
 'use client'
 
+import { PostProps } from '@/components/client-page/CommunityClient'
+import { postComment } from '@/lib/communityApi'
 import Link from 'next/link'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 
-type SearchBarType = {
+type DataType = {
   comment: string
 }
 
-type Props = {
-  onSubmit: SubmitHandler<SearchBarType>
+interface Props {
+  data: PostProps
+  comments?: CommentProps[]
 }
 
-export interface PostDetailProps {
-  category: string
-  title: string
-  content: string
-  author: string
-  createdDate: string
-  viewCount: number
+interface CommentProps {
+  seq: number
+  username: string
+  comment: string
+  registeredAt: string
+  myComments: string[] // 댓글에 포함된 myComments의 타입은 배열로 정의
 }
 
-const CommunityDetail = ({ data }: { data: PostDetailProps }) => {
-  const { handleSubmit, register } = useForm<SearchBarType>()
+const CommunityDetail = ({ data, comments }: Props) => {
+  console.log('comments', comments)
 
-  const onSubmit = () => {}
+  const { handleSubmit, register, reset } = useForm<DataType>()
+
+  const onSubmit = async (formData: DataType) => {
+    const token = localStorage.getItem('token')
+
+    try {
+      await postComment({
+        postSeq: data.seq,
+        comment: formData.comment,
+        token
+      })
+
+      reset()
+    } catch (error) {
+      console.error('댓글 등록 실패:', error)
+    }
+  }
 
   return (
     <div>
       <div className="mb-4 flex items-center justify-between">
         <h4 className="flex text-body-2 font-semibold leading-[1] text-red-main">
-          {data.category}
+          {data.postType}
         </h4>
         <svg
           width="20"
@@ -50,19 +68,58 @@ const CommunityDetail = ({ data }: { data: PostDetailProps }) => {
       </h4>
       <div className="mt-[5px] flex justify-between text-caption-1 lg:mt-[11px]">
         <div className="flex items-center gap-[10px]">
-          <p className="font-semibold lg:text-body-2">{data.author}</p>
-          <span>{data.createdDate}</span>
+          <p className="font-semibold lg:text-body-2">{data.username}</p>
+          <span>{data.registeredAt}</span>
         </div>
         <div>조회 {data.viewCount}회</div>
       </div>
 
       <div className="min-h-[170px] px-[15px] py-2 lg:mt-4 lg:min-h-[223px] lg:p-0">
         <div className="w-full text-caption-1 lg:text-heading-5 lg:text-gray-60">
-          {data.content}
+          {data.contents}
         </div>
       </div>
 
-      {/* 댓글 */}
+      {/* 댓글 목록 */}
+      <div>
+        {comments?.map((comment: CommentProps) => (
+          <div
+            className="px-1"
+            key={comment.seq}>
+            <div className="flex justify-between text-caption-1">
+              <div className="flex items-center gap-[10px]">
+                <p className="font-semibold lg:text-body-2">
+                  {comment.username}
+                </p>
+                <span>{comment.registeredAt}</span>
+              </div>
+              <div>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 5H10.0083M10 10H10.0083M10 15H10.0083"
+                    stroke="#19191B"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
+            </div>
+
+            <div className="py-2 lg:mt-4">
+              <div className="min-h-4 w-full text-caption-1 lg:text-heading-5 lg:text-gray-60">
+                {comment.comment}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* 댓글 작성*/}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex h-[105px] flex-col border border-gray-10 p-2">
@@ -88,7 +145,7 @@ const CommunityDetail = ({ data }: { data: PostDetailProps }) => {
               viewBox="0 0 21 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg">
-              <g clip-path="url(#clip0_8228_35098)">
+              <g clipPath="url(#clip0_8228_35098)">
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"
@@ -139,7 +196,7 @@ const CommunityDetail = ({ data }: { data: PostDetailProps }) => {
             </svg>
           </button>
         </div>
-        <Link href="/board">
+        <Link href="/board/community">
           <div className="rounded border border-gray-80 px-3 py-[10px] text-gray-80 lg:px-[30px]">
             목록
           </div>

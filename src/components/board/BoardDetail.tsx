@@ -38,7 +38,7 @@ const BoardDetail = ({ data }: { data: NoticeDetailProps }) => {
               viewBox="0 0 21 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg">
-              <g clip-path="url(#clip0_8228_35098)">
+              <g clipPath="url(#clip0_8228_35098)">
                 <path
                   fillRule="evenodd"
                   clipRule="evenodd"

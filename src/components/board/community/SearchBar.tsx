@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 export type SearchBarType = {
   searchWord: string
   searchType: string
-  category: string
+  influencerSearchPostType: string
 }
 
 type Props = {
@@ -24,12 +24,12 @@ const SearchBar = ({ onSubmit }: Props) => {
     defaultValues: {
       searchWord: '',
       searchType: 'ALL',
-      category: ''
+      influencerSearchPostType: ''
     }
   })
 
   const handleCategoryClick = (category: string) => {
-    setValue('category', category)
+    setValue('influencerSearchPostType', category)
     handleSubmit(onSubmit)()
   }
 
@@ -60,10 +60,10 @@ const SearchBar = ({ onSubmit }: Props) => {
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg">
-              <g clip-path="url(#clip0_5639_25522)">
+              <g clipPath="url(#clip0_5639_25522)">
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M4 10.5C4 6.91015 6.91015 4 10.5 4C14.0899 4 17 6.91015 17 10.5C17 14.0899 14.0899 17 10.5 17C6.91015 17 4 14.0899 4 10.5ZM10.5 2C5.80558 2 2 5.80558 2 10.5C2 15.1944 5.80558 19 10.5 19C12.4869 19 14.3145 18.3183 15.7618 17.176L20.293 21.7072C20.6835 22.0977 21.3167 22.0977 21.7072 21.7072C22.0977 21.3167 22.0977 20.6835 21.7072 20.293L17.176 15.7618C18.3183 14.3145 19 12.4869 19 10.5C19 5.80558 15.1944 2 10.5 2Z"
                   fill="#19191B"
                 />

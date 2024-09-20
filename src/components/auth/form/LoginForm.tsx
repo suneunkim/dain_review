@@ -85,6 +85,7 @@ export function LoginForm() {
       })
 
       localStorage.setItem('token', result.data.token)
+      document.cookie = `token=${result.data.token}; path=/; max-age=172800; secure; SameSite=Lax`
 
       router.push('/')
     } catch (error) {

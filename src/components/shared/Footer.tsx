@@ -62,7 +62,7 @@ const Footer = () => {
           </svg>
           <span>체험단</span>
         </Link>
-        
+
         <Link
           className="flex w-full flex-col items-center justify-center gap-[2px]"
           href="/my-page">

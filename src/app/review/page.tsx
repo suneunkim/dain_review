@@ -8,8 +8,8 @@ import ImagePreviewer from '@/components/review/ImagePreviewer'
 import BlogIcon from '@/assets/icons/review/blog.svg'
 import PointIcon from '@/assets/icons/review/point.svg'
 
-const ExCampaignImage = '/review/ex_campaign.png'
-const ExampleImage = '/review/example.png'
+const ExCampaignImage = '/img/campaign.png'
+const ExampleImage = '/img/example.png'
 
 // 리뷰 등록: 인플루언서의 체험단 리뷰 등록 및 결과 보고 작성 페이지
 // 홈 - 마이페이지(인플루언서) - 리뷰 등록
@@ -80,8 +80,9 @@ const Page = () => {
                 플랫폼에 작성한 리뷰 URL을 입력해 주세요
               </p>
               <input
-                className="mb-[26px] h-[38px] w-full rounded-[4px] border border-line-normal pl-[12px]"
                 required
+                maxLength={300}
+                className="mb-[26px] h-[38px] w-full rounded-[4px] border border-line-normal pl-[12px]"
               />
               <h4 className="text-body-1 font-[800]">
                 파일 선택<strong className="text-red-main">*</strong>
@@ -92,7 +93,11 @@ const Page = () => {
                 <br />
                 10MB 이하의 이미지 파일 10개까지 업로드 가능합니다
               </p>
-              <ImagePreviewer onFileSelect={handleFileSelect} />
+              <ImagePreviewer
+                onFileSelect={handleFileSelect}
+                maxFiles={10}
+                maxSize={10}
+              />
               <p className="my-[5px] text-body-2 text-gray-60">
                 <strong className="text-gray-60">예시화면</strong>
                 &nbsp;&nbsp;키워드로 검색 시 검색되는 본인의 게시물을 캡처해

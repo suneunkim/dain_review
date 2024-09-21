@@ -9,4 +9,6 @@ export interface CampaignProps {
   recruiter: number // 모집 인원
   applicationEndDate: string // 모집 종료일
   segment: '프리미엄' | '다인' | '일반' // 세그먼트
+  city: string
+  district: string
 }

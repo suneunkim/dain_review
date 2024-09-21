@@ -4,11 +4,12 @@ import { useMediaQuery } from 'react-responsive'
 import ProductCard from './ProductCard'
 import MoreButton from './MoreButton'
 import { useEffect, useState } from 'react'
+import SegmentProductCard from './SegmentProductCard'
+import { CampaignProps } from '@/models/campaignList'
 
-const ProductCardContainer = () => {
+const ProductCardContainer = ({ popularityData }: any) => {
   const [desktop, setDesktop] = useState(false)
   const isMobile = useMediaQuery({ query: '(max-width: 1023px)' })
-  const displayedProducts = Array(8).fill(null)
 
   useEffect(() => {
     if (isMobile) {
@@ -32,10 +33,10 @@ const ProductCardContainer = () => {
           <MoreButton />
         </section>
         <div className="grid grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-4 lg:gap-x-5 lg:gap-y-10">
-          {displayedProducts.slice(0, visibleCards).map((_, i) => (
-            <ProductCard
-              flag={null}
-              key={i}
+          {popularityData.slice(0, visibleCards).map((data: CampaignProps) => (
+            <SegmentProductCard
+              data={data}
+              key={data.seq}
             />
           ))}
         </div>

@@ -4,9 +4,11 @@ import DeadlineProductCard from './DeadlineProductCard'
 
 interface DeadlineBoxProps {
   title: '마감임박 🚨' | '신규 체험단 🐤'
+  data?: any
+  type: 'latest' | 'deadline'
 }
 
-const DeadlineProductBox = ({ title }: DeadlineBoxProps) => {
+const DeadlineProductBox = ({ title, data, type }: DeadlineBoxProps) => {
   return (
     <div className="min-w-[328px] lg:h-[715px] lg:w-[37vw] lg:min-w-[422px] desktop:w-[580px]">
       <div className="mb-4 flex justify-between">
@@ -25,10 +27,13 @@ const DeadlineProductBox = ({ title }: DeadlineBoxProps) => {
       </div>
       <div className="my-5 hidden border border-line-normal lg:block" />
       <div className="flex flex-col gap-6">
-        <DeadlineProductCard />
-        <DeadlineProductCard />
-        <DeadlineProductCard />
-        <DeadlineProductCard />
+        {data.map((item: any, index: number) => (
+          <DeadlineProductCard
+            key={index}
+            data={item}
+            type={type}
+          />
+        ))}
       </div>
     </div>
   )

@@ -13,7 +13,12 @@ import { useSearchModalStore, useHamburgerModalStore } from '@/store'
 import NearByProductContainer from '../home/near/NearByProductContainer'
 import HamburgerMenuModal from '../modal/hamburger-modal/HamburgerMenuModal'
 
-export default function HomeClient() {
+export default function HomeClient({
+  premiumData,
+  fallbackPopularityData,
+  deadlineData,
+  latestData
+}: any) {
   const { isOpen } = useSearchModalStore()
   const { isHamburgerOpen } = useHamburgerModalStore()
 
@@ -26,15 +31,18 @@ export default function HomeClient() {
         </div>
         {/* 체험단 */}
         <section className="flex flex-col gap-[48px] lg:gap-[80px]">
-          <PremiumCardContainer />
+          <PremiumCardContainer premiumData={premiumData} />
           <NearByProductContainer
             isLogin={true}
             isAddressSet={false}
           />
-          <ProductCardContainer />
+          <ProductCardContainer popularityData={fallbackPopularityData} />
           <PremiumPick />
         </section>
-        <DeadlineProductContainer />
+        <DeadlineProductContainer
+          deadlineData={deadlineData}
+          latestData={latestData}
+        />
         <img
           src="home-banner/contact-us.png"
           className="mb-[74px] h-full w-full sm:hidden"

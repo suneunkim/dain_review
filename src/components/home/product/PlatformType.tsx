@@ -1,6 +1,6 @@
 interface PlatformTypeProps {
   platform: '블로그' | '유튜브' | '인스타그램' | '틱톡' | '쇼츠'
-  labelType?: '기자단' | '방문형' | '배송형' | '카테고리'
+  labelType?: string // '기자단' | '방문형' | '배송형' | '카테고리'
   detailPage?: boolean
   type?: string // 방문형 등
   category?: string

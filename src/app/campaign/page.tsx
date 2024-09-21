@@ -15,13 +15,13 @@ const page = async ({ searchParams }: any) => {
   } = searchParams
 
   const data = await fetchCampaignList({
-    categorySeq: categorySeq || '',
-    searchWord: searchWord || '',
-    platformSeq: platformSeq || '',
-    typeSeq: typeSeq || '',
-    orderParam: orderParam || '',
-    districts: districts || '',
-    city: city || ''
+    categorySeq,
+    searchWord,
+    platformSeq,
+    typeSeq,
+    orderParam,
+    districts,
+    city
   })
 
   return (

@@ -158,7 +158,7 @@ const MobileLayout = ({ data }: { data: ProductDetailProps }) => {
           ))}
         </div>
       </section>
-      <section className="mb-12 mt-12">
+      <section className="my-12">
         <p className="mb-4 text-heading-5 font-bold">사업주 요청사항</p>
         <p>{data.mission}</p>
       </section>

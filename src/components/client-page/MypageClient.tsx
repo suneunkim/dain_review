@@ -32,7 +32,7 @@ const MypageClient = () => {
     <div className="mx-auto w-full">
       <div className="flex h-[250px] w-full justify-center bg-slate-400 max-lg:bg-white">
         {/* 데스크탑 용 */}
-        <section className="relative mt-28 box-border flex h-[430px] w-[1400px] items-center justify-center gap-5 rounded-se-2xl rounded-ss-2xl bg-white p-10 shadow-md max-[1400px]:w-full max-lg:hidden">
+        <section className="max-w-[1400px]:w-full relative mt-28 box-border flex h-[430px] w-[1400px] items-center justify-center gap-5 rounded-se-2xl rounded-ss-2xl bg-white p-10 shadow-md max-lg:hidden">
           <h3 className="absolute left-10 top-10 text-[1.9rem] font-bold">
             MY 프로필
           </h3>
@@ -107,7 +107,7 @@ const MypageClient = () => {
                 </div>
               </div>
             </div>
-            <div className="mt-6 flex items-center justify-between rounded-[4px] border-[1px] px-4 py-[10px]">
+            <div className="mt-6 flex items-center justify-between rounded-[4px] border px-4 py-[10px]">
               <div>
                 <p className="mb-3 flex items-center text-sm text-gray-90">
                   <ProfilePoint
@@ -132,7 +132,7 @@ const MypageClient = () => {
       <div className="mt-36 h-3 w-full bg-line-neutral lg:hidden"></div>
 
       {/* 프로필 */}
-      <div className="z-20 mb-28 mt-6 flex w-[1400px] flex-col justify-center max-[1400px]:w-full lg:my-72">
+      <div className="max-w-[1400px]:w-full z-20 mb-28 mt-6 flex w-[1400px] flex-col justify-center lg:my-72">
         <div className="mb-10 mt-12 box-border flex h-20 w-full items-center justify-center bg-red-30 text-center text-[24px] font-[700] leading-[80px] text-white max-lg:hidden">
           다인리뷰 신규 회원이라면🐣? 이용가이드 확인하러가기
           <img

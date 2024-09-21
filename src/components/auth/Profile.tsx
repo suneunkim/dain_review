@@ -44,18 +44,18 @@ const Profile: React.FC<ImageUploadProps> = ({ name, control, label }) => {
             />
 
             {preview !== null ? (
-              <div className="relative h-[100px] w-[100px]">
+              <div className="relative size-[100px]">
                 <img
                   src={preview}
                   alt="Preview"
-                  className="mt-2 h-full w-full overflow-hidden rounded-full object-cover"
+                  className="mt-2 size-full overflow-hidden rounded-full object-cover"
                 />
                 <div className="absolute bottom-0 right-0">
                   <CameraProfile />
                 </div>
               </div>
             ) : (
-              <label className="relative block h-[100px] w-[100px]">
+              <label className="relative block size-[100px]">
                 <ProfileImage
                   width={100}
                   height={100}

@@ -48,7 +48,7 @@ const CancelPage = () => {
           <section className="flex flex-col gap-2">
             <p className="text-body-1 font-bold text-gray-90">구분</p>
             <select
-              className="border px-2 py-2 lg:w-[335px]"
+              className="border p-2 lg:w-[335px]"
               {...register('reason', { required: '취소 사유를 선택하세요' })}>
               <option
                 disabled

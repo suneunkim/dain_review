@@ -37,7 +37,7 @@ const MyActivityDashboard = () => {
       </div>
 
       {/* Responsive Layout */}
-      <div className="w-full rounded-lg border-[1px] bg-white lg:hidden">
+      <div className="w-full rounded-lg border bg-white lg:hidden">
         <div className="grid h-20 grid-cols-3 border-b border-gray-200">
           <div className="flex flex-col items-center justify-center border-r border-gray-200">
             <span className="text-gray-500">신청</span>

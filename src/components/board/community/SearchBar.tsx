@@ -38,7 +38,7 @@ const SearchBar = ({ onSubmit }: Props) => {
       onSubmit={handleSubmit(onSubmit)}
       className="flex flex-col gap-4 lg:gap-3">
       <section className="flex items-center gap-2 lg:gap-[15px]">
-        <div className="flex w-[288px] items-center justify-center gap-[6px] border-b border-gray-90 py-[5px] pl-2 pr-[10px] lg:w-[478px] lg:px-[15px] lg:py-[10px] lg:pl-0 lg:pr-0">
+        <div className="flex w-[288px] items-center justify-center gap-[6px] border-b border-gray-90 py-[5px] pl-2 pr-[10px] lg:w-[478px] lg:px-0 lg:py-[10px]">
           <select
             className="lg:w-[114px]"
             {...register('searchType')}>
@@ -54,7 +54,7 @@ const SearchBar = ({ onSubmit }: Props) => {
           />
           <button type="submit">
             <svg
-              className="h-5 w-5"
+              className="size-5"
               width="24"
               height="24"
               viewBox="0 0 24 24"

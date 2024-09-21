@@ -28,7 +28,7 @@ export default function MyProfile() {
     <>
       <div className="flex h-[250px] w-full justify-center bg-slate-400 max-lg:bg-white">
         {/* 데스크탑 용 */}
-        <section className="relative mt-28 box-border flex h-[430px] w-[1400px] items-center justify-center gap-5 rounded-se-2xl rounded-ss-2xl bg-white p-10 shadow-md max-[1400px]:w-full max-lg:hidden">
+        <section className="max-w-[1400px]:w-full relative mt-28 box-border flex h-[430px] w-[1400px] items-center justify-center gap-5 rounded-se-2xl rounded-ss-2xl bg-white p-10 shadow-md max-lg:hidden">
           <h3 className="absolute left-10 top-10 text-[1.9rem] font-bold">
             MY 프로필
           </h3>
@@ -85,7 +85,7 @@ export default function MyProfile() {
                 </h4>
                 <ul>
                   <li className="flex items-center gap-2">
-                    <div className="top-[10px] flex h-5 w-5 items-center justify-center overflow-hidden rounded-md">
+                    <div className="top-[10px] flex size-5 items-center justify-center overflow-hidden rounded-md">
                       <SocialInstagramLink
                         width={20}
                         height={20}
@@ -100,7 +100,7 @@ export default function MyProfile() {
                     />
                   </li>
                   <li className="flex items-center gap-2">
-                    <div className="top-[10px] flex h-5 w-5 items-center justify-center overflow-hidden rounded-md">
+                    <div className="top-[10px] flex size-5 items-center justify-center overflow-hidden rounded-md">
                       <SocialNaverBlogLink
                         width={20}
                         height={20}
@@ -115,7 +115,7 @@ export default function MyProfile() {
                     />
                   </li>
                   <li className="flex items-center gap-2">
-                    <div className="top-[10px] flex h-5 w-5 items-center justify-center overflow-hidden rounded-md">
+                    <div className="top-[10px] flex size-5 items-center justify-center overflow-hidden rounded-md">
                       <SocialYoutubeLink
                         width={20}
                         height={20}
@@ -130,7 +130,7 @@ export default function MyProfile() {
                     />
                   </li>
                   <li className="flex items-center gap-2">
-                    <div className="top-[10px] flex h-5 w-5 items-center justify-center overflow-hidden rounded-md">
+                    <div className="top-[10px] flex size-5 items-center justify-center overflow-hidden rounded-md">
                       <SocialTikTokLink
                         width={20}
                         height={20}
@@ -170,7 +170,7 @@ export default function MyProfile() {
                 </div>
               </div>
             </div>
-            <div className="mt-6 flex items-center justify-between rounded-[4px] border-[1px] px-4 py-[10px]">
+            <div className="mt-6 flex items-center justify-between rounded-[4px] border px-4 py-[10px]">
               <div>
                 <p className="mb-3 flex items-center text-sm text-gray-90">
                   <ProfilePoint
@@ -187,11 +187,11 @@ export default function MyProfile() {
                 출금하기
               </button>
             </div>
-            <div className="mt-6 w-full rounded-[4px] border-[1px] pt-4">
+            <div className="mt-6 w-full rounded-[4px] border pt-4">
               <h3 className="mb-2 border-b px-2 text-center font-[500] text-black">
                 다인리뷰와 연결된 SNS
               </h3>
-              <div className="box-border flex items-center justify-around px-2 py-2">
+              <div className="box-border flex items-center justify-around p-2">
                 <div className="flex flex-col items-center gap-4">
                   <InstagramMobile
                     width={20}
@@ -243,7 +243,7 @@ export default function MyProfile() {
       </div>
       <div className="mt-36 h-3 w-full bg-line-neutral lg:hidden"></div>
       {/* 프로필 */}
-      <div className="z-20 mb-28 mt-6 flex w-[1400px] flex-col justify-center max-[1400px]:w-full lg:my-72">
+      <div className="max-w-[1400px]:w-full z-20 mb-28 mt-6 flex w-[1400px] flex-col justify-center lg:my-72">
         <div className="mb-10 mt-12 box-border flex h-20 w-full items-center justify-center bg-red-30 text-center text-[24px] font-[700] leading-[80px] text-white max-lg:hidden">
           다인리뷰 신규 회원이라면🐣? 이용가이드 확인하러가기
           <img

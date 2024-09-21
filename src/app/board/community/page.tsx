@@ -23,7 +23,7 @@ const page = async ({ searchParams }: { searchParams: SarchParams }) => {
   })
 
   return (
-    <div className="mx-auto max-w-[1440px]">
+    <div className="mx-auto max-w-screen-desktop">
       {/* 모바일 레이아웃 */}
       <div className="lg:hidden">
         <BoardLayout

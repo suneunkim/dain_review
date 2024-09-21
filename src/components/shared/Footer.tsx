@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <>
       {/* 모바일 반응형 푸터 */}
-      <div className="fixed bottom-0 z-30 flex h-[64px] w-full items-center justify-between rounded-tl-2xl rounded-tr-2xl bg-white text-caption-3 font-bold shadow-fotter lg:hidden">
+      <div className="fixed bottom-0 z-30 flex h-[64px] w-full items-center justify-between rounded-t-2xl bg-white text-caption-3 font-bold shadow-fotter lg:hidden">
         <Link
           className="flex w-full flex-col items-center justify-center gap-[2px]"
           href="/">
@@ -62,7 +62,7 @@ const Footer = () => {
           </svg>
           <span>체험단</span>
         </Link>
-        
+
         <Link
           className="flex w-full flex-col items-center justify-center gap-[2px]"
           href="/my-page">

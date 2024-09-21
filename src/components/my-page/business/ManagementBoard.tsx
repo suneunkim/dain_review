@@ -5,7 +5,7 @@ import Arrow from '@/assets/icons/my-profile/Arrow.svg'
 const ManagementBoard = () => {
   return (
     <>
-      <div className="mb-10 flex w-full justify-between border-[1px] max-lg:hidden">
+      <div className="mb-10 flex w-full justify-between border max-lg:hidden">
         {/* 진행 Section */}
         <div className="] box-border flex w-full items-center justify-between p-5">
           <div className="w-1/3">

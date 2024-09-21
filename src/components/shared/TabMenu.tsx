@@ -34,8 +34,8 @@ const TabMenu = () => {
             key={tab}
             className={`rounded-full px-3 py-1 text-sm font-[400] ${
               activeSubTab === tab
-                ? 'border-[1px] border-red-main text-red-main'
-                : 'border-[1px] border-line-normal text-gray-600'
+                ? 'border border-red-main text-red-main'
+                : 'border border-line-normal text-gray-600'
             }`}
             onClick={() => setActiveSubTab(tab)}>
             {tab}

@@ -32,7 +32,7 @@ const LikeButton = ({ deskTop }: Props) => {
         </svg>
       ) : (
         <button
-          className="flex aspect-square h-[46px] items-center justify-center rounded-md bg-gray-5"
+          className="aspect-square flex h-[46px] items-center justify-center rounded-md bg-gray-5"
           type="button">
           <svg
             width="28"

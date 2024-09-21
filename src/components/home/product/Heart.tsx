@@ -3,7 +3,7 @@ import React from 'react'
 const Heart = () => {
   return (
     <svg
-      className="absolute right-2 top-2 aspect-square w-6 lg:h-10 lg:w-10"
+      className="absolute right-2 top-2 h-6 w-6 lg:size-10"
       width="24"
       height="24"
       viewBox="0 0 24 24"

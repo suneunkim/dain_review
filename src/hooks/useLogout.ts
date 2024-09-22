@@ -3,7 +3,6 @@
 import { useUserStore } from '@/store'
 import { useRouter } from 'next/navigation'
 
-
 const useLogout = () => {
   const clearUser = useUserStore(state => state.clearUser)
   const router = useRouter()

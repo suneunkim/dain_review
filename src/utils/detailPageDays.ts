@@ -63,23 +63,36 @@ export interface transDateProps {
 
 // 날짜 API 데이터를 캘린더에 맞춘 형식으로 변환, UTC가 아니라 한국 날짜로 맞추기
 export const transformApiData = (data: transDateProps) => {
+  const safeDate = (dateStr: string | null | undefined) => {
+    if (!dateStr) {
+      console.error('Invalid date:', dateStr)
+      return new Date() // 기본값 사용 또는 오류 처리
+    }
+    const date = new Date(dateStr)
+    if (isNaN(date.getTime())) {
+      console.error('Invalid date format:', dateStr)
+      return new Date() // 기본값 사용 또는 오류 처리
+    }
+    return date
+  }
+
   return {
     applicationStartDate:
-      new Date(data.applicationStartDate).toISOString().split('T')[0] +
+      safeDate(data.applicationStartDate).toISOString().split('T')[0] +
       'T00:00:00',
     applicationEndDate:
-      new Date(data.applicationEndDate).toISOString().split('T')[0] +
+      safeDate(data.applicationEndDate).toISOString().split('T')[0] +
       'T23:59:59',
     applicationParticipantsDate:
-      new Date(data.applicationParticipantsDate).toISOString().split('T')[0] +
+      safeDate(data.applicationParticipantsDate).toISOString().split('T')[0] +
       'T23:59:59',
     experienceStartDate:
-      new Date(data.experienceStartDate).toISOString().split('T')[0] +
+      safeDate(data.experienceStartDate).toISOString().split('T')[0] +
       'T00:00:00',
     experienceEndDate:
-      new Date(data.experienceEndDate).toISOString().split('T')[0] +
+      safeDate(data.experienceEndDate).toISOString().split('T')[0] +
       'T23:59:59',
     reviewEndDate:
-      new Date(data.reviewEndDate).toISOString().split('T')[0] + 'T23:59:59'
+      safeDate(data.reviewEndDate).toISOString().split('T')[0] + 'T23:59:59'
   }
 }

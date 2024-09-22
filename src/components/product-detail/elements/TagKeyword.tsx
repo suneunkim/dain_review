@@ -53,7 +53,7 @@ const TagKeywordContainer = ({ tagkeywordList }: TagKeywordContainerProps) => {
         <button
           type="button"
           onClick={handleCopyKeywords}
-          className="mt-[25px] w-[78px] border-b-2 border-gray-70 520:mt-0">
+          className="mt-[25px] min-w-[78px] border-b-2 border-gray-70 520:mt-0">
           키워드 복사
         </button>
       </div>

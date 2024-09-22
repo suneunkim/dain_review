@@ -1,15 +1,16 @@
 'use client'
 
 import { useMediaQuery } from 'react-responsive'
-import ProductCard from './ProductCard'
-import MoreButton from './MoreButton'
+import MoreButtonIcon from './MoreButton'
 import { useEffect, useState } from 'react'
 import SegmentProductCard from './SegmentProductCard'
 import { CampaignProps } from '@/models/campaignList'
+import useNavigateWithOrderParam from '@/hooks/useMoreButton'
 
 const ProductCardContainer = ({ popularityData }: any) => {
   const [desktop, setDesktop] = useState(false)
   const isMobile = useMediaQuery({ query: '(max-width: 1023px)' })
+  const navigatePremium = useNavigateWithOrderParam('point')
 
   useEffect(() => {
     if (isMobile) {
@@ -30,7 +31,9 @@ const ProductCardContainer = ({ popularityData }: any) => {
           <p className="text-heading-5 font-[700] lg:text-[22px]">
             인기 체험단 ⭐
           </p>
-          <MoreButton />
+          <button onClick={navigatePremium}>
+            <MoreButtonIcon />
+          </button>
         </section>
         <div className="grid grid-cols-2 gap-x-4 gap-y-8 lg:grid-cols-4 lg:gap-x-5 lg:gap-y-10">
           {popularityData.slice(0, visibleCards).map((data: CampaignProps) => (

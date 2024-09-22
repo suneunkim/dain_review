@@ -13,7 +13,12 @@ interface KakaoMapProps {
   mapId: string
 }
 
-const KakaoMap = ({ latitude, longitude, placeName, mapId }: KakaoMapProps) => {
+const KakaoMap = ({
+  latitude = 37.5667,
+  longitude = 126.9782,
+  placeName = '다인카페',
+  mapId
+}: KakaoMapProps) => {
   useEffect(() => {
     const loadKaKaoMap = () => {
       if (window.kakao && window.kakao.maps) {
@@ -51,7 +56,7 @@ const KakaoMap = ({ latitude, longitude, placeName, mapId }: KakaoMapProps) => {
 
     // 스크립트 로드 시, 로드된 후 이벤트를 발생시켜 지도를 초기화합니다.
     const script = document.createElement('script')
-    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_MAP_CLIENT}&libraries=services&autoload=false`
+    script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=c0e6be4f805e51858d2f212f7224c429&libraries=services&autoload=false`
     script.onload = () => window.dispatchEvent(new Event('kakaoMapLoaded'))
     document.head.appendChild(script)
 
@@ -65,12 +70,17 @@ const KakaoMap = ({ latitude, longitude, placeName, mapId }: KakaoMapProps) => {
   // 길찾기 바로가기
   const kakaoMapLink = `https://map.kakao.com/link/to/${placeName},${latitude},${longitude}`
 
+  const handleKakaoMapLink = () => {
+    window.location.href = kakaoMapLink // 클릭 시 카카오 맵 링크로 이동
+  }
+
   return (
     <>
       <div
         id={mapId}
         className="h-[176px] w-full sm:h-[352px] lg:h-[344px]"
       />
+      <button onClick={handleKakaoMapLink}>카카오 지도로 길찾기</button>
     </>
   )
 }

@@ -1,15 +1,16 @@
 'use client'
 
 import { useMediaQuery } from 'react-responsive'
-import PremiumCard from './PremiumCard'
-import MoreButton from '../product/MoreButton'
+import MoreButtonIcon from '../product/MoreButton'
 import { useEffect, useState } from 'react'
 import SegmentProductCard from '../product/SegmentProductCard'
 import { CampaignProps } from '@/models/campaignList'
+import useNavigateWithOrderParam from '@/hooks/useMoreButton'
 
 const PremiumCardContainer = ({ premiumData }: any) => {
   const [desktop, setDesktop] = useState(false)
   const isMobile = useMediaQuery({ query: '(max-width: 1023px)' })
+  const navigatePremium = useNavigateWithOrderParam('point')
 
   useEffect(() => {
     if (isMobile) {
@@ -30,13 +31,16 @@ const PremiumCardContainer = ({ premiumData }: any) => {
           <p className="text-heading-5 font-bold lg:text-[22px] lg:leading-[25.2px]">
             프리미엄 체험단 👑
           </p>
-          <MoreButton />
+          <button onClick={navigatePremium}>
+            <MoreButtonIcon />
+          </button>
         </section>
         <div className="grid grid-cols-2 gap-x-4 gap-y-[22px] lg:grid-cols-3">
           {premiumData?.slice(0, visibleCards).map((data: CampaignProps) => (
             <SegmentProductCard
               data={data}
               key={data.seq}
+              isPremiumContainer
             />
           ))}
         </div>

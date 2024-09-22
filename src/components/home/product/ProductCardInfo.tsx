@@ -8,7 +8,9 @@ const ProductCardInfo = ({
   type = '배송형',
   platform = '인스타그램',
   applicationEndDate = '2024-10-09 00:00:00.0',
-  recruiter = 3
+  recruiter = 3,
+  city = '서울',
+  district = '종로구'
 }) => {
   const remainingDays = calculateRemainingDays(applicationEndDate)
 
@@ -21,7 +23,7 @@ const ProductCardInfo = ({
     <div className="mt-[4px] flex flex-col gap-1 lg:mt-[12px] lg:gap-3">
       <div>
         <p className="text-caption-1 text-gray-60 lg:mb-[4px] lg:text-body-2">
-          서울 종로구
+          {city ? `${city} ${district}` : '재택'}
         </p>
         <h4 className="mb-[2px] truncate text-body-2 font-bold text-gray-90 lg:text-heading-5">
           {title}

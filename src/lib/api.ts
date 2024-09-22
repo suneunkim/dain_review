@@ -1,7 +1,10 @@
 // lib/api.ts
 export const fetchProductDetail = async (productId: string) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/campaign/${productId}`
+    `${process.env.NEXT_PUBLIC_API_URL}/api/campaign/${productId}`,
+    {
+      cache: 'no-store'
+    }
   )
 
   if (!res.ok) {

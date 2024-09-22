@@ -22,7 +22,7 @@ const page = async ({ params }: { params: { productId: string } }) => {
       {errorMessage ? (
         <p className="mt-40 text-center">{errorMessage}</p>
       ) : (
-        <ProductDetailClient data={productDetail} />
+        <ProductDetailClient data={productDetail.data} />
       )}
     </main>
   )

@@ -1,6 +1,7 @@
 import SearchClient from '@/components/client-page/SearchClient'
 import Footer from '@/components/shared/Footer'
 import Header from '@/components/shared/Header'
+import TopButton from '@/components/shared/TopButton'
 import { fetchCampaignList } from '@/lib/api'
 
 const page = async ({ searchParams }: any) => {
@@ -41,6 +42,7 @@ const page = async ({ searchParams }: any) => {
         keyword={searchWord}
         data={data.list}
       />
+      <TopButton />
       <Footer />
     </div>
   )

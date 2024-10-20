@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 다인리뷰 체험단 플랫폼
 
-## Getting Started
+다인리뷰 체험단 플랫폼은 사업주와 인플루서의 상생을 목적으로 한 체험단 리뷰 사이트입니다. 사용자는 다양한 필터를 적용해 체험단 상품을 검색하고, 상세 정보를 확인하며, 편리하게 리뷰를 작성할 수 있습니다. 이 프로젝트에서는 SSR(서버사이드 렌더링)을 적극 활용해 SEO 최적화와 성능 개선을 달성했습니다.
 
-First, run the development server:
+![image](https://github.com/user-attachments/assets/e0884f8c-4804-46de-a210-1e9a7741af6f)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1주일에 한 번씩 전체 회의를 통해 협업하며 진행되었으며, 개발단 전체의 계획 및 일정 공유를 위해 프론트엔드에서 주도적으로 매일 오전 짧은 스크럼을 도입해 소통을 강화했습니다.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+디자인 시스템의 정보를 Tailwind에 미리 정의하여 개발에 사용했으며 개발 중 발생한 이슈와 문제 해결을 문서화하여 노션을 통해 팀과 공유했습니다.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+![image](https://github.com/user-attachments/assets/c8620e00-02d6-4156-92b3-e374e7ef5ece)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+## 프로젝트 기간
+- 2024.07 ~ 2024.09 (10주)
+- 기획 2명, 디자이너 4명, 백엔드 4명, 프론트엔드 3명으로 구성
 
-To learn more about Next.js, take a look at the following resources:
+## 사용 기술
+![image](https://github.com/user-attachments/assets/84371f59-1f32-4a47-9b9c-fd493bc6a2de)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 주요 기능 (담당 페이지 중 주요 페이지)
 
-## Deploy on Vercel
+### 1. 홈 페이지
+**반응형 웹 구현**
+- 모바일과 데스크탑 환경에 따라 각기 다른 레이아웃을 제공. 모바일에서는 4개, 데스크탑에서는 8개의 상품을 보여주며, lg:hidden block과 같은 Tailwind CSS 속성을 사용해 성능을 최적화
+  
+**상품 정렬**
+- 추천순, 거리순, 마감 임박순, 최신순 등 다양한 기준으로 상품을 정렬해 사용자 경험을 극대화
+  
+**재사용 가능한 컴포넌트 구현**
+- 동일한 UI를 가진 상품 카드를 재사용 가능한 컴포넌트로 구현해 유지보수성을 높이고, 일관된 UI 제공
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 2. 체험단 상세 페이지
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**SSR 적용**
+- 서버 컴포넌트로 동적 데이터를 서버사이드 렌더링을 통해 SEO 최적화와 빠른 로드 속도를 달성
+  
+**일정 캘린더 구현**
+- date-fns 라이브러리를 활용해 체험단 모집 기간과 이벤트 일정을 정확하게 표시
+  
+**지도 링크 추가**
+- 카카오 맵 API를 통해 가게 위치를 확인할 수 있는 버튼을 제공, 사용자 경험 향상
+
+  ![image](https://github.com/user-attachments/assets/38e9c238-2a27-4cb4-a276-a8165b92f8ad)
+
+
+### 3. 검색 페이지
+**쿼리 파라미터 기반 검색**
+- 필터(카테고리, 플랫폼, 유형, 지역 등)를 적용해 쿼리 파라미터 기반으로 데이터를 서버에서 가져와 SSR과 SEO 최적화를 구현
+- 지역 필터는 도시 하나와 3개의 구를 선택할 수 있으며 선택한 값은 쿼리파라미터를 이용해 서버에서 데이터를 가져와 결과 반영
+
+**필터 모달 구현**
+- 모바일 환경에서는 필터 선택 모달로, 데스크탑에서는 고정된 필터 UI로 구현해 반응형 경험 제공
+
+**검색어 상태 관리**
+- 검색어는 전역 상태로 관리되어, 페이지 이동 간에도 쿼리 파라미터를 유지
+- 검색 모달을 통해 입력된 검색어가 검색 페이지로 전달되어 일관성 있는 검색 경험을 제공
+
+![image](https://github.com/user-attachments/assets/949f65d5-7c63-4795-a0ce-02a61703fccf)
+
+
+## 개선 사항
+**SSR(서버사이드 렌더링)**
+- Next.js의 서버 컴포넌트를 활용해 홈, 상세, 검색 페이지에서 SSR을 구현하여 초기 로딩 속도를 최적화하고, SEO 향상을 달성
+
+**반응형 UI 구현**
+- 모바일과 데스크탑 환경에서 최적화된 레이아웃 제공을 위해 JavaScript 대신 CSS로 처리
+- lg:hidden block 같은 Tailwind CSS 속성을 사용하여 화면 크기에 따라 레이아웃을 구분함
+
+**캘린더 UI 개선**
+- 일부 달력이 5주가 아닌 6주로 표시되어 레이아웃이 깨지는 문제가 있어서 5주로 고정 후 전후 날짜를 흐리게 구분해서 같은 달력에 표시
+- 같은 달력에서 전월과 현재 월의 같은 일자에 이벤트 일정이 중복으로 표시되는 문제가 있어서 현재 월을 구분하는 로직 추가
+- 캘린더 디자인대로 css를 위해 달력 라이브러리를 대신 date-fns 라이브러리를 활용해 디자인과 같은 캘린더 구현
+- 서버의 날짜와 시간 사용시 UTC 시간의 차이로 한국 날짜와 달라지는 문제가 있어서 포맷팅 함수로 처리해 모집 기간과 같은 이벤트를 정확한 날짜에 맞게 표시
+
+![image](https://github.com/user-attachments/assets/77e23c73-94d2-4f6a-9692-5d21b2f3fba1)
+
+**CSS 우선순위 문제 해결**
+- Swiper 슬라이드 라이브러리 적용 시 CSS 커스텀 스타일이 제대로 적용되지 않는 문제를 해결하기 위해, !important를 사용하여 CSS 우선순위를 조정하여 디자인 대로 구현
+
+### 기타 구현 사항
+**상태 관리 및 모달 구현**
+- Zustand를 사용해 검색 모달, 필터 모달, 햄버거 메뉴 등의 상태를 전역에서 관리하여 필요한 시점에 열리고 닫힐 수 있도록 구현
+- 모달이 열렸을 때는 스크롤 방지 처리를 통해 사용자 경험을 개선
+
+**쿼리 파라미터 처리**
+- 선택된 필터 값을 URL의 쿼리 파라미터로 변환해 해당 파라미터에 맞는 데이터를 다시 불러오는 방식으로 설계
+- 모바일과 웹 환경에 맞춘 UI 차별화를 제공
